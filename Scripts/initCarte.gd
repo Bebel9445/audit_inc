@@ -3,6 +3,9 @@ extends MarginContainer
 @onready var card_image: TextureRect = $VBoxContainer/TextureRect
 @onready var card_text: Label = $VBoxContainer/Label
 
+func _ready():
+	hide()
+
 func set_card(image: Texture2D, text: String):
 	card_image.texture = image
 	card_text.text = text
