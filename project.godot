@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Audit Inc"
-run/main_scene="uid://md1pfmffnl46"
+run/main_scene="uid://cho5teehqnmm8"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
