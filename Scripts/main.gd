@@ -21,16 +21,16 @@ func new_game():
 	#Initialiser les states en fonction de la difficulté choisi	
 
 func lancer_audit(nomPole):
+	var carte_instance = carte_scene.instantiate()
+	add_child(carte_instance)
+	choixPoles_instance.hide()
+	
 	if (nomPole == "RH") :
-		pass
+		var img = load("res://icon.svg")
+		carte_instance.set_card(img, "Voici le pole RH !")
 	elif (nomPole == "Economie") :
 		pass
 	elif (nomPole == "Fournitures") :
 		pass
 	else :
 		pass
-	
-	var carte_instance = carte_scene.instantiate()
-	add_child(carte_instance)
-	#carte_instance.set_card(TextureRect e, "ldn,dkkd")
-	choixPoles_instance.hide()
