@@ -15,14 +15,15 @@ func new_game(difficulte : int):
 	$Menu.queue_free()
 	choixPoles_instance = choixPoles_scene.instantiate()
 	add_child(choixPoles_instance)	
-	choixPoles_instance.poleRH.connect(Callable(self, "lancer_audit").bind("RH")) #Mettre "RH" en paramètre ( = lancer_audit("RH"))
-	choixPoles_instance.poleEconomie.connect(Callable(self, "lancer_audit").bind("Economie"))
-	choixPoles_instance.poleFournitures.connect(Callable(self, "lancer_audit").bind("Fournitures"))
-	choixPoles_instance.poleBienEtre.connect(Callable(self, "lancer_audit").bind("BienEtre"))
+	choixPoles_instance.poleRH.connect(lancer_audit) #Mettre "RH" en paramètre ( = lancer_audit("RH"))
+	choixPoles_instance.poleEconomie.connect(lancer_audit)
+	choixPoles_instance.poleFournitures.connect(lancer_audit)
+	choixPoles_instance.poleBienEtre.connect(lancer_audit)
 	
 	#Initialiser les states en fonction de la difficulté choisi	
 
 func lancer_audit(nomPole):
+	print(nomPole)
 	if (nomPole == "RH") :
 		pass
 	elif (nomPole == "Economie") :
