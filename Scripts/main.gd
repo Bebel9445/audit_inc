@@ -3,20 +3,22 @@ extends Node
 @export var carte_scene : PackedScene
 
 var choixPoles_instance
+var current_difficulte : int
 
 func _ready():
 	pass
 	
 
-func new_game():
+func new_game(difficulte : int):
+	print(difficulte)
+	current_difficulte = difficulte
 	$Menu.queue_free()
-	
 	choixPoles_instance = choixPoles_scene.instantiate()
 	add_child(choixPoles_instance)	
-	choixPoles_instance.poleRH.connect(Callable(self, "lancer_audit").bind("RH")) #Mettre "RH" en paramètre ( = lancer_audit("RH"))
-	choixPoles_instance.poleEconomie.connect(Callable(self, "lancer_audit").bind("Economie"))
-	choixPoles_instance.poleFournitures.connect(Callable(self, "lancer_audit").bind("Fournitures"))
-	choixPoles_instance.poleBienEtre.connect(Callable(self, "lancer_audit").bind("BienEtre"))
+	choixPoles_instance.poleRH.connect(lancer_audit) #Mettre "RH" en paramètre ( = lancer_audit("RH"))
+	choixPoles_instance.poleEconomie.connect(lancer_audit)
+	choixPoles_instance.poleFournitures.connect(lancer_audit)
+	choixPoles_instance.poleBienEtre.connect(lancer_audit)
 	
 	#Initialiser les states en fonction de la difficulté choisi	
 
@@ -25,6 +27,7 @@ func lancer_audit(nomPole):
 	add_child(carte_instance)
 	choixPoles_instance.hide()
 	
+	print(nomPole)
 	if (nomPole == "RH") :
 		var img = load("res://icon.svg")
 		carte_instance.set_card(img, "Voici le pole RH !", "Choix de gauche", "choix de droite (la droiiiiite hein)")
