@@ -1,0 +1,90 @@
+{
+    "nbCartes" : 8,
+    "0" : {
+        "nomPerso" : "Z.",
+        "question" : "Comment va le personnel ?",
+        "response" : "Il en manque pas mal",
+        "choix" : {
+            "gauche" : {"texte" : "Je n'en suis pas si sur", "stats" : [0, 20, 0, -10], "prochaineCarte" : null},
+            "droite" : {"texte" : "Embauchons plus", "stats" : [10, -10, 0, 5], "prochaineCarte" : null}
+        },
+        "image" : "images/Z.jpg"
+    },
+
+    "1" : {
+        "nomPerso" : "Z.",
+        "question" : "Comment va le personnel ?",
+        "response" : "On en a trop, certains se tournent les pouces",
+        "choix" : {
+            "gauche" : {"texte" : "Qu'ils continuent !", "stats" : [0, 0, 0, -10], "prochaineCarte" : null},
+            "droite" : {"texte" : "Boonez leur des congés", "stats" : [0, 0, 0, 15], "prochaineCarte" : null}
+        },
+        "image" : "images/Z.jpg"
+    },
+
+    "2" : {
+        "nomPerso" : "Z.",
+        "question" : "Comment va le personnel ?",
+        "response" : "On est juste bien",
+        "choix" : {
+            "gauche" : {"texte" : "OK !", "stats" : [0, 0, 0, 0], "prochaineCarte" : null},
+            "droite" : {"texte" : "OK !", "stats" : [0, 0, 0, 0], "prochaineCarte" : null}
+        },
+        "image" : "images/Z.jpg"
+    },
+
+    "3" : {
+        "nomPerso" : "Z.",
+        "question" : "Je vois pas mal de personne qui font la queue à l'IT",
+        "response" : "Oui, on a des pannes informatiques, il nous manque des machines",
+        "choix" : {
+            "gauche" : {"texte" : "Qu'il en soit ainsi", "stats" : [0, 10, -10, 0], "prochaineCarte" : null},
+            "droite" : {"texte" : "Achetez-en plus !", "stats" : [0, 0, 0, 0], "prochaineCarte" : "4"}
+        },
+        "image" : "images/Z.jpg"
+    },
+
+    "i4" : {
+        "nomPerso" : "Z.",
+        "question" : "Quel modèle coulez-vous prendre ?",
+        "response" : "Que pensez-vous de celui la ?",
+        "choix" : {
+            "gauche" : {"texte" : "Je suis pas d'accord", "stats" : [0, 0, 0, 0], "prochaineCarte" : "5"},
+            "droite" : {"texte" : "Prenons le !", "stats" : [0, -10, 5, 0], "prochaineCarte" : null}
+        },
+        "image" : "images/pcVieux.jpg"
+    },
+
+    "i5" : {
+        "nomPerso" : "Z.",
+        "question" : "Quel modèle coulez-vous prendre ?",
+        "response" : "Que pensez-vous de celui la ?",
+        "choix" : {
+            "gauche" : {"texte" : "Je suis pas d'accord", "stats" : [0, 0, 0, 0], "prochaineCarte" : "6"},
+            "droite" : {"texte" : "Prenons le !", "stats" : [0, -20, 10, 0], "prochaineCarte" : null}
+        },
+        "image" : "images/pcMid.jpg"
+    },
+
+    "i6" : {
+        "nomPerso" : "Z.",
+        "question" : "Quel modèle coulez-vous prendre ?",
+        "response" : "Que pensez-vous de celui la ?",
+        "choix" : {
+            "gauche" : {"texte" : "Je suis pas d'accord", "stats" : [0, 0, 0, 0], "prochaineCarte" : "4"},
+            "droite" : {"texte" : "Prenons le !", "stats" : [0, -30, 20, 0], "prochaineCarte" : null}
+        },
+        "image" : "images/pcNeuf.jpg"
+    },
+
+    "7" : {
+        "nomPerso" : "Comptable",
+        "question" : "Quel est l'état des comptes ?",
+        "response" : "Il ne vont pas très bien",
+        "choix" : {
+            "gauche" : {"texte" : "Faites de votre mieux", "stats" : [0, -5, 0, 0], "prochaineCarte" : null},
+            "droite" : {"texte" : "Reduisez les avantages CSE", "stats" : [0, 10, 0, -15], "prochaineCarte" : null}
+        },
+        "image" : "images/comptable.jpg"
+    }
+}
