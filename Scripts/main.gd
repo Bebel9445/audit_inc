@@ -27,7 +27,7 @@ func lancer_audit(nomPole):
 	
 	if (nomPole == "RH") :
 		var img = load("res://icon.svg")
-		carte_instance.set_card(img, "Voici le pole RH !")
+		carte_instance.set_card(img, "Voici le pole RH !", "Choix de gauche", "choix de droite (la droiiiiite hein)")
 	elif (nomPole == "Economie") :
 		pass
 	elif (nomPole == "Fournitures") :
