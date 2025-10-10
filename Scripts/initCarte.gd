@@ -1,16 +1,24 @@
 extends MarginContainer
 
+signal choixGauche
+signal choixDroite
+
 @onready var card_image: TextureRect = $VBoxContainer/TextureRect
 @onready var card_text: Label = $VBoxContainer/Label
+@onready var card_text_gauche: Button = $VBoxContainer/HBoxContainer/BoutonGauche
+@onready var card_text_droite: Button = $VBoxContainer/HBoxContainer/BoutonDroite
 
 func _ready():
 	pass
 
-func set_card(image: Texture2D, text: String):
+func set_card(image: Texture2D, text: String, textGauche: String, textDroite: String):
 	card_image.texture = image
 	card_text.text = text
+	card_text_gauche.text = textGauche
+	card_text_droite.text = textDroite
 
-#var img = load("res://pngtree-gold-coins-stack-icon-flat-illustration-of-golden-vector-for-web-png-image_12528911.png")
-#func _process(delta):
-	#if Input.is_action_just_pressed("click_mouse"):
-		#set_card(img, "Voici une pile de pièce !")
+func _on_bouton_gauche_pressed():
+	choixGauche.emit("Gauche")
+
+func _on_bouton_droite_pressed():
+	choixDroite.emit("Droite")
