@@ -45,33 +45,33 @@ script = ExtResource("1_v6ryk")
 
 [node name="PopUpEconomie" type="ConfirmationDialog" parent="."]
 title = "Pôle économie"
-position = Vector2i(850, 100)
-size = Vector2i(200, 132)
-dialog_text = "Voici le pôle économie, voulez-vous vraiment démarrer l'audit?"
+position = Vector2i(750, 100)
+size = Vector2i(300, 200)
+dialog_text = "Voici le pôle économie, c'est ici que vous allez favoriser la collaboration, l'innovation et la compétitivité de l'entreprise. Voulez-vous vraiment démarrer l'audit?"
 dialog_autowrap = true
 cancel_button_text = "Annuler"
 
 [node name="PopUpRH" type="ConfirmationDialog" parent="."]
 title = "Pôle RH"
 position = Vector2i(100, 400)
-size = Vector2i(200, 132)
-dialog_text = "Voici le pôle RH, voulez-vous vraiment démarrer l'audit?"
+size = Vector2i(400, 210)
+dialog_text = "Voici le pôle RH, c'est ici que vous allez être en charge du recrutement de nouveaux employés et de la formation des salariés déjà présents dans l'entreprise afin d'assurer leur développement au sein de l'organisation. voulez-vous vraiment démarrer l'audit?"
 dialog_autowrap = true
 cancel_button_text = "Annuler"
 
 [node name="PopUpFournitures" type="ConfirmationDialog" parent="."]
 title = "Pôle Fournitures"
-position = Vector2i(850, 400)
-size = Vector2i(200, 132)
-dialog_text = "Voici le pôle RH, voulez-vous vraiment démarrer l'audit?"
+position = Vector2i(750, 400)
+size = Vector2i(300, 210)
+dialog_text = "Voici le pôle fournitures, c'est ici que vous allez vous occuper des achats de matériels, ainsi que de l'approvisionnement  des besoins techniques voulez-vous vraiment démarrer l'audit?"
 dialog_autowrap = true
 cancel_button_text = "Annuler"
 
 [node name="PopUpBienEtre" type="ConfirmationDialog" parent="."]
 title = "Pôle Bien-être"
 position = Vector2i(100, 100)
-size = Vector2i(200, 132)
-dialog_text = "Voici le pôle bien-être, voulez-vous vraiment démarrer l'audit?"
+size = Vector2i(300, 200)
+dialog_text = "Voici le pôle bien-être, c'est ici que vous allez vous occuper de la satisfaction des employées, ainsi que leurs besoins. Voulez-vous vraiment démarrer l'audit?"
 dialog_autowrap = true
 cancel_button_text = "Annuler"
 
