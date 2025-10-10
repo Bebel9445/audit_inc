@@ -64,3 +64,6 @@ autowrap_mode = 2
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/BoutonGauche" to="." method="_on_bouton_gauche_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/BoutonDroite" to="." method="_on_bouton_droite_pressed"]

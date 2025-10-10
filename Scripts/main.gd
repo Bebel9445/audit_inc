@@ -25,6 +25,8 @@ func new_game(difficulte : int):
 func lancer_audit(nomPole):
 	var carte_instance = carte_scene.instantiate()
 	add_child(carte_instance)
+	carte_instance.choixGauche.connect(choix)
+	carte_instance.choixDroite.connect(choix)
 	choixPoles_instance.hide()
 	
 	print(nomPole)
@@ -37,3 +39,9 @@ func lancer_audit(nomPole):
 		pass
 	else :
 		pass
+
+func choix(nomChoix):
+	if (nomChoix == "Gauche"):
+		print("Gauche")
+	else:
+		print("Droite")
