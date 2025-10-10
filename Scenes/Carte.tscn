@@ -45,12 +45,10 @@ alignment = 1
 [node name="VSeparator2" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="LabelGauche" type="Label" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(125, 0)
+[node name="BoutonGauche" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
-size_flags_horizontal = 2
 text = "test1"
-vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer/HBoxContainer"]
@@ -58,13 +56,10 @@ custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="LabelDroite" type="Label" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(135, 0)
+[node name="BoutonDroite" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
-size_flags_horizontal = 10
 text = "test2"
-horizontal_alignment = 2
-vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
