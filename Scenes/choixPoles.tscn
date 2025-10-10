@@ -47,7 +47,7 @@ script = ExtResource("1_v6ryk")
 title = "Pôle économie"
 position = Vector2i(850, 100)
 size = Vector2i(200, 132)
-dialog_text = "Voici le pôle économie, voulez-vous vraiment le démarrer ?"
+dialog_text = "Voici le pôle économie, voulez-vous vraiment démarrer l'audit?"
 dialog_autowrap = true
 cancel_button_text = "Annuler"
 
@@ -55,7 +55,7 @@ cancel_button_text = "Annuler"
 title = "Pôle RH"
 position = Vector2i(100, 400)
 size = Vector2i(200, 132)
-dialog_text = "Voici le pôle RH, voulez-vous vraiment le démarrer ?"
+dialog_text = "Voici le pôle RH, voulez-vous vraiment démarrer l'audit?"
 dialog_autowrap = true
 cancel_button_text = "Annuler"
 
@@ -63,7 +63,7 @@ cancel_button_text = "Annuler"
 title = "Pôle Fournitures"
 position = Vector2i(850, 400)
 size = Vector2i(200, 132)
-dialog_text = "Voici le pôle RH, voulez-vous vraiment le démarrer ?"
+dialog_text = "Voici le pôle RH, voulez-vous vraiment démarrer l'audit?"
 dialog_autowrap = true
 cancel_button_text = "Annuler"
 
@@ -71,7 +71,7 @@ cancel_button_text = "Annuler"
 title = "Pôle Bien-être"
 position = Vector2i(100, 100)
 size = Vector2i(200, 132)
-dialog_text = "Voici le pôle bien-être, voulez-vous vraiment le démarrer ?"
+dialog_text = "Voici le pôle bien-être, voulez-vous vraiment démarrer l'audit?"
 dialog_autowrap = true
 cancel_button_text = "Annuler"
 
