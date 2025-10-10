@@ -22,15 +22,15 @@ func new_game(difficulte : int):
 	
 	#Initialiser les states en fonction de la difficulté choisi	
 
-func lancer_audit(nomPole: String) -> void:
-	var json_path := "res://Scripts/"+ nomPole +".json"
+func lancer_audit(nomPole: String):
+	var json_path = "res://Scripts/"+ nomPole +".json"
 	
 	if not FileAccess.file_exists(json_path):
 		push_error("Fichier JSON introuvable pour le pôle : " + nomPole)
 		return
 	
-	var file := FileAccess.open(json_path, FileAccess.READ)
-	var text := file.get_as_text()
+	var file = FileAccess.open(json_path, FileAccess.READ)
+	var text = file.get_as_text()
 	file.close()
 	
 	var data: Dictionary = JSON.parse_string(text)
@@ -38,8 +38,7 @@ func lancer_audit(nomPole: String) -> void:
 		push_error("Erreur : JSON invalide pour le pôle " + nomPole)
 		return
 	
-	# Créer la carte
-	var carte_instance := carte_scene.instantiate()
+	var carte_instance = carte_scene.instantiate()
 	add_child(carte_instance)
 	choixPoles_instance.hide()
 	
@@ -57,7 +56,6 @@ func lancer_audit(nomPole: String) -> void:
 		if carteData.has("image"):
 			img = load(carteData["image"]) as Texture2D
 		
-		# On prépare les données de la carte
 		var perso = carteData.get("nomPerso", "")
 		var question = carteData.get("question", "")
 		var response = carteData.get("response", "")
@@ -65,7 +63,6 @@ func lancer_audit(nomPole: String) -> void:
 		var choixGauche = carteData["choix"]["gauche"]
 		var choixDroite = carteData["choix"]["droite"]
 		
-		# Afficher la carte (fonction de ta scène)
 		carte_instance.set_card(
 			img,
 			"%s\n%s\n%s" % [perso, question, response], 

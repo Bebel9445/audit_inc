@@ -17,7 +17,7 @@
 		"prochaineCarte": null
 	  }
 	},
-	"image": "res://Images/Z.png",
+	"image": "res://icon.svg",
 	"carteBan": [ ]
   }
 }
