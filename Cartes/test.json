@@ -1,132 +1,132 @@
 {
-    "nbCartesTirable" : 7,
-    "0" : {
-        "tirable" : true,
-        "nomPerso" : "Z.",
-        "question" : "Comment va le personnel ?",
-        "response" : "Il en manque pas mal",
-        "choix" : {
-            "gauche" : {"texte" : "Je n'en suis pas si sur", "stats" : [0, 20, 0, -10], "prochaineCarte" : null},
-            "droite" : {"texte" : "Embauchons plus", "stats" : [10, -10, 0, 5], "prochaineCarte" : null}
-        },
-        "image" : "images/Z.jpg",
-        "carteBan" : ["1", "2"]
-    },
+	"nbCartesTirable" : 7,
+	"0" : {
+		"tirable" : true,
+		"nomPerso" : "Z.",
+		"question" : "Comment va le personnel ?",
+		"response" : "Il en manque pas mal",
+		"choix" : {
+			"gauche" : {"texte" : "Je n'en suis pas si sur", "stats" : [0, 20, 0, -10], "prochaineCarte" : null},
+			"droite" : {"texte" : "Embauchons plus", "stats" : [10, -10, 0, 5], "prochaineCarte" : null}
+		},
+		"image" : "images/Z.jpg",
+		"carteBan" : ["1", "2"]
+	},
 
-    "1" : {
-        "tirable" : true,
-        "nomPerso" : "Z.",
-        "question" : "Comment va le personnel ?",
-        "response" : "On en a trop, certains se tournent les pouces",
-        "choix" : {
-            "gauche" : {"texte" : "Qu'ils continuent !", "stats" : [0, 0, 0, -10], "prochaineCarte" : null},
-            "droite" : {"texte" : "Boonez leur des congés", "stats" : [0, 0, 0, 15], "prochaineCarte" : null}
-        },
-        "image" : "images/Z.jpg",
-        "carteBan" : ["0", "2"]
-    },
+	"1" : {
+		"tirable" : true,
+		"nomPerso" : "Z.",
+		"question" : "Comment va le personnel ?",
+		"response" : "On en a trop, certains se tournent les pouces",
+		"choix" : {
+			"gauche" : {"texte" : "Qu'ils continuent !", "stats" : [0, 0, 0, -10], "prochaineCarte" : null},
+			"droite" : {"texte" : "Boonez leur des congés", "stats" : [0, 0, 0, 15], "prochaineCarte" : null}
+		},
+		"image" : "images/Z.jpg",
+		"carteBan" : ["0", "2"]
+	},
 
-    "2" : {
-        "tirable" : true,
-        "nomPerso" : "Z.",
-        "question" : "Comment va le personnel ?",
-        "response" : "On est juste bien",
-        "choix" : {
-            "gauche" : {"texte" : "OK !", "stats" : [0, 0, 0, 0], "prochaineCarte" : null},
-            "droite" : {"texte" : "OK !", "stats" : [0, 0, 0, 0], "prochaineCarte" : null}
-        },
-        "image" : "images/Z.jpg",
-        "carteBan" : ["0", "1"]
-    },
+	"2" : {
+		"tirable" : true,
+		"nomPerso" : "Z.",
+		"question" : "Comment va le personnel ?",
+		"response" : "On est juste bien",
+		"choix" : {
+			"gauche" : {"texte" : "OK !", "stats" : [0, 0, 0, 0], "prochaineCarte" : null},
+			"droite" : {"texte" : "OK !", "stats" : [0, 0, 0, 0], "prochaineCarte" : null}
+		},
+		"image" : "images/Z.jpg",
+		"carteBan" : ["0", "1"]
+	},
 
-    "3" : {
-        "tirable" : true,
-        "nomPerso" : "Z.",
-        "question" : "Je vois pas mal de personne qui font la queue à l'IT",
-        "response" : "Oui, on a des pannes informatiques, il nous manque des machines",
-        "choix" : {
-            "gauche" : {"texte" : "Qu'il en soit ainsi", "stats" : [0, 10, -10, 0], "prochaineCarte" : null},
-            "droite" : {"texte" : "Achetez-en plus !", "stats" : [0, 0, 0, 0], "prochaineCarte" : "4"}
-        },
-        "image" : "images/Z.jpg",
-        "carteBan" : []
-    },
+	"3" : {
+		"tirable" : true,
+		"nomPerso" : "Z.",
+		"question" : "Je vois pas mal de personne qui font la queue à l'IT",
+		"response" : "Oui, on a des pannes informatiques, il nous manque des machines",
+		"choix" : {
+			"gauche" : {"texte" : "Qu'il en soit ainsi", "stats" : [0, 10, -10, 0], "prochaineCarte" : null},
+			"droite" : {"texte" : "Achetez-en plus !", "stats" : [0, 0, 0, 0], "prochaineCarte" : "4"}
+		},
+		"image" : "images/Z.jpg",
+		"carteBan" : []
+	},
 
-    "4" : {
-        "tirable" : false,
-        "nomPerso" : "Z.",
-        "question" : "Quel modèle coulez-vous prendre ?",
-        "response" : "Que pensez-vous de celui la ?",
-        "choix" : {
-            "gauche" : {"texte" : "Je suis pas d'accord", "stats" : [0, 0, 0, 0], "prochaineCarte" : "5"},
-            "droite" : {"texte" : "Prenons le !", "stats" : [0, -10, 5, 0], "prochaineCarte" : null}
-        },
-        "image" : "images/pcVieux.jpg",
-        "carteBan" : []
-    },
+	"4" : {
+		"tirable" : false,
+		"nomPerso" : "Z.",
+		"question" : "Quel modèle coulez-vous prendre ?",
+		"response" : "Que pensez-vous de celui la ?",
+		"choix" : {
+			"gauche" : {"texte" : "Je suis pas d'accord", "stats" : [0, 0, 0, 0], "prochaineCarte" : "5"},
+			"droite" : {"texte" : "Prenons le !", "stats" : [0, -10, 5, 0], "prochaineCarte" : null}
+		},
+		"image" : "images/pcVieux.jpg",
+		"carteBan" : []
+	},
 
-    "5" : {
-        "tirable" : false,
-        "nomPerso" : "Z.",
-        "question" : "Quel modèle coulez-vous prendre ?",
-        "response" : "Que pensez-vous de celui la ?",
-        "choix" : {
-            "gauche" : {"texte" : "Je suis pas d'accord", "stats" : [0, 0, 0, 0], "prochaineCarte" : "6"},
-            "droite" : {"texte" : "Prenons le !", "stats" : [0, -20, 10, 0], "prochaineCarte" : null}
-        },
-        "image" : "images/pcMid.jpg",
-        "carteBan" : []
-    },
+	"5" : {
+		"tirable" : false,
+		"nomPerso" : "Z.",
+		"question" : "Quel modèle coulez-vous prendre ?",
+		"response" : "Que pensez-vous de celui la ?",
+		"choix" : {
+			"gauche" : {"texte" : "Je suis pas d'accord", "stats" : [0, 0, 0, 0], "prochaineCarte" : "6"},
+			"droite" : {"texte" : "Prenons le !", "stats" : [0, -20, 10, 0], "prochaineCarte" : null}
+		},
+		"image" : "images/pcMid.jpg",
+		"carteBan" : []
+	},
 
-    "6" : {
-        "tirable" : false,
-        "nomPerso" : "Z.",
-        "question" : "Quel modèle coulez-vous prendre ?",
-        "response" : "Que pensez-vous de celui la ?",
-        "choix" : {
-            "gauche" : {"texte" : "Je suis pas d'accord", "stats" : [0, 0, 0, 0], "prochaineCarte" : "4"},
-            "droite" : {"texte" : "Prenons le !", "stats" : [0, -30, 20, 0], "prochaineCarte" : null}
-        },
-        "image" : "images/pcNeuf.jpg",
-        "carteBan" : []
-    },
+	"6" : {
+		"tirable" : false,
+		"nomPerso" : "Z.",
+		"question" : "Quel modèle coulez-vous prendre ?",
+		"response" : "Que pensez-vous de celui la ?",
+		"choix" : {
+			"gauche" : {"texte" : "Je suis pas d'accord", "stats" : [0, 0, 0, 0], "prochaineCarte" : "4"},
+			"droite" : {"texte" : "Prenons le !", "stats" : [0, -30, 20, 0], "prochaineCarte" : null}
+		},
+		"image" : "images/pcNeuf.jpg",
+		"carteBan" : []
+	},
 
-    "7" : {
-        "tirable" : true,
-        "nomPerso" : "Comptable",
-        "question" : "Quel est l'état des comptes ?",
-        "response" : "Ils ne vont pas très bien",
-        "choix" : {
-            "gauche" : {"texte" : "Faites de votre mieux", "stats" : [0, -5, 0, 0], "prochaineCarte" : null},
-            "droite" : {"texte" : "Reduisez les avantages CSE", "stats" : [0, 10, 0, -15], "prochaineCarte" : null}
-        },
-        "image" : "images/comptable.jpg",
-        "carteBan" : ["8"]
-    },
+	"7" : {
+		"tirable" : true,
+		"nomPerso" : "Comptable",
+		"question" : "Quel est l'état des comptes ?",
+		"response" : "Ils ne vont pas très bien",
+		"choix" : {
+			"gauche" : {"texte" : "Faites de votre mieux", "stats" : [0, -5, 0, 0], "prochaineCarte" : null},
+			"droite" : {"texte" : "Reduisez les avantages CSE", "stats" : [0, 10, 0, -15], "prochaineCarte" : null}
+		},
+		"image" : "images/comptable.jpg",
+		"carteBan" : ["8"]
+	},
 
-    "8" : {
-        "tirable" : true,
-        "nomPerso" : "Comptable",
-        "question" : "Quel est l'état des comptes ?",
-        "response" : "Ils vont très bien",
-        "choix" : {
-            "gauche" : {"texte" : "Pas mal", "stats" : [0, 0, 0, 0], "prochaineCarte" : null},
-            "droite" : {"texte" : "Investissez !", "stats" : [0, -20, 10, 10], "prochaineCarte" : null}
-        },
-        "image" : "images/comptable.jpg",
-        "carteBan" : ["7"]
-    },
+	"8" : {
+		"tirable" : true,
+		"nomPerso" : "Comptable",
+		"question" : "Quel est l'état des comptes ?",
+		"response" : "Ils vont très bien",
+		"choix" : {
+			"gauche" : {"texte" : "Pas mal", "stats" : [0, 0, 0, 0], "prochaineCarte" : null},
+			"droite" : {"texte" : "Investissez !", "stats" : [0, -20, 10, 10], "prochaineCarte" : null}
+		},
+		"image" : "images/comptable.jpg",
+		"carteBan" : ["7"]
+	},
 
-    "9" : {
-        "tirable" : true,
-        "nomPerso" : "Yann",
-        "question" : "Qui êtes vous ?",
-        "response" : "BATO !",
-        "choix" : {
-            "gauche" : {"texte" : "BARK !", "stats" : [0, 0, 0, 0], "prochaineCarte" : null},
-            "droite" : {"texte" : "POR AVIO !", "stats" : [0, 0, 0, 0], "prochaineCarte" : null}
-        },
-        "image" : "images/yann.jpg",
-        "carteBan" : []
-    }    
+	"9" : {
+		"tirable" : true,
+		"nomPerso" : "Yann",
+		"question" : "Qui êtes vous ?",
+		"response" : "BATO !",
+		"choix" : {
+			"gauche" : {"texte" : "BARK !", "stats" : [0, 0, 0, 0], "prochaineCarte" : null},
+			"droite" : {"texte" : "POR AVIO !", "stats" : [0, 0, 0, 0], "prochaineCarte" : null}
+		},
+		"image" : "images/yann.jpg",
+		"carteBan" : []
+	}    
 }
