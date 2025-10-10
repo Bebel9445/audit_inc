@@ -40,8 +40,11 @@ func lancer_audit(nomPole: String):
 	
 	var carte_instance = carte_scene.instantiate()
 	add_child(carte_instance)
+	carte_instance.choixGauche.connect(choix)
+	carte_instance.choixDroite.connect(choix)
 	choixPoles_instance.hide()
 	
+<<<<<<< HEAD
 	var jeuActif := true
 	var indexCarte := 1
 	
@@ -77,3 +80,21 @@ func lancer_audit(nomPole: String):
 		
 		if indexCarte > int(data["nbCartes"]):
 			jeuActif = false
+=======
+	print(nomPole)
+	if (nomPole == "RH") :
+		var img = load("res://icon.svg")
+		carte_instance.set_card(img, "Voici le pole RH !", "Choix de gauche", "choix de droite (la droiiiiite hein)")
+	elif (nomPole == "Economie") :
+		pass
+	elif (nomPole == "Fournitures") :
+		pass
+	else :
+		pass
+
+func choix(nomChoix):
+	if (nomChoix == "Gauche"):
+		print("Gauche")
+	else:
+		print("Droite")
+>>>>>>> origin
