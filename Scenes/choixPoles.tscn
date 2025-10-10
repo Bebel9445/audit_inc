@@ -43,6 +43,38 @@ grow_vertical = 2
 size_flags_horizontal = 4
 script = ExtResource("1_v6ryk")
 
+[node name="PopUpEconomie" type="ConfirmationDialog" parent="."]
+title = "Pôle économie"
+position = Vector2i(850, 100)
+size = Vector2i(200, 132)
+dialog_text = "Voici le pôle économie, voulez-vous vraiment démarrer l'audit?"
+dialog_autowrap = true
+cancel_button_text = "Annuler"
+
+[node name="PopUpRH" type="ConfirmationDialog" parent="."]
+title = "Pôle RH"
+position = Vector2i(100, 400)
+size = Vector2i(200, 132)
+dialog_text = "Voici le pôle RH, voulez-vous vraiment démarrer l'audit?"
+dialog_autowrap = true
+cancel_button_text = "Annuler"
+
+[node name="PopUpFournitures" type="ConfirmationDialog" parent="."]
+title = "Pôle Fournitures"
+position = Vector2i(850, 400)
+size = Vector2i(200, 132)
+dialog_text = "Voici le pôle RH, voulez-vous vraiment démarrer l'audit?"
+dialog_autowrap = true
+cancel_button_text = "Annuler"
+
+[node name="PopUpBienEtre" type="ConfirmationDialog" parent="."]
+title = "Pôle Bien-être"
+position = Vector2i(100, 100)
+size = Vector2i(200, 132)
+dialog_text = "Voici le pôle bien-être, voulez-vous vraiment démarrer l'audit?"
+dialog_autowrap = true
+cancel_button_text = "Annuler"
+
 [node name="PoleEconomie" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 1
@@ -101,6 +133,10 @@ theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_xuu31")
 text = "Bien-être"
 
+[connection signal="confirmed" from="PopUpEconomie" to="." method="_on_pop_up_economie_confirmed"]
+[connection signal="confirmed" from="PopUpRH" to="." method="_on_pop_up_rh_confirmed"]
+[connection signal="confirmed" from="PopUpFournitures" to="." method="_on_pop_up_fournitures_confirmed"]
+[connection signal="confirmed" from="PopUpBienEtre" to="." method="_on_pop_up_bien_etre_confirmed"]
 [connection signal="pressed" from="PoleEconomie" to="." method="_on_pole_economie_pressed"]
 [connection signal="pressed" from="PoleRH" to="." method="_on_pole_rh_pressed"]
 [connection signal="pressed" from="PoleFournitures" to="." method="_on_pole_fournitures_pressed"]
