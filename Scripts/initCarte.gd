@@ -1,7 +1,6 @@
 extends MarginContainer
 
-signal choixGauche
-signal choixDroite
+signal choixFait
 
 @onready var card_image: TextureRect = $VBoxContainer/TextureRect
 @onready var card_text: Label = $VBoxContainer/Label
@@ -18,7 +17,7 @@ func set_card(image: Texture2D, text: String, textGauche: String, textDroite: St
 	card_text_droite.text = textDroite
 
 func _on_bouton_gauche_pressed():
-	choixGauche.emit("Gauche")
+	choixFait.emit("gauche")
 
 func _on_bouton_droite_pressed():
-	choixDroite.emit("Droite")
+	choixFait.emit("droite")
