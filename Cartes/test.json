@@ -1,4 +1,5 @@
 {
+	"nbCartes" : 9,
 	"nbCartesTirable" : 7,
 	"0" : {
 		"tirable" : true,
@@ -9,7 +10,7 @@
 			"gauche" : {"texte" : "Je n'en suis pas si sur", "stats" : [0, 20, 0, -10], "prochaineCarte" : null},
 			"droite" : {"texte" : "Embauchons plus", "stats" : [10, -10, 0, 5], "prochaineCarte" : null}
 		},
-		"image" : "images/Z.jpg",
+		"image" : "res://Cartes/images/Z.jpg",
 		"carteBan" : ["1", "2"]
 	},
 
@@ -22,7 +23,7 @@
 			"gauche" : {"texte" : "Qu'ils continuent !", "stats" : [0, 0, 0, -10], "prochaineCarte" : null},
 			"droite" : {"texte" : "Boonez leur des congés", "stats" : [0, 0, 0, 15], "prochaineCarte" : null}
 		},
-		"image" : "images/Z.jpg",
+		"image" : "res://Cartes/images/Z.jpg",
 		"carteBan" : ["0", "2"]
 	},
 
@@ -35,7 +36,7 @@
 			"gauche" : {"texte" : "OK !", "stats" : [0, 0, 0, 0], "prochaineCarte" : null},
 			"droite" : {"texte" : "OK !", "stats" : [0, 0, 0, 0], "prochaineCarte" : null}
 		},
-		"image" : "images/Z.jpg",
+		"image" : "res://Cartes/images/Z.jpg",
 		"carteBan" : ["0", "1"]
 	},
 
@@ -48,7 +49,7 @@
 			"gauche" : {"texte" : "Qu'il en soit ainsi", "stats" : [0, 10, -10, 0], "prochaineCarte" : null},
 			"droite" : {"texte" : "Achetez-en plus !", "stats" : [0, 0, 0, 0], "prochaineCarte" : "4"}
 		},
-		"image" : "images/Z.jpg",
+		"image" : "res://Cartes/images/Z.jpg",
 		"carteBan" : []
 	},
 
@@ -61,7 +62,7 @@
 			"gauche" : {"texte" : "Je suis pas d'accord", "stats" : [0, 0, 0, 0], "prochaineCarte" : "5"},
 			"droite" : {"texte" : "Prenons le !", "stats" : [0, -10, 5, 0], "prochaineCarte" : null}
 		},
-		"image" : "images/pcVieux.jpg",
+		"image" : "res://Cartes/images/pcVieux.jpg",
 		"carteBan" : []
 	},
 
@@ -74,7 +75,7 @@
 			"gauche" : {"texte" : "Je suis pas d'accord", "stats" : [0, 0, 0, 0], "prochaineCarte" : "6"},
 			"droite" : {"texte" : "Prenons le !", "stats" : [0, -20, 10, 0], "prochaineCarte" : null}
 		},
-		"image" : "images/pcMid.jpg",
+		"image" : "res://Cartes/images/pcMid.jpg",
 		"carteBan" : []
 	},
 
@@ -87,7 +88,7 @@
 			"gauche" : {"texte" : "Je suis pas d'accord", "stats" : [0, 0, 0, 0], "prochaineCarte" : "4"},
 			"droite" : {"texte" : "Prenons le !", "stats" : [0, -30, 20, 0], "prochaineCarte" : null}
 		},
-		"image" : "images/pcNeuf.jpg",
+		"image" : "res://Cartes/images/pcNeuf.jpg",
 		"carteBan" : []
 	},
 
@@ -100,7 +101,7 @@
 			"gauche" : {"texte" : "Faites de votre mieux", "stats" : [0, -5, 0, 0], "prochaineCarte" : null},
 			"droite" : {"texte" : "Reduisez les avantages CSE", "stats" : [0, 10, 0, -15], "prochaineCarte" : null}
 		},
-		"image" : "images/comptable.jpg",
+		"image" : "res://Cartes/images/comptable.jpg",
 		"carteBan" : ["8"]
 	},
 
@@ -113,7 +114,7 @@
 			"gauche" : {"texte" : "Pas mal", "stats" : [0, 0, 0, 0], "prochaineCarte" : null},
 			"droite" : {"texte" : "Investissez !", "stats" : [0, -20, 10, 10], "prochaineCarte" : null}
 		},
-		"image" : "images/comptable.jpg",
+		"image" : "res://Cartes/images/comptable.jpg",
 		"carteBan" : ["7"]
 	},
 
@@ -126,7 +127,8 @@
 			"gauche" : {"texte" : "BARK !", "stats" : [0, 0, 0, 0], "prochaineCarte" : null},
 			"droite" : {"texte" : "POR AVIO !", "stats" : [0, 0, 0, 0], "prochaineCarte" : null}
 		},
-		"image" : "images/yann.jpg",
+		"image" : "res://Cartes/images/yann.jpg",
 		"carteBan" : []
 	}    
 }
+

@@ -1,0 +1,23 @@
+{
+  "nbCartes": 1,
+  "1": {
+	"tirable": true,
+	"nomPerso": "Z.",
+	"question": "Comment va le personnel ?",
+	"response": "Il en manque pas mal",
+	"choix": {
+	  "gauche": {
+		"texte": "Il y en a suffisament",
+		"stats": [0, 0, 0, 0],
+		"prochaineCarte": null
+	  },
+	  "droite": {
+		"texte": "Embauchons plus",
+		"stats": [0, 0, 0, 0],
+		"prochaineCarte": null
+	  }
+	},
+	"image": "res://icon.svg",
+	"carteBan": [ ]
+  }
+}
