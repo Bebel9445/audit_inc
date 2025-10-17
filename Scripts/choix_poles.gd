@@ -5,13 +5,29 @@ signal poleFournitures
 signal poleBienEtre
 
 func _on_pole_economie_pressed():
-	poleEconomie.emit("Economie")
+	$PopUpEconomie.show()
 
 func _on_pole_rh_pressed():
-	poleRH.emit("RH")
+	$PopUpRH.show()
 
 func _on_pole_fournitures_pressed():
-	poleFournitures.emit("Fourniture")
+	$PopUpFournitures.show()
 
 func _on_pole_bien_etre_pressed():
+	$PopUpBienEtre.show()
+
+
+func _on_pop_up_economie_confirmed():
+	poleEconomie.emit("Economie")
+
+
+func _on_pop_up_rh_confirmed():
+	poleRH.emit("RH")
+
+
+func _on_pop_up_fournitures_confirmed():
+	poleFournitures.emit("Fourniture")
+
+
+func _on_pop_up_bien_etre_confirmed():
 	poleBienEtre.emit("BienEtre")
