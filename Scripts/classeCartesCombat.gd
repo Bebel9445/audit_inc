@@ -12,9 +12,8 @@ var _degat: int
 func _init(carte_instance: ObjetCarteCombat, cout_valeur: int, niveau: int, degat: int):
 	_carte = carte_instance
 	_cout = cout_valeur
-	_niveau_carte = niveau
 	_degat = degat
-	self.augmenter_degat(_niveau_carte)
+	self.setNiveau(niveau)
 
 # --- Méthodes ---
 func getCout() -> int:
@@ -29,7 +28,7 @@ func getDegat() -> int:
 func setNiveau(niveau: int):
 	_niveau_carte = niveau
 	self.augmenter_degat(_niveau_carte)
-	_carte.labelNiveau.text = str(_niveau_carte)
+	_carte.labelNiveau.text = "lvl. " + str(_niveau_carte)
 
 func augmenter_degat(multiplicateur: int):
 	_degat *= multiplicateur

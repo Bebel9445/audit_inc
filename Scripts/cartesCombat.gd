@@ -6,8 +6,6 @@ var labelState: Label
 
 func _init(nom: String, niveau: int, texte: String, degats: int, image: Texture2D):
 	name = nom
-	anchor_right = 1
-	anchor_bottom = 1
 	size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	add_theme_constant_override("margin_left", 10)
@@ -58,7 +56,7 @@ func _init(nom: String, niveau: int, texte: String, degats: int, image: Texture2
 
 	labelState = Label.new()
 	labelState.text = "Dégats : " + str(degats)
-	var font = load("res://Fonts/Figerona-VF.ttf")
+	var font = load("res://Fonts/Figerona-VF.ttf")	# Pour mettre en gras
 	labelState.add_theme_font_override("font", font)
 	labelState.autowrap_mode = TextServer.AUTOWRAP_WORD
 	labelState.size_flags_horizontal = Control.SIZE_EXPAND_FILL
