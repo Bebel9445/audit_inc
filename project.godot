@@ -15,6 +15,10 @@ run/main_scene="uid://cho5teehqnmm8"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+CartesCombat="*res://Scripts/cartesCombat.gd"
+
 [editor]
 
 version_control/plugin_name="GitPlugin"
