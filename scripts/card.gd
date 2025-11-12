@@ -1,13 +1,10 @@
-extends Control
-
-signal card_played(card)
-var data
-
-func setup(card_data):
-	data = card_data
-	$Panel/CardName.text = card_data.name
-	$Panel/Description.text = card_data.description
+extends Area2D
 
 
-func _on_play_button_pressed() -> void:
-		emit_signal("card_played", data)
+func _ready():
+	var img = load("res://icon.svg")
+	var carte = FightCardsObject.new("test", 0, "Le test a fonctionné gros ;)", 0, img)
+	add_child(carte)
+	
+	var info = FightCards.new(carte, 3, 10, 10)
+	print(info.getNiveau())

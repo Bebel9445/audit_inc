@@ -17,14 +17,14 @@ offset_right = -1.0
 offset_bottom = 625.0
 
 [node name="CardZone" type="ScrollContainer" parent="."]
-offset_left = 863.0
-offset_top = 29.0
-offset_right = 1110.0
-offset_bottom = 622.0
+offset_left = 925.0
+offset_top = 22.0
+offset_right = 1135.0
+offset_bottom = 615.0
 
 [node name="CardsVBox" type="VBoxContainer" parent="CardZone"]
 layout_mode = 2
-theme_override_constants/separation = 120
+theme_override_constants/separation = 5
 
 [node name="CombatManager" type="Node" parent="."]
 
