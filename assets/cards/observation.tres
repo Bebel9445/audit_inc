@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=2 format=3 uid="uid://djvijkbiujw4n"]
+
+[ext_resource type="Script" uid="uid://dfjj45bb0sc5" path="res://scripts/resources/CardResource.gd" id="1_8oumf"]
+
+[resource]
+script = ExtResource("1_8oumf")
+name = "Observation moment"
+type = "combat"
+cost = 2
+description = "non non baguette"
+effect_script = "res://scripts/effects/VerificationEffect.gd"
+metadata/_custom_type_script = "uid://dfjj45bb0sc5"

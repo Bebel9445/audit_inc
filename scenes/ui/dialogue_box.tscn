@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqspirjqpmj3d"]
+
+[ext_resource type="Script" uid="uid://cailyg7atjipl" path="res://scripts/dialogue_box.gd" id="1_xg44k"]
+[ext_resource type="Texture2D" uid="uid://nyqrn1wytcug" path="res://assets/icons/9b1ren30ip241.png" id="2_6iboe"]
+[ext_resource type="FontFile" uid="uid://d21dge175n1og" path="res://assets/icons/ByteBounce.ttf" id="3_4mjmi"]
+
+[node name="DialogueBox" type="Control"]
+layout_direction = 2
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_xg44k")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 35.0
+offset_top = -173.0
+offset_right = 694.0
+offset_bottom = -45.0
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -16.0
+offset_right = 661.0
+offset_bottom = 148.0
+texture = ExtResource("2_6iboe")
+
+[node name="NextButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 563.0
+offset_top = 89.0
+offset_right = 629.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("3_4mjmi")
+text = "Suivant"
+
+[node name="DialogueText" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 198.0
+offset_top = 31.0
+offset_right = 560.0
+offset_bottom = 110.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_4mjmi")
+theme_override_font_sizes/font_size = 24
+text = "Suivant"
+autowrap_mode = 2

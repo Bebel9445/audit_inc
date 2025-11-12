@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3 uid="uid://d254arbm1shvb"]
+
+[ext_resource type="Script" uid="uid://d2iotqfl8xnnr" path="res://scripts/resources/DialogueResource.gd" id="1_udocr"]
+
+[resource]
+script = ExtResource("1_udocr")
+id = "combat_intro"
+lines = Array[String](["\"Service RH : Bonjour, auditeur...\",", "\"Vous pensez que nos dossiers ne sont pas en ordre ?\",", "\"Préparez-vous à vérifier tout ça !\""])
+metadata/_custom_type_script = "uid://d2iotqfl8xnnr"

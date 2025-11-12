@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci6284mim63qb"]
+
+[ext_resource type="PackedScene" uid="uid://bqspirjqpmj3d" path="res://scenes/ui/dialogue_box.tscn" id="1_ik0t7"]
+[ext_resource type="Script" uid="uid://c7rbe5ddbd12r" path="res://scripts/combat_manager.gd" id="1_ofoda"]
+
+[node name="CombatScene" type="Node2D"]
+script = ExtResource("1_ofoda")
+
+[node name="ServiceDisplay" type="TextureRect" parent="."]
+offset_right = 142.0
+offset_bottom = 140.0
+
+[node name="DialogueBox" parent="." instance=ExtResource("1_ik0t7")]
+offset_left = -1.0
+offset_top = 625.0
+offset_right = -1.0
+offset_bottom = 625.0
+
+[node name="CardZone" type="ScrollContainer" parent="."]
+offset_left = 863.0
+offset_top = 29.0
+offset_right = 1110.0
+offset_bottom = 622.0
+
+[node name="CardsVBox" type="VBoxContainer" parent="CardZone"]
+layout_mode = 2
+theme_override_constants/separation = 120
+
+[node name="CombatManager" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
