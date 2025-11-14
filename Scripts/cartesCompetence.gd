@@ -1,7 +1,116 @@
 extends MarginContainer
 class_name ObjetCarteCompetence
 
+@export var nom_competence: String
+@export var _niveau: int = 1
 var labelNiveau: Label
+
+var is_dragging := false # Servira pour les drags and drops
+var preview = null
+
+# StyleBoxes pour le contour
+var style_defaut = StyleBoxFlat.new()
+var surlignement_possible = StyleBoxFlat.new()
+var surlignement_impossible = StyleBoxFlat.new()
+
+func _ready():
+	# En gros y'aura un contour gris quand la carte ne peux pas être fusionné et jaune sinon lors d'un drag and drop
+	style_defaut.border_width_bottom = 4
+	style_defaut.border_width_left = 4
+	style_defaut.border_width_right = 4
+	style_defaut.border_width_top = 4
+	style_defaut.border_color = Color.TRANSPARENT
+	
+	surlignement_possible.border_width_bottom = 4
+	surlignement_possible.border_width_left = 4
+	surlignement_possible.border_width_right = 4
+	surlignement_possible.border_width_top = 4
+	surlignement_possible.border_color = Color.YELLOW
+	
+	surlignement_impossible.border_width_bottom = 4
+	surlignement_impossible.border_width_left = 4
+	surlignement_impossible.border_width_right = 4
+	surlignement_impossible.border_width_top = 4
+	surlignement_impossible.border_color = Color.GRAY
+	
+	add_theme_stylebox_override("panel", style_defaut)
+
+
+# ===========================
+#  TOUTES LES FONCTIONS POUR DRAG
+# ===========================
+
+func _get_drag_data(position):
+	is_dragging = true
+	add_theme_stylebox_override("panel", style_defaut)
+	
+	# donnée envoyée : un dictionnaire
+	var donnee = {
+		"carte": self,
+		"competence": nom_competence,
+		"niveau": _niveau
+	}
+
+	# création d'une petite preview
+	# en gros la preview elle permet d'avoir un visuel "fantome" de la carte sur la souris quand tu drag
+	preview = duplicate()
+	preview.modulate.a = 0.5
+	set_drag_preview(preview)
+
+	return donnee
+
+
+func _can_drop_data(position, donnee):
+	if not donnee.has("competence"):
+		return false
+	
+	if donnee["carte"] == self:
+		return false
+
+	# Même compétence ? -> surlignage jaune
+	if donnee["competence"] == nom_competence && donnee["niveau"] == _niveau:
+		add_theme_stylebox_override("panel", surlignement_possible)
+	else:
+		add_theme_stylebox_override("panel", surlignement_impossible)
+
+	return true
+
+
+func _drop_data(position, donnee):
+	is_dragging = false
+
+	if donnee["competence"] == nom_competence && donnee["niveau"] == _niveau:
+		_fusionner(donnee["carte"])
+	else:
+		# pas la même carte → contour gris
+		add_theme_stylebox_override("panel", surlignement_impossible)
+
+	await get_tree().process_frame
+	add_theme_stylebox_override("panel", style_defaut)
+
+
+func _drag_end(success):
+	is_dragging = false
+	add_theme_stylebox_override("panel", style_defaut)
+
+
+# ===========================
+#  FUSION
+# ===========================
+
+func _fusionner(autre_carte):
+	print("Fusion de la carte ", nom_competence)
+
+	_niveau += 1
+	labelNiveau.text = "lvl. " + str(_niveau)
+
+	# Supprime l'autre carte
+	autre_carte.queue_free()
+
+
+# ===========================
+#  CARTE
+# ===========================
 
  # Pour créer une carte sur l'écran
 func _init(nom: String, niveau: int, image: Texture2D):

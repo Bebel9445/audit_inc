@@ -11,3 +11,5 @@ func _ready():
 	
 	var carteCompetence = ObjetCarteCompetence.new("test", 0, img)
 	add_child(carteCompetence)
+	var autreCarteCompetence = ObjetCarteCompetence.new("test", 0, img)
+	add_child(autreCarteCompetence)
