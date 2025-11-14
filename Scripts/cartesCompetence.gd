@@ -2,7 +2,8 @@ extends MarginContainer
 class_name ObjetCarteCompetence
 
 @export var nom_competence: String
-@export var _niveau: int = 1
+@export var _niveau: int = -1 # Au cas où à -1 pour éviter des erreurs (qui ne devraient pas arriver)
+var panel: Panel
 var labelNiveau: Label
 
 var is_dragging := false # Servira pour les drags and drops
@@ -33,7 +34,7 @@ func _ready():
 	surlignement_impossible.border_width_top = 4
 	surlignement_impossible.border_color = Color.GRAY
 	
-	add_theme_stylebox_override("panel", style_defaut)
+	panel.add_theme_stylebox_override("panel", style_defaut)
 
 
 # ===========================
@@ -42,7 +43,7 @@ func _ready():
 
 func _get_drag_data(position):
 	is_dragging = true
-	add_theme_stylebox_override("panel", style_defaut)
+	panel.add_theme_stylebox_override("panel", style_defaut)
 	
 	# donnée envoyée : un dictionnaire
 	var donnee = {
@@ -69,9 +70,9 @@ func _can_drop_data(position, donnee):
 
 	# Même compétence ? -> surlignage jaune
 	if donnee["competence"] == nom_competence && donnee["niveau"] == _niveau:
-		add_theme_stylebox_override("panel", surlignement_possible)
+		panel.add_theme_stylebox_override("panel", surlignement_possible)
 	else:
-		add_theme_stylebox_override("panel", surlignement_impossible)
+		panel.add_theme_stylebox_override("panel", surlignement_impossible)
 
 	return true
 
@@ -83,15 +84,15 @@ func _drop_data(position, donnee):
 		_fusionner(donnee["carte"])
 	else:
 		# pas la même carte → contour gris
-		add_theme_stylebox_override("panel", surlignement_impossible)
+		panel.add_theme_stylebox_override("panel", surlignement_impossible)
 
 	await get_tree().process_frame
-	add_theme_stylebox_override("panel", style_defaut)
+	panel.add_theme_stylebox_override("panel", style_defaut)
 
 
 func _drag_end(success):
 	is_dragging = false
-	add_theme_stylebox_override("panel", style_defaut)
+	panel.add_theme_stylebox_override("panel", style_defaut)
 
 
 # ===========================
@@ -99,8 +100,6 @@ func _drag_end(success):
 # ===========================
 
 func _fusionner(autre_carte):
-	print("Fusion de la carte ", nom_competence)
-
 	_niveau += 1
 	labelNiveau.text = "lvl. " + str(_niveau)
 
@@ -113,7 +112,7 @@ func _fusionner(autre_carte):
 # ===========================
 
  # Pour créer une carte sur l'écran
-func _init(nom: String, niveau: int, image: Texture2D):
+func _init(nom: String, niveau: int, image: Texture2D, position_x: int, position_y: int):
 	name = nom
 	size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -121,8 +120,10 @@ func _init(nom: String, niveau: int, image: Texture2D):
 	add_theme_constant_override("margin_top", 10)
 	add_theme_constant_override("margin_right", 10)
 	add_theme_constant_override("margin_bottom", 10)
+	position.x = position_x
+	position.y = position_y
 	
-	var panel := Panel.new()
+	panel = Panel.new()
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	add_child(panel)
@@ -151,7 +152,8 @@ func _init(nom: String, niveau: int, image: Texture2D):
 	vbox_gauche.add_child(labelNom)
 	
 	labelNiveau = Label.new()
-	labelNiveau.text = "lvl. " + str(niveau)
+	_niveau = niveau
+	labelNiveau.text = "lvl. " + str(_niveau)
 	labelNiveau.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	labelNiveau.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	labelNiveau.add_theme_font_size_override("font_size", 18)
