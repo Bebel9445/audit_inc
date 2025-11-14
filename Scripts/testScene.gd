@@ -9,11 +9,11 @@ func _ready():
 	#var info = CarteDeCombat.new(carte, 3, 10, 10)
 	#print(info.getNiveau())
 	
-	var carteCompetence = ObjetCarteCompetence.new("test", 0, img, 150, 20)
+	var carteCompetence = ObjetCarteCompetence.new("test", 0, img, 100, 20)
 	add_child(carteCompetence)
 	var info1 = CarteDeCompetence.new(carteCompetence, 0, "test")
 	print(info1.getNiveau())
-	var autreCarteCompetence = ObjetCarteCompetence.new("test", 0, img, 700, 20)
+	var autreCarteCompetence = ObjetCarteCompetence.new("test", 0, img, 800, 20)
 	add_child(autreCarteCompetence)
 	var CarteCompetenceNiv2 = ObjetCarteCompetence.new("test2", 2, img, 400, 400)
 	add_child(CarteCompetenceNiv2)
@@ -21,3 +21,6 @@ func _ready():
 	add_child(CarteCompetenceNiv1)
 	var CarteCompetenceNiv3 = ObjetCarteCompetence.new("test", 3, img, 700, 400)
 	add_child(CarteCompetenceNiv3)
+	
+	var slot = Slot.new(400,20)
+	add_child(slot)

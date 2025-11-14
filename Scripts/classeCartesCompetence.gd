@@ -11,7 +11,7 @@ var _competence: String
 func _init(carte_instance: ObjetCarteCompetence, niveau: int, comptence: String):
 	_carte = carte_instance
 	_competence = comptence
-	self.setNiveau(niveau)
+	_niveau_carte = niveau
 
 # --- Méthodes ---
 func getCompetence() -> String:
@@ -19,7 +19,3 @@ func getCompetence() -> String:
 
 func getNiveau() -> int:
 	return _niveau_carte
-
-func setNiveau(niveau: int):
-	_niveau_carte = niveau
-	_carte.labelNiveau.text = "lvl. " + str(_niveau_carte)

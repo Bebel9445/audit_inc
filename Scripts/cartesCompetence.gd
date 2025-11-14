@@ -45,31 +45,24 @@ func _get_drag_data(position):
 	is_dragging = true
 	panel.add_theme_stylebox_override("panel", style_defaut)
 	
-	# donnée envoyée : un dictionnaire
-	var donnee = {
-		"carte": self,
-		"competence": nom_competence,
-		"niveau": _niveau
-	}
-
 	# création d'une petite preview
 	# en gros la preview elle permet d'avoir un visuel "fantome" de la carte sur la souris quand tu drag
 	preview = duplicate()
 	preview.modulate.a = 0.5
 	set_drag_preview(preview)
 
-	return donnee
+	return self
 
 
 func _can_drop_data(position, donnee):
-	if not donnee.has("competence"):
+	if donnee == null:
 		return false
 	
-	if donnee["carte"] == self:
+	if donnee == self:
 		return false
 
 	# Même compétence ? -> surlignage jaune
-	if donnee["competence"] == nom_competence && donnee["niveau"] == _niveau:
+	if donnee.nom_competence == nom_competence && donnee._niveau == _niveau:
 		panel.add_theme_stylebox_override("panel", surlignement_possible)
 	else:
 		panel.add_theme_stylebox_override("panel", surlignement_impossible)
@@ -80,8 +73,8 @@ func _can_drop_data(position, donnee):
 func _drop_data(position, donnee):
 	is_dragging = false
 
-	if donnee["competence"] == nom_competence && donnee["niveau"] == _niveau:
-		_fusionner(donnee["carte"])
+	if donnee.nom_competence == nom_competence && donnee._niveau == _niveau:
+		_fusionner(donnee)
 	else:
 		# pas la même carte → contour gris
 		panel.add_theme_stylebox_override("panel", surlignement_impossible)
