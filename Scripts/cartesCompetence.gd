@@ -114,6 +114,7 @@ func _fusionner(autre_carte):
  # Pour créer une carte sur l'écran
 func _init(nom: String, niveau: int, image: Texture2D, position_x: int, position_y: int):
 	name = nom
+	nom_competence = nom
 	size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	add_theme_constant_override("margin_left", 10)
@@ -159,12 +160,12 @@ func _init(nom: String, niveau: int, image: Texture2D, position_x: int, position
 	labelNiveau.add_theme_font_size_override("font_size", 18)
 	vbox_gauche.add_child(labelNiveau)
 	
-	var label := Label.new()
-	label.text = "Compétence"
-	label.autowrap_mode = TextServer.AUTOWRAP_WORD
-	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	hbox.add_child(label)
+	# Faut trouver une image compatible (une étoile)
+	#var etoile := TextureRect.new()
+	#var img = load("res://Cartes/images/Etoile.png")
+	#etoile.texture = img
+	#etoile.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	#hbox.add_child(etoile)
 
 	var texture_rect := TextureRect.new()
 	texture_rect.texture = image
