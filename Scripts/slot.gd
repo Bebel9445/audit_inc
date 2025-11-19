@@ -46,8 +46,8 @@ func _drop_data(position, donnee):
 func _init(position_x, position_y) -> void:
 	position.x = position_x
 	position.y = position_y
-	size.x = 200
-	size.y = 250
+	size.x = 230
+	size.y = 230
 	
 	var couleur_slot = ColorRect.new()
 	couleur_slot.color = Color.LIGHT_GRAY
