@@ -11,10 +11,10 @@ offset_right = 142.0
 offset_bottom = 140.0
 
 [node name="DialogueBox" parent="." instance=ExtResource("1_ik0t7")]
-offset_left = -1.0
-offset_top = 625.0
-offset_right = -1.0
-offset_bottom = 625.0
+offset_left = -4.0
+offset_top = 647.0
+offset_right = -4.0
+offset_bottom = 647.0
 
 [node name="CardZone" type="ScrollContainer" parent="."]
 offset_left = 925.0
@@ -29,3 +29,14 @@ theme_override_constants/separation = 5
 [node name="CombatManager" type="Node" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CardZone2" type="ScrollContainer" parent="."]
+offset_left = 19.0
+offset_top = 17.0
+offset_right = 807.0
+offset_bottom = 232.0
+
+[node name="SkillsBox" type="HBoxContainer" parent="CardZone2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6

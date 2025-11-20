@@ -1,19 +1,33 @@
 class_name FightCards
-extends RefCounted # permet de créer des objets “légers” non liés à une scène (Node).
-# En gros c'est pour pas avoir à mettre de extend (je crois)
+extends RefCounted
+
+# --- DEFINITION DU TYPE ---
+enum CardType { 
+	ACTION,      # Carte jouable en combat (Main)
+	COMPETENCE   # Carte passive (Slot)
+}
 
 # --- Attributs ---
 var _carte: FightCardsObject
-var _cout: int	# ça coûte x semaines à jouer la catre comme Abel à proposé
+var _cout: int
 var _niveau_carte: int
 var _degat: int
 
+# Nouveaux attributs
+var effect_script: String  # Chemin vers le script d'effet
+var card_type: CardType    # Type de la carte (ACTION ou COMPETENCE)
+
 # --- Constructeur ---
-func _init(carte_instance: FightCardsObject, cout_valeur: int, niveau: int, degat: int):
+func _init(carte_instance: FightCardsObject, cout_valeur: int, niveau: int, degat: int, 
+		   effect_path: String, type_de_carte: CardType):
+	
 	_carte = carte_instance
 	_cout = cout_valeur
 	_degat = degat
-	self.setNiveau(niveau)
+	effect_script = effect_path
+	card_type = type_de_carte
+	
+	setNiveau(niveau)
 
 # --- Méthodes ---
 func getCout() -> int:
@@ -28,7 +42,9 @@ func getDegat() -> int:
 func setNiveau(niveau: int):
 	_niveau_carte = niveau
 	self.augmenter_degat(_niveau_carte)
-	_carte.labelNiveau.text = "lvl. " + str(_niveau_carte)
+	# Vérification de sécurité si l'objet visuel a bien le label
+	if _carte and "labelNiveau" in _carte:
+		_carte.labelNiveau.text = "lvl. " + str(_niveau_carte)
 	
 func getName() -> String:
 	return _carte.name
@@ -41,4 +57,5 @@ func getDescription() -> String:
 	
 func augmenter_degat(multiplicateur: int):
 	_degat *= multiplicateur
-	_carte.labelState.text = "Dégats : " + str(_degat)
+	if _carte and "labelState" in _carte:
+		_carte.labelState.text = "Dégats : " + str(_degat)
