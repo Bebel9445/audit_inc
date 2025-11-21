@@ -24,8 +24,19 @@ func add_red_border():
 	add_theme_stylebox_override("panel", sb)
 
 func remove_border():
-	add_theme_stylebox_override("panel", StyleBoxFlat.new())
+	var sb = StyleBoxFlat.new()
+	sb.bg_color = Color(0,0,0,0)
+	sb.bg_color = Color(0,0,0,0)
+	sb.border_width_bottom = 4
+	sb.border_width_left = 4
+	sb.border_width_right = 4
+	sb.border_width_top = 4
+	add_theme_stylebox_override("panel", sb)
 
+
+func _notification(what):
+	if what == NOTIFICATION_DRAG_END:
+		remove_border()
 
 func _can_drop_data(position, donnee):
 	# donnee est envoyé par la carte
@@ -50,7 +61,7 @@ func _init(position_x, position_y) -> void:
 	size.y = 230
 	
 	var couleur_slot = ColorRect.new()
-	couleur_slot.color = Color.LIGHT_GRAY
+	couleur_slot.color = Color.DARK_GRAY
 	couleur_slot.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	couleur_slot.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	add_child(couleur_slot)

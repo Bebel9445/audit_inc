@@ -8,10 +8,10 @@ var _niveau_carte: int
 var _competence: String
 
 # --- Constructeur ---
-func _init(carte_instance: ObjetCarteCompetence, niveau: int, comptence: String):
+func _init(carte_instance: ObjetCarteCompetence, comptence: String):
 	_carte = carte_instance
 	_competence = comptence
-	_niveau_carte = niveau
+	_niveau_carte = _carte._niveau
 
 # --- Méthodes ---
 func getCompetence() -> String:

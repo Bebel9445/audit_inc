@@ -2,7 +2,7 @@ extends MarginContainer
 class_name ObjetCarteCompetence
 
 @export var nom_competence: String
-@export var _niveau: int = -1 # Au cas où à -1 pour éviter des erreurs (qui ne devraient pas arriver)
+var _niveau: int = -1 # Au cas où à -1 pour éviter des erreurs (qui ne devraient pas arriver)
 var panel: Panel
 var labelNiveau: Label
 
@@ -13,6 +13,7 @@ var preview = null
 var style_defaut = StyleBoxFlat.new()
 var surlignement_possible = StyleBoxFlat.new()
 var surlignement_impossible = StyleBoxFlat.new()
+var drag_source
 
 func _ready():
 	# En gros y'aura un contour gris quand la carte ne peux pas être fusionné et jaune sinon lors d'un drag and drop
@@ -41,8 +42,14 @@ func _ready():
 #  TOUTES LES FONCTIONS POUR DRAG
 # ===========================
 
+func _notification(what):
+	if what == NOTIFICATION_DRAG_END:
+		panel.add_theme_stylebox_override("panel", style_defaut)
+		drag_source = null
+
 func _get_drag_data(position):
 	is_dragging = true
+	drag_source = self
 	panel.add_theme_stylebox_override("panel", style_defaut)
 	
 	# création d'une petite preview
@@ -52,7 +59,6 @@ func _get_drag_data(position):
 	set_drag_preview(preview)
 
 	return self
-
 
 func _can_drop_data(position, donnee):
 	if donnee == null:
@@ -75,9 +81,8 @@ func _drop_data(position, donnee):
 
 	if donnee.nom_competence == nom_competence && donnee._niveau == _niveau:
 		_fusionner(donnee)
-	else:
-		# pas la même carte → contour gris
-		panel.add_theme_stylebox_override("panel", surlignement_impossible)
+	#else:
+		#panel.add_theme_stylebox_override("panel", surlignement_impossible)
 
 	await get_tree().process_frame
 	panel.add_theme_stylebox_override("panel", style_defaut)
@@ -86,7 +91,6 @@ func _drop_data(position, donnee):
 func _drag_end(success):
 	is_dragging = false
 	panel.add_theme_stylebox_override("panel", style_defaut)
-
 
 # ===========================
 #  FUSION

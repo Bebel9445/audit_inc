@@ -11,8 +11,7 @@ func _ready():
 	
 	var carteCompetence = ObjetCarteCompetence.new("test", 0, img, 100, 20)
 	add_child(carteCompetence)
-	var info1 = CarteDeCompetence.new(carteCompetence, 0, "test")
-	print(info1.getNiveau())
+	var info1 = CarteDeCompetence.new(carteCompetence, "test")
 	var autreCarteCompetence = ObjetCarteCompetence.new("test", 0, img, 800, 20)
 	add_child(autreCarteCompetence)
 	var CarteCompetenceNiv2 = ObjetCarteCompetence.new("test2", 2, img, 400, 400)
