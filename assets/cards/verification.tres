@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=2 format=3 uid="uid://cigfxihe7cae7"]
+
+[ext_resource type="Script" uid="uid://dfjj45bb0sc5" path="res://scripts/resources/CardResource.gd" id="1_os5cy"]
+
+[resource]
+script = ExtResource("1_os5cy")
+name = "Vérification documentaire"
+type = "combat"
+cost = 1
+description = "oui oui baguette"
+effect_script = "res://scripts/effects/VerificationEffect.gd"
+metadata/_custom_type_script = "uid://dfjj45bb0sc5"

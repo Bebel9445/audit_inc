@@ -10,19 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Audit Inc"
-run/main_scene="uid://cho5teehqnmm8"
+config/name="AuditInc"
+run/main_scene="uid://ci6284mim63qb"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
-
-[autoload]
-
-CartesCombat="*res://Scripts/cartesCombat.gd"
-
-[editor]
-
-version_control/plugin_name="GitPlugin"
-version_control/autoload_on_startup=true
 
 [rendering]
 
