@@ -3,11 +3,13 @@ class_name CombatManager
 
 @onready var card_zone = $CardZone
 @onready var card_zone2 = $CardZone2
+@onready var slot_zone = $SlotZone
 @onready var service_display = $ServiceDisplay
 @onready var dialogue_box = $DialogueBox
 
 @onready var deck_manager = preload("res://scripts/deck_manager.gd").new()
 @onready var player = preload("res://scripts/player.gd").new()
+#@onready var slot = preload("res://scripts/slot.gd")
 
 var turn := 1
 
@@ -25,6 +27,8 @@ func start_combat():
 	
 	# 2. Afficher les compétences
 	display_skills() 
+	
+	display_slots()
 
 	if not dialogue_box.is_connected("dialogue_finished", Callable(self, "_on_dialogue_finished")):
 		dialogue_box.connect("dialogue_finished", Callable(self, "_on_dialogue_finished"))
@@ -34,6 +38,23 @@ func start_combat():
 
 func _on_dialogue_finished():
 	dialogue_box.show_text("À toi de jouer !")
+
+func display_slots():
+	var container = slot_zone.get_node("SlotHBox")
+	if container == null:
+		push_error("Erreur : Impossible de trouver le conteneur 'SlotHBox' dans SlotZone")
+		return
+	
+	# On nettoie le conteneur au cas où
+	for child in container.get_children():
+		child.queue_free()
+	
+	# on créer 2 slots
+	for i in range(2):
+		var slot = Slot.new()
+		slot.custom_minimum_size = Vector2(140, 180)
+		container.add_child(slot)
+		slot.position = Vector2.ZERO
 
 # --- NOUVELLE FONCTION : Affiche les compétences dans CardZone2 ---
 func display_skills():
@@ -99,6 +120,8 @@ func add_card_to_zone(card_info: FightCards):
 	if not carte_visuelle.is_connected("gui_input", Callable(self, "_on_card_clicked")):
 		carte_visuelle.connect("gui_input", Callable(self, "_on_card_clicked").bind(card_info))
 
+	$MainHand.add_card(carte_visuelle)
+	
 	var container = card_zone.get_node("CardsVBox")
 	container.add_child(carte_visuelle)
 

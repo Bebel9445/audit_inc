@@ -5,8 +5,6 @@ var labelNiveau: Label
 var labelState: Label
 var texte: String  
 
-
-
  # Pour créer une carte sur l'écran
 func _init(nom: String, niveau: int, texte: String, degats: int, image: Texture2D):
 	name = nom

@@ -10,6 +10,11 @@ var labelNiveau: Label
 var is_dragging := false 
 var preview = null
 
+# C'est pour les slots
+signal quit_slot(slot)
+var slot_actuel = null
+
+
 # StyleBoxes
 var style_defaut = StyleBoxFlat.new()
 var surlignement_possible = StyleBoxFlat.new()
@@ -53,6 +58,12 @@ func _notification(what):
 func _get_drag_data(position):
 	is_dragging = true
 	drag_source = self
+	
+	# Pour dire au slot qu'on est plus dessus 
+	if slot_actuel:
+		emit_signal("quit_slot", slot_actuel)
+		slot_actuel = null  # la carte ne dépend plus du slot
+	
 	panel.add_theme_stylebox_override("panel", style_defaut)
 	preview = duplicate()
 	preview.modulate.a = 0.5
@@ -70,6 +81,7 @@ func _can_drop_data(position, donnee):
 
 func _drop_data(position, donnee):
 	is_dragging = false
+	
 	if donnee.nom_competence == nom_competence && donnee._niveau == _niveau:
 		_fusionner(donnee)
 
@@ -88,7 +100,6 @@ func _fusionner(autre_carte):
 	_niveau += 1
 	labelNiveau.text = "Lv." + str(_niveau) # "Lv." prend moins de place
 	autre_carte.queue_free()
-
 
 # ===========================
 #  INIT (VERSION MINIATURE)

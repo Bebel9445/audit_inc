@@ -52,15 +52,15 @@ func _drop_data(position, donnee):
 		donnee.get_parent().remove_child(donnee)
 		add_child(donnee)
 		donnee.position = Vector2.ZERO
+		
+		donnee.slot_actuel = self
+		donnee.connect("quit_slot", self._on_carte_quit_slot)
 
-func _init(position_x, position_y) -> void:
-	position.x = position_x
-	position.y = position_y
+func _on_carte_quit_slot(slot):
+	if slot == self:
+		carte_occupee = null
+
+
+func _init() -> void:
 	size.x = 230
 	size.y = 230
-	
-	var couleur_slot = ColorRect.new()
-	couleur_slot.color = Color.LIGHT_GRAY
-	couleur_slot.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	couleur_slot.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	add_child(couleur_slot)
