@@ -1,0 +1,74 @@
+[
+    {
+        "id" : 0,
+        "niveau" : 1,
+        "nom" : "comptabilite",
+        "image" : "res://comptabilite1.png"
+    },
+    {
+        "id" : 0,
+        "niveau" : 2,
+        "nom" : "comptabilite",
+        "image" : "res://comptabilite2.png"
+    },
+    {
+        "id" : 0,
+        "niveau" : 3,
+        "nom" : "comptabilite",
+        "image" : "res://comptabilite3.png"
+    },
+    {
+        "id" : 0,
+        "niveau" : 4,
+        "nom" : "comptabilite",
+        "image" : "res://comptabilite4.png"
+    },
+    {
+        "id" : 1,
+        "niveau" : 1,
+        "nom" : "juridique",
+        "image" : "res://juridique1.png"
+    },
+    {
+        "id" : 1,
+        "niveau" : 2,
+        "nom" : "juridique",
+        "image" : "res://juridique2.png"
+    },
+    {
+        "id" : 1,
+        "niveau" : 3,
+        "nom" : "juridique",
+        "image" : "res://juridique3.png"
+    },
+    {
+        "id" : 1,
+        "niveau" : 4,
+        "nom" : "juridique",
+        "image" : "res://juridique4.png"
+    },
+    {
+        "id" : 2,
+        "niveau" : 1,
+        "nom" : "communication",
+        "image" : "res://communication1.png"
+    },
+    {
+        "id" : 2,
+        "niveau" : 2,
+        "nom" : "communication",
+        "image" : "res://communication2.png"
+    },
+    {
+        "id" : 2,
+        "niveau" : 3,
+        "nom" : "communication",
+        "image" : "res://communication3.png"
+    },
+    {
+        "id" : 2,
+        "niveau" : 4,
+        "nom" : "communication",
+        "image" : "res://communication4.png"
+    }
+]

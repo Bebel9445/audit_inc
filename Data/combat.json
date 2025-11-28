@@ -1,0 +1,15 @@
+[
+    {
+        "type" : 2,
+        "niveau" : 1,
+        "nom" : "Z",
+        "image" : "res://z.png",
+        "attaque" : {
+            "nom" : "Le C c'est mieux !",
+            "descritpion" : "Il vous bassine avec la superiorité du C sur tous les autres langages.",
+            "temps" : 3,
+            "degats" : 50
+        },
+        "texte" : "Il a une magnifique barbe !"
+    }
+]

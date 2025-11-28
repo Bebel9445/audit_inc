@@ -1,0 +1,40 @@
+{
+    "pnj": {
+        "0" : {
+            "Majda" : "res://majda.png",
+            "Mainguy" : "res://mainguy.png"
+        },
+        "1" : {
+            "Roy" : "res://roy.png",
+            "Masdak" : "res://masdak.png"
+        },
+        "2" : {
+            "Wessler" : "res://wessler.png",
+            "Community manager" : "res://cm.png"
+        },
+        "all" : {
+            "Z" : "res://z.png",
+            "Ali" : "res://ali.png",
+            "Gossa" : "res://gossa.png",
+            "Blindauer" : "res://blindauer.png",
+            "Secretaire" : "res://secretaire.png",
+            "Stagiaire" : "res://stagiaire.png",
+            "Employe" : "res://employe.png"
+        }
+    },
+
+    "perso cle" : {
+        "0" : {
+            "Chef comptable" : "res://chef_comptable.png",
+            "Josianne de la compta" : "res://josianne.png"
+        },
+        "1" : {
+            "Avocat d'entreprise" : "res://avocat.png",
+            "Consultant en droit" : "res://consultant_droit.png"
+        },
+        "2" : {
+            "Directeur des ressources humaines" : "res://drh.png",
+            "Responsable publicitaire" : "res://publicitaire.png"
+        }
+    }
+}
