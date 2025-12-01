@@ -4,6 +4,7 @@ class_name FightCardsObject
 var labelNiveau: Label
 var labelState: Label
 var texte: String
+var damage: int
 
  # Pour créer une carte sur l'écran
 func _init(nom: String, niveau: int, texte: String, degats: int, image: Texture2D):
@@ -58,6 +59,7 @@ func _init(nom: String, niveau: int, texte: String, degats: int, image: Texture2
 
 	labelState = Label.new()
 	labelState.text = "Dégats : " + str(degats)
+	damage = degats
 	var font = load("res://Fonts/Figerona-VF.ttf")	# Pour mettre en gras
 	labelState.add_theme_font_override("font", font)
 	labelState.autowrap_mode = TextServer.AUTOWRAP_WORD

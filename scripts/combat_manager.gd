@@ -1,9 +1,8 @@
 extends Node
 class_name CombatManager
 
-@onready var card_zone = $CardZone
 @onready var card_zone2 = $CardZone2
-@onready var slot_zone = $SlotZone
+@onready var slot_zone = $SlotZone/SlotHBox
 @onready var service_display = $ServiceDisplay
 @onready var dialogue_box = $DialogueBox
 
@@ -40,7 +39,7 @@ func _on_dialogue_finished():
 	dialogue_box.show_text("À toi de jouer !")
 
 func display_slots():
-	var container = slot_zone.get_node("SlotHBox")
+	var container = slot_zone
 	if container == null:
 		push_error("Erreur : Impossible de trouver le conteneur 'SlotHBox' dans SlotZone")
 		return
@@ -121,9 +120,6 @@ func add_card_to_zone(card_info: FightCards):
 		carte_visuelle.connect("gui_input", Callable(self, "_on_card_clicked").bind(card_info))
 
 	$MainHand.add_card(carte_visuelle)
-	
-	var container = card_zone.get_node("CardsVBox")
-	container.add_child(carte_visuelle)
 
 # --- Quand une carte est cliquée ---
 func _on_card_clicked(event: InputEvent, carte_info: FightCards):
@@ -161,3 +157,20 @@ func apply_card_effect(carte_info: FightCards):
 			push_warning("Impossible de charger l’effet : " + str(carte_info.effect_script))
 	else:
 		print("Aucun effet défini pour :", carte_info.getName())
+
+func apply_bonus_from_slot():# Mieux de mettre les classes en paramètres 
+	var card = object_skill_card
+
+	for slot in slot_zone.get_children():
+		if slot is Slot:
+			if slot.carte_occupee != null:
+				card = slot.carte_occupee
+				apply_bonus(card.type, card.bonus)# IL FAUT ABSOLUMENT LE CHANGER 
+
+func apply_bonus(type: String, bonus: int):
+	for fight_card in $MainHand.get_children():
+		if not fight_card is FightCardsObject:
+			return
+		if fight_card.type == type:
+			fight_card.damage += bonus
+			fight_card.labelState.text = "Dégats : " + str(fight_card.damage)

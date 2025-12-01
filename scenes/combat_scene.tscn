@@ -17,16 +17,6 @@ offset_top = 220.0
 offset_right = 440.0
 offset_bottom = 220.0
 
-[node name="CardZone" type="ScrollContainer" parent="."]
-offset_left = 925.0
-offset_top = 247.0
-offset_right = 1135.0
-offset_bottom = 615.0
-
-[node name="CardsVBox" type="VBoxContainer" parent="CardZone"]
-layout_mode = 2
-theme_override_constants/separation = 5
-
 [node name="CombatManager" type="Node" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -34,7 +24,7 @@ theme_override_constants/separation = 5
 [node name="CardZone2" type="ScrollContainer" parent="."]
 offset_left = 19.0
 offset_top = 400.0
-offset_right = 807.0
+offset_right = 481.0
 offset_bottom = 615.0
 
 [node name="SkillsBox" type="HBoxContainer" parent="CardZone2"]
@@ -55,7 +45,9 @@ layout_mode = 2
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 500.0
+offset_left = 550.0
 offset_top = 250.0
-offset_right = 500.0
+offset_right = 550.0
 offset_bottom = 250.0
+grow_horizontal = 1
+grow_vertical = 1

@@ -82,7 +82,9 @@ func _update_positions(instantly := false):
 			card.position = Vector2(target_x, target_y)
 			card.rotation = target_rot
 			card.scale = Vector2.ONE * target_scale
+			card.size = Vector2(140, 180)
 		else:
 			card.position = card.position.lerp(Vector2(target_x, target_y), animation_speed)
 			card.rotation = lerp_angle(card.rotation, target_rot, animation_speed)
 			card.scale = card.scale.lerp(Vector2.ONE * target_scale, animation_speed)
+			card.size = Vector2(140, 180)
