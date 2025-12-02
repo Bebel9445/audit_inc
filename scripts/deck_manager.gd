@@ -27,16 +27,16 @@ func reset_deck():
 	# ==========================================
 	# 1. CRÉATION DES CARTES D'ACTION (FightCards)
 	# ==========================================
-	# Rappel : FightCardsObject.new(Nom, Niveau, Description, Dégats, Image)
-	var card1_obj = FightCardsObject.new("Vérification", 1, "Passe un service en 'green'", 5, img1)
-	var card2_obj = FightCardsObject.new("Observation", 1, "Observe les conditions", 3, img2)
-	var card3_obj = FightCardsObject.new("Entretien", 1, "Effectue un entretien préventif", 4, img1)
+	# Rappel : FightCardsObject.new(Nom, Description, Dégats, Image)
+	var card1_obj = FightCardsObject.new("Vérification", "Passe un service en 'green'", 5, img1)
+	var card2_obj = FightCardsObject.new("Observation", "Observe les conditions", 3, img2)
+	var card3_obj = FightCardsObject.new("Entretien", "Effectue un entretien préventif", 4, img1)
 
-	# Rappel : FightCards.new(Visuel, Coût, Niveau, Dégat, ScriptEffet, Type)
+	# Rappel : FightCards.new(Visuel, Coût, Dégat, ScriptEffet, Type)
 	# Assure-toi que ta classe FightCards a bien le constructeur mis à jour avec CardType
-	var card1 = FightCards.new(card1_obj, 2, 1, 5, "res://scripts/effects/repair_service_effect.gd", FightCards.CardType.ACTION)
-	var card2 = FightCards.new(card2_obj, 1, 1, 3, "res://scripts/effects/observe_service_effect.gd", FightCards.CardType.ACTION)
-	var card3 = FightCards.new(card3_obj, 3, 1, 4, "res://scripts/effects/maintenance_effect.gd", FightCards.CardType.ACTION)
+	var card1 = FightCards.new(card1_obj, 2, 5, "res://scripts/effects/repair_service_effect.gd", FightCards.CardType.LEGAL)
+	var card2 = FightCards.new(card2_obj, 1, 3, "res://scripts/effects/observe_service_effect.gd", FightCards.CardType.ECONOMY)
+	var card3 = FightCards.new(card3_obj, 3, 4, "res://scripts/effects/maintenance_effect.gd", FightCards.CardType.COMMUNICATION)
 
 	draw_pile = [card1, card2, card3]
 	
@@ -54,11 +54,13 @@ func reset_deck():
 	var skill_visuel_2 = object_skill_card.new("Audit Flash", 1, img2, 0, 0)
 	
 	# B. Création de la Data (skill_card)
-	# Constructeur : _init(carte_instance, niveau, competence, effect_path)
+	# Constructeur : _init(carte_instance, niveau, competence, bonus, type, effect_path)
 	var skill_data_1 = skill_card.new(
 		skill_visuel_1, 
 		1, 
 		"Isolation", 
+		2,
+		FightCards.CardType.LEGAL,
 		"res://scripts/skills/isolation_skill.gd" # Exemple de script passif
 	)
 	
@@ -66,6 +68,8 @@ func reset_deck():
 		skill_visuel_2, 
 		1, 
 		"Audit Flash", 
+		1,
+		FightCards.CardType.ECONOMY,
 		"res://scripts/skills/flash_audit.gd"
 	)
 

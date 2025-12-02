@@ -165,12 +165,19 @@ func apply_bonus_from_slot():# Mieux de mettre les classes en paramètres
 		if slot is Slot:
 			if slot.carte_occupee != null:
 				card = slot.carte_occupee
-				apply_bonus(card.type, card.bonus)# IL FAUT ABSOLUMENT LE CHANGER 
+				if card is object_skill_card:
+					var card_class = card.assigned_class
+					if card_class == skill_card:
+						apply_bonus(card_class.getType(), card_class.getBonus())
 
 func apply_bonus(type: String, bonus: int):
 	for fight_card in $MainHand.get_children():
 		if not fight_card is FightCardsObject:
 			return
-		if fight_card.type == type:
-			fight_card.damage += bonus
-			fight_card.labelState.text = "Dégats : " + str(fight_card.damage)
+		var card_class = fight_card.assigned_class
+		if not card_class is FightCards:
+			return
+		
+		if card_class.getType() == type:
+			card_class.setHaveBonus(true)
+			card_class.updateDamageWithBonus(bonus)

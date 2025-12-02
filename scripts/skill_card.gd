@@ -1,6 +1,9 @@
 extends MarginContainer
 class_name object_skill_card
 
+# Pour liéer la carte avec classe
+var assigned_class: skill_card
+
 @export var nom_competence: String
 var _niveau: int = -1 # Au cas où à -1 pour éviter des erreurs (qui ne devraient pas arriver)
 
@@ -99,6 +102,7 @@ func _drag_end(success):
 func _fusionner(autre_carte):
 	_niveau += 1
 	labelNiveau.text = "Lv." + str(_niveau) # "Lv." prend moins de place
+	assigned_class.setNiveau(_niveau)
 	autre_carte.queue_free()
 
 # ===========================

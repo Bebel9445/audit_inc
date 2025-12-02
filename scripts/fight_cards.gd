@@ -1,13 +1,13 @@
 extends MarginContainer
 class_name FightCardsObject
 
-var labelNiveau: Label
+var assigned_class: FightCards
 var labelState: Label
 var texte: String
 var damage: int
 
  # Pour créer une carte sur l'écran
-func _init(nom: String, niveau: int, texte: String, degats: int, image: Texture2D):
+func _init(nom: String, texte: String, degats: int, image: Texture2D):
 	name = nom
 	size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -36,12 +36,6 @@ func _init(nom: String, niveau: int, texte: String, degats: int, image: Texture2
 	labelNom.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	labelNom.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	hbox.add_child(labelNom)
-	
-	labelNiveau = Label.new()
-	labelNiveau.text = "lvl. " + str(niveau)
-	labelNiveau.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	labelNiveau.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	hbox.add_child(labelNiveau)
 
 	var texture_rect := TextureRect.new()
 	texture_rect.texture = image
