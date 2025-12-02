@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ci6284mim63qb"]
+[gd_scene load_steps=4 format=3 uid="uid://ci6284mim63qb"]
 
 [ext_resource type="PackedScene" uid="uid://bqspirjqpmj3d" path="res://scenes/ui/dialogue_box.tscn" id="1_ik0t7"]
 [ext_resource type="Script" uid="uid://c7rbe5ddbd12r" path="res://scripts/combat_manager.gd" id="1_ofoda"]
+[ext_resource type="PackedScene" uid="uid://du3ie6k23cb33" path="res://scenes/main_hand_manager.tscn" id="3_m17q1"]
 
 [node name="CombatScene" type="Node2D"]
 script = ExtResource("1_ofoda")
@@ -11,20 +12,10 @@ offset_right = 142.0
 offset_bottom = 140.0
 
 [node name="DialogueBox" parent="." instance=ExtResource("1_ik0t7")]
-offset_left = -4.0
-offset_top = 647.0
-offset_right = -4.0
-offset_bottom = 647.0
-
-[node name="CardZone" type="ScrollContainer" parent="."]
-offset_left = 925.0
-offset_top = 22.0
-offset_right = 1135.0
-offset_bottom = 615.0
-
-[node name="CardsVBox" type="VBoxContainer" parent="CardZone"]
-layout_mode = 2
-theme_override_constants/separation = 5
+offset_left = 440.0
+offset_top = 220.0
+offset_right = 440.0
+offset_bottom = 220.0
 
 [node name="CombatManager" type="Node" parent="."]
 
@@ -32,11 +23,31 @@ theme_override_constants/separation = 5
 
 [node name="CardZone2" type="ScrollContainer" parent="."]
 offset_left = 19.0
-offset_top = 17.0
-offset_right = 807.0
-offset_bottom = 232.0
+offset_top = 400.0
+offset_right = 481.0
+offset_bottom = 615.0
 
 [node name="SkillsBox" type="HBoxContainer" parent="CardZone2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
+
+[node name="SlotZone" type="MarginContainer" parent="."]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 780.0
+offset_bottom = 200.0
+
+[node name="SlotHBox" type="HBoxContainer" parent="SlotZone"]
+layout_mode = 2
+
+[node name="MainHand" parent="." instance=ExtResource("3_m17q1")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 550.0
+offset_top = 250.0
+offset_right = 550.0
+offset_bottom = 250.0
+grow_horizontal = 1
+grow_vertical = 1

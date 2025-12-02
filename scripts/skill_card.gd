@@ -1,18 +1,28 @@
 extends MarginContainer
 class_name object_skill_card
 
+# Pour liéer la carte avec classe
+var assigned_class: skill_card
+
 @export var nom_competence: String
-@export var _niveau: int = -1 
+var _niveau: int = -1 # Au cas où à -1 pour éviter des erreurs (qui ne devraient pas arriver)
+
 var panel: Panel
 var labelNiveau: Label
 
 var is_dragging := false 
 var preview = null
 
+# C'est pour les slots
+signal quit_slot(slot)
+var slot_actuel = null
+
+
 # StyleBoxes
 var style_defaut = StyleBoxFlat.new()
 var surlignement_possible = StyleBoxFlat.new()
 var surlignement_impossible = StyleBoxFlat.new()
+var drag_source
 
 func _ready():
 	# MODIF : Bordures plus fines (2px au lieu de 4px) pour faire plus propre en petit
@@ -43,8 +53,20 @@ func _ready():
 #  DRAG & DROP
 # ===========================
 
+func _notification(what):
+	if what == NOTIFICATION_DRAG_END:
+		panel.add_theme_stylebox_override("panel", style_defaut)
+		drag_source = null
+
 func _get_drag_data(position):
 	is_dragging = true
+	drag_source = self
+	
+	# Pour dire au slot qu'on est plus dessus 
+	if slot_actuel:
+		emit_signal("quit_slot", slot_actuel)
+		slot_actuel = null  # la carte ne dépend plus du slot
+	
 	panel.add_theme_stylebox_override("panel", style_defaut)
 	preview = duplicate()
 	preview.modulate.a = 0.5
@@ -62,10 +84,10 @@ func _can_drop_data(position, donnee):
 
 func _drop_data(position, donnee):
 	is_dragging = false
+	
 	if donnee.nom_competence == nom_competence && donnee._niveau == _niveau:
 		_fusionner(donnee)
-	else:
-		panel.add_theme_stylebox_override("panel", surlignement_impossible)
+
 	await get_tree().process_frame
 	panel.add_theme_stylebox_override("panel", style_defaut)
 
@@ -73,11 +95,15 @@ func _drag_end(success):
 	is_dragging = false
 	panel.add_theme_stylebox_override("panel", style_defaut)
 
+# ===========================
+#  FUSION
+# ===========================
+
 func _fusionner(autre_carte):
 	_niveau += 1
 	labelNiveau.text = "Lv." + str(_niveau) # "Lv." prend moins de place
+	assigned_class.setNiveau(_niveau)
 	autre_carte.queue_free()
-
 
 # ===========================
 #  INIT (VERSION MINIATURE)
