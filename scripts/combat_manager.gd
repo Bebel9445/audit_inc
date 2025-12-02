@@ -159,16 +159,14 @@ func apply_card_effect(carte_info: FightCards):
 		print("Aucun effet défini pour :", carte_info.getName())
 
 func apply_bonus_from_slot():# Mieux de mettre les classes en paramètres 
-	var card = object_skill_card
-
 	for slot in slot_zone.get_children():
 		if slot is Slot:
 			if slot.carte_occupee != null:
-				card = slot.carte_occupee
-				if card is object_skill_card:
-					var card_class = card.assigned_class
-					if card_class == skill_card:
-						apply_bonus(card_class.getType(), card_class.getBonus())
+				for card in slot.get_children():
+					if card is object_skill_card:
+						var card_class = card.assigned_class
+						if card_class == skill_card:
+							apply_bonus(card_class.getType(), card_class.getBonus())
 
 func apply_bonus(type: String, bonus: int):
 	for fight_card in $MainHand.get_children():
