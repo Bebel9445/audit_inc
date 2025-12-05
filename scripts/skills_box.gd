@@ -1,0 +1,25 @@
+extends ScrollContainer
+
+func _can_drop_data(position, data):
+	return data is object_skill_card
+
+func _drop_data(position, data):
+	var container = get_node("SkillsBox")
+	
+	if container == null:
+		push_error("Erreur : Impossible de trouver le conteneur 'SkillsBox' dans CardZone2")
+		return
+	
+	if data.get_parent():
+		data.get_parent().remove_child(data)
+		
+	# --- REDIMENSIONNEMENT ---
+	# C'est ici qu'on force la taille plus petite !
+	# Par exemple : 140x180 (au lieu de la taille standard qui est souvent plus grande)
+	data.custom_minimum_size = Vector2(140, 180)
+	
+	# On l'ajoute au conteneur
+	container.add_child(data)
+	
+	# Reset de position standard
+	data.position = Vector2.ZERO
