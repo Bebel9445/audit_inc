@@ -13,20 +13,20 @@ offset_right = 142.0
 offset_bottom = 140.0
 
 [node name="DialogueBox" parent="." instance=ExtResource("1_ik0t7")]
-offset_left = 440.0
-offset_top = 220.0
-offset_right = 440.0
-offset_bottom = 220.0
+offset_left = 1100.0
+offset_top = 300.0
+offset_right = 1100.0
+offset_bottom = 300.0
 
 [node name="CombatManager" type="Node" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="CardZone2" type="ScrollContainer" parent="."]
-offset_left = 19.0
-offset_top = 400.0
-offset_right = 481.0
-offset_bottom = 615.0
+offset_left = 800.0
+offset_top = 754.0
+offset_right = 1262.0
+offset_bottom = 969.0
 script = ExtResource("3_a2e2y")
 
 [node name="SkillsBox" type="HBoxContainer" parent="CardZone2"]
@@ -35,10 +35,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 
 [node name="SlotZone" type="MarginContainer" parent="."]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 780.0
-offset_bottom = 200.0
+offset_left = 800.0
+offset_top = 500.0
+offset_right = 1560.0
+offset_bottom = 680.0
 
 [node name="SlotHBox" type="HBoxContainer" parent="SlotZone"]
 layout_mode = 2
@@ -47,9 +47,26 @@ layout_mode = 2
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 550.0
-offset_top = 250.0
-offset_right = 550.0
-offset_bottom = 250.0
+offset_left = 1400.0
+offset_top = 600.0
+offset_right = 1400.0
+offset_bottom = 600.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="StartCombat" type="Button" parent="."]
+offset_left = 1677.0
+offset_top = 909.0
+offset_right = 1877.0
+offset_bottom = 959.0
+text = "Lancer le Combat"
+
+[node name="ConfirmationAttack" type="ConfirmationDialog" parent="."]
+title = "Veuillez confirmer..."
+position = Vector2i(200, 200)
+size = Vector2i(400, 200)
+ok_button_text = "Oui"
+dialog_autowrap = true
+cancel_button_text = "Annuler"
+
+[connection signal="pressed" from="StartCombat" to="." method="start_combat"]

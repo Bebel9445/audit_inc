@@ -1,6 +1,9 @@
 extends Node
 class_name CombatManager
 
+signal combat_start
+signal card_played(FightCards)
+
 @onready var card_zone2 = $CardZone2
 @onready var slot_zone = $SlotZone/SlotHBox
 @onready var service_display = $ServiceDisplay
@@ -8,16 +11,15 @@ class_name CombatManager
 
 @onready var deck_manager = preload("res://scripts/deck_manager.gd").new()
 @onready var player = preload("res://scripts/player.gd").new()
-#@onready var slot = preload("res://scripts/slot.gd")
 
-var turn := 1
+var is_in_fight = false
 
 # --- Démarrage ---
 func _ready():
-	start_combat()
+	start_game()
 
 # --- Initialisation du combat ---
-func start_combat():
+func start_game():
 	player.reset()
 	deck_manager.shuffle() # Mélange les actions
 	
@@ -34,6 +36,20 @@ func start_combat():
 
 	var intro_dialogue = load("res://data/dialogues/combat_intro.tres")
 	dialogue_box.load_dialogue_resource(intro_dialogue)
+
+func start_combat():
+	card_zone2.hide()
+	is_in_fight = true
+	apply_bonus_from_slot()
+	$StartCombat.hide()
+	
+	combat_start.emit()
+
+func end_combat():
+	pass
+	#is_in_fight = false
+	#card_zone2.show()
+	#$StartCombat.show()
 
 func _on_dialogue_finished():
 	dialogue_box.show_text("À toi de jouer !")
@@ -123,8 +139,15 @@ func add_card_to_zone(card_info: FightCards):
 
 # --- Quand une carte est cliquée ---
 func _on_card_clicked(event: InputEvent, carte_info: FightCards):
+	if not is_in_fight:
+		return
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		_on_card_played(carte_info)
+		if carte_info.haveBonus():
+			$ConfirmationAttack.dialog_text = "Vous vous apprétez à jouer la carte " + carte_info.getName() + ". Qui va faire " + str(carte_info.getDamageWithBonus()) + " dégats avec les dégâts bonus."
+		else:
+			$ConfirmationAttack.dialog_text = "Vous vous apprétez à jouer la carte " + carte_info.getName() + ". Qui va faire " + str(carte_info.getDamage()) + " dégats."
+		$ConfirmationAttack.connect("confirmed", func(): _on_card_played(carte_info))
+		$ConfirmationAttack.show()
 
 # --- Quand une carte est jouée ---
 func _on_card_played(carte_info: FightCards):
@@ -138,6 +161,7 @@ func _on_card_played(carte_info: FightCards):
 	print("Carte jouée :", carte_info.getName(), "| Coût :", card_cost)
 
 	apply_card_effect(carte_info)
+	card_played.emit(carte_info)
 	
 	# On retire le visuel de l'écran avant de défausser
 	if carte_info._carte.get_parent():
@@ -158,17 +182,17 @@ func apply_card_effect(carte_info: FightCards):
 	else:
 		print("Aucun effet défini pour :", carte_info.getName())
 
-func apply_bonus_from_slot():# Mieux de mettre les classes en paramètres 
+func apply_bonus_from_slot():
 	for slot in slot_zone.get_children():
 		if slot is Slot:
 			if slot.carte_occupee != null:
 				for card in slot.get_children():
 					if card is object_skill_card:
 						var card_class = card.assigned_class
-						if card_class == skill_card:
+						if card_class is skill_card:
 							apply_bonus(card_class.getType(), card_class.getBonus())
 
-func apply_bonus(type: String, bonus: int):
+func apply_bonus(type: FightCards.CardType, bonus: int):
 	for fight_card in $MainHand.get_children():
 		if not fight_card is FightCardsObject:
 			return
@@ -179,3 +203,13 @@ func apply_bonus(type: String, bonus: int):
 		if card_class.getType() == type:
 			card_class.setHaveBonus(true)
 			card_class.updateDamageWithBonus(bonus)
+
+func remove_bonus():
+	for fight_card in $MainHand.get_children():
+		if not fight_card is FightCardsObject:
+			return
+		var card_class = fight_card.assigned_class
+		if not card_class is FightCards:
+			return
+		
+		card_class.setHaveBonus(false)

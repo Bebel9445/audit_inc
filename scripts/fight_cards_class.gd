@@ -11,6 +11,7 @@ enum CardType{
 
 # --- Attributs ---
 var _carte: FightCardsObject
+var _lvl: int
 var _cout: int
 var _damage: int
 var _have_bonus: bool
@@ -21,10 +22,11 @@ var effect_script: String  # Chemin vers le script d'effet
 var _type: CardType    # Type de la carte (ACTION ou COMPETENCE)
 
 # --- Constructeur ---
-func _init(carte_instance: FightCardsObject, cout_valeur: int, damage: int, effect_path: String, type: CardType):
+func _init(carte_instance: FightCardsObject, lvl: int,  cout_valeur: int, damage: int, effect_path: String, type: CardType):
 	
 	_carte = carte_instance
 	_carte.assigned_class = self
+	_lvl = lvl
 	_cout = cout_valeur
 	_damage = damage
 	effect_script = effect_path
@@ -33,6 +35,9 @@ func _init(carte_instance: FightCardsObject, cout_valeur: int, damage: int, effe
 	_damage_with_bonus = damage
 
 # --- Méthodes ---
+func getLvl() -> int:
+	return _lvl
+
 func getCout() -> int:
 	return _cout
 
@@ -62,3 +67,4 @@ func setHaveBonus(have_bonus: bool):
 
 func updateDamageWithBonus(bonus: int):
 	_damage_with_bonus = _damage + bonus
+	_carte.labelState.text = "Dégats :" + str(_damage_with_bonus)

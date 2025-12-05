@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://0ukm2uxkfoum"]
+
+[ext_resource type="Script" uid="uid://c858kxyp6xsoj" path="res://scripts/main.gd" id="1_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://bup7p43jmrfug" path="res://scenes/ui/service_graph.tscn" id="1_elqb8"]
+[ext_resource type="PackedScene" uid="uid://ci6284mim63qb" path="res://scenes/combat_scene.tscn" id="2_rvslj"]
+[ext_resource type="PackedScene" uid="uid://dpfxc7xyxcfdx" path="res://scenes/enemy.tscn" id="4_rarhs"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_0bbpv")
+
+[node name="ServiceGraph" parent="." instance=ExtResource("1_elqb8")]
+
+[node name="CombatScene" parent="." instance=ExtResource("2_rvslj")]
+visible = false
+
+[node name="Enemy" parent="." instance=ExtResource("4_rarhs")]
