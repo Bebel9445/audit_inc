@@ -1,121 +1,182 @@
 extends Node2D
 
-@export var service_scene : PackedScene = preload("res://scenes/ui/service_node.tscn")
-var services := [] # array classique
+# Signal global vers le CombatManager
+signal initiate_combat(service: ServiceNode)
 
-signal initiate_combat(service: ServiceNode) # 
+@export_category("Configuration Graphique")
+@export var service_scene : PackedScene = preload("res://scenes/ui/service_node.tscn")
+@export var background_texture : Texture2D = preload("res://assets/background.png")
+
+@export_group("Ajustement du Graphe")
+# Permet de décaler le centre du graphe (ex: Vector2(0, 50) pour le descendre)
+@export var graph_center_offset : Vector2 = Vector2(0,40) 
+# Permet de réduire/agrandir l'ellipse pour qu'elle rentre dans ta "fenêtre" (0.8 = 80% de la taille standard)
+@export_range(0.1, 2.0) var graph_scale : float = 0.7
+
+var services := [] 
 
 func _ready():
-	create_graph()
-	
-	#oui bon c pour tester qu'on peut changer l'état + influence 
-
+	# On attend une frame pour être sûr que la taille de l'écran est correcte
+	call_deferred("create_graph")
 
 func create_graph():
-	randomize() # pour avoir des valeurs différentes à chaque lancement
+	randomize()
+	
+	# Nettoyage
+	for child in get_children():
+		child.queue_free()
+	services.clear()
 
-	var total_services = 5
+	# Creation du fond
+	create_background()
+
+	# Config
+	var total_services = randi_range(4, 6)
+	var viewport_size = get_viewport_rect().size
+	
+	# Calcul du centre
+	var center_screen = (viewport_size / 2) + graph_center_offset
+	
+	# calcul de l'espace (formation en ellipse)
+	# On applique le multiplicateur 'graph_scale' pour réduire/agrandir l'écartement
+	var radius_x = (viewport_size.x * 0.42) * graph_scale
+	var radius_y = (viewport_size.y * 0.35) * graph_scale
+	
+	# Création des noeuds
 	for i in range(total_services):
 		var s_instance = service_scene.instantiate()
 		var s : ServiceNode = s_instance as ServiceNode
-		if s == null:
-			print("Erreur : L'instance n'est pas un ServiceNode")
-			continue
+		
+		if s == null: continue
 
 		s.name = "Service %d" % i
-		s.nameService = "Service %d" % i
+		s.nameService = "Pole %d" % (i + 1)
+		
+		# Stats aléatoires
 		s.state = get_random_state()
-		
-		# la taille sera définis dans nos données plus tard
 		s.size = randi_range(1, 3) 
+		s.type = randi() % 4
 		
-		s.position = get_circular_position(i, total_services, 200, Vector2(400,300))
+		# positionnement moment
+		var angle_step = TAU / total_services
+		var base_angle = (angle_step * i) - (PI / 2)
+		
+		var random_angle = base_angle + randf_range(-0.15, 0.15)
+		var dist_mod = randf_range(0.9, 1.05)
+		
+		var x_pos = cos(random_angle) * radius_x * dist_mod
+		var y_pos = sin(random_angle) * radius_y * dist_mod
+		
+		s.position = center_screen + Vector2(x_pos, y_pos)
+		
+		# Connexion des signaux ects
 		s.connect("combat_requested", Callable(self, "_on_service_clicked"))
+		
+		if s.has_signal("mouse_entered"):
+			s.connect("mouse_entered", Callable(self, "_on_service_hover_enter"))
+			s.connect("mouse_exited", Callable(self, "_on_service_hover_exit"))
+		else:
+			var area = s.get_node_or_null("Area2D")
+			if area:
+				area.connect("mouse_entered", Callable(self, "_on_service_hover_enter"))
+				area.connect("mouse_exited", Callable(self, "_on_service_hover_exit"))
+		
 		add_child(s)
 		services.append(s)
-		
-		# Appelé APRES avoir défini state et size
 		s.update_visual() 
 	
-	# réation des liens pour avoir un graphe a tester
+	# --- 5. CRÉATION DES LIENS ---
 	for i in range(total_services):
 		services[i].add_link(services[(i+1) % total_services])
+		if randf() < 0.25:
+			var target_index = (i + 2) % total_services
+			if not services[target_index] in services[i].links:
+				services[i].add_link(services[target_index])
 	
 	update_links_visual()
 
-#gestion d'un tour surtout pour gérer la propagation
-func execute_turn():
-	print("Système : Propagation de l'influence...")
+func create_background():
+	var bg
 	
-	# Dictionnaire pour stocker les états futurs
-	var next_states = {}
-
-	# Chaque nœud calcule son futur état basé sur l'état ACTUEL des voisins
-	for s in services:
-		var service_node : ServiceNode = s as ServiceNode
-		if service_node:
-			# On demande au nœud de calculer son prochain état
-			next_states[service_node] = service_node.calculate_next_state()
-	
-	# On applique les états calculés (tout en même temps)
-	var state_changed = false
-	for s in services:
-		var service_node : ServiceNode = s as ServiceNode
-		if service_node and service_node.state != next_states[service_node]:
-			service_node.state = next_states[service_node]
-			service_node.update_visual() # Mettre à jour la couleur/apparence
-			state_changed = true
-	
-	if state_changed:
-		print("Des états ont changé.")
+	if background_texture:
+		bg = TextureRect.new()
+		bg.texture = background_texture
+		# EXPAND_IGNORE_SIZE permet de redimensionner l'image arbitrairement
+		bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		# STRETCH_SCALE va étirer l'image pour qu'elle remplisse exactement l'écran 
+		bg.stretch_mode = TextureRect.STRETCH_SCALE 
 	else:
-		print("Le système est stable.")
+		bg = ColorRect.new()
+		bg.color = Color(0.106, 0.247, 0.250, 0.8) 
 	
-	# Optionnel : Mettre à jour les lignes si leur couleur dépend de l'état
-	# update_links_visual() 
-
+	# On utilise les ancres pour que ça colle parfaitement à tout l'écran
+	bg.anchor_right = 1
+	bg.anchor_bottom = 1
+	bg.size = get_viewport_rect().size
+	bg.position = Vector2.ZERO
+	
+	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE 
+	bg.z_index = -100 
+	
+	add_child(bg)
 
 func update_links_visual():
-	# Supprimer les anciennes lignes
 	for child in get_children():
 		if child is Line2D:
 			child.queue_free()
 	
-	# Dessiner les lignes sans doublons
 	var drawn_links = {}
+	
 	for s in services:
-		var service_node: ServiceNode = s as ServiceNode # Typage pour plus de clarté
-		if not service_node: continue
-		
-		for l_untyped in service_node.links:
-			var l: ServiceNode = l_untyped as ServiceNode 
-			if l == null:
-				continue
-				
-			# Clé unique pour éviter doublons
-			var key = str(min(s.get_instance_id(), l.get_instance_id())) + "_" + str(max(s.get_instance_id(), l.get_instance_id()))
-			if drawn_links.has(key):
-				continue
-			drawn_links[key] = true
-
-			var line = Line2D.new()
-			line.width = 2
-			line.default_color = Color(1,0,0) # rouge visible
+		var node_a = s as ServiceNode
+		for neighbor in node_a.links:
+			var node_b = neighbor as ServiceNode
 			
-		
-			line.points = [s.get_edge_position(l.get_center_position()), l.get_edge_position(s.get_center_position())]
+			var id_1 = node_a.get_instance_id()
+			var id_2 = node_b.get_instance_id()
+			var key = str(min(id_1, id_2)) + "_" + str(max(id_1, id_2))
+			
+			if drawn_links.has(key): continue
+			drawn_links[key] = true
+			
+			var line = Line2D.new()
+			line.width = 2.0
+			line.default_color = Color(0.5, 0.5, 0.5, 0.5)
+			line.z_index = -1 
+			
+			var p1 = node_a.get_edge_position(node_b.position)
+			var p2 = node_b.get_edge_position(node_a.position)
+			
+			line.points = [p1, p2]
 			add_child(line)
 
+func execute_turn():
+	var next_states = {}
+	for s in services:
+		next_states[s] = s.calculate_next_state()
+	
+	var state_changed = false
+	for s in services:
+		if s.state != next_states[s]:
+			s.state = next_states[s]
+			s.update_visual()
+			state_changed = true
 			
+	if state_changed:
+		print("Des états ont changé.")
+
 func get_random_state() -> String:
-	var states = ["green","orange","red"]
-	return states[randi() % states.size()]
-
-
-func get_circular_position(index:int, total:int, radius:float = 200.0, center:Vector2 = Vector2(400,300)) -> Vector2:
-	var angle = (TAU / total) * index
-	return center + Vector2(cos(angle), sin(angle)) * radius
+	var roll = randf()
+	if roll < 0.5: return "green"
+	elif roll < 0.8: return "orange"
+	else: return "red"
 
 func _on_service_clicked(service: ServiceNode):
-	# On transmet le signal au parent (qui sera le CombatManager)
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 	emit_signal("initiate_combat", service)
+
+func _on_service_hover_enter():
+	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
+
+func _on_service_hover_exit():
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
