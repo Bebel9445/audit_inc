@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="AuditInc"
-run/main_scene="uid://ci6284mim63qb"
+run/main_scene="uid://0ukm2uxkfoum"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=960
-window/size/viewport_height=540
+window/size/viewport_width=1908
+window/size/viewport_height=992
 window/stretch/mode="viewport"
 
 [rendering]

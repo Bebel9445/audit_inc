@@ -7,7 +7,7 @@ var texte: String
 var damage: int
 
  # Pour créer une carte sur l'écran
-func _init(nom: String, texte: String, degats: int, image: Texture2D):
+func _init(nom: String, level: int, texte: String, degats: int, image: Texture2D):
 	name = nom
 	size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -36,6 +36,12 @@ func _init(nom: String, texte: String, degats: int, image: Texture2D):
 	labelNom.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	labelNom.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	hbox.add_child(labelNom)
+	
+	var labelLvl := Label.new()
+	labelLvl.text = "lvl. " + str(level)
+	labelLvl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	labelLvl.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	hbox.add_child(labelLvl)
 
 	var texture_rect := TextureRect.new()
 	texture_rect.texture = image

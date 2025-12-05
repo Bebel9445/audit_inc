@@ -27,16 +27,16 @@ func reset_deck():
 	# ==========================================
 	# 1. CRÉATION DES CARTES D'ACTION (FightCards)
 	# ==========================================
-	# Rappel : FightCardsObject.new(Nom, Description, Dégats, Image)
-	var card1_obj = FightCardsObject.new("Vérification", "Passe un service en 'green'", 5, img1)
-	var card2_obj = FightCardsObject.new("Observation", "Observe les conditions", 3, img2)
-	var card3_obj = FightCardsObject.new("Entretien", "Effectue un entretien préventif", 4, img1)
+	# Rappel : FightCardsObject.new(Nom, lvl, Description, Dégats, Image)
+	var card1_obj = FightCardsObject.new("Vérification", 1, "Passe un service en 'green'", 5, img1)
+	var card2_obj = FightCardsObject.new("Observation", 1, "Observe les conditions", 3, img2)
+	var card3_obj = FightCardsObject.new("Entretien", 1, "Effectue un entretien préventif", 4, img1)
 
-	# Rappel : FightCards.new(Visuel, Coût, Dégat, ScriptEffet, Type)
+	# Rappel : FightCards.new(Visuel, lvl, Coût, Dégat, ScriptEffet, Type)
 	# Assure-toi que ta classe FightCards a bien le constructeur mis à jour avec CardType
-	var card1 = FightCards.new(card1_obj, 2, 5, "res://scripts/effects/repair_service_effect.gd", FightCards.CardType.LEGAL)
-	var card2 = FightCards.new(card2_obj, 1, 3, "res://scripts/effects/observe_service_effect.gd", FightCards.CardType.ECONOMY)
-	var card3 = FightCards.new(card3_obj, 3, 4, "res://scripts/effects/maintenance_effect.gd", FightCards.CardType.COMMUNICATION)
+	var card1 = FightCards.new(card1_obj, 1, 2, 5, "res://scripts/effects/repair_service_effect.gd", FightCards.CardType.LEGAL)
+	var card2 = FightCards.new(card2_obj, 1, 1, 3, "res://scripts/effects/observe_service_effect.gd", FightCards.CardType.ECONOMY)
+	var card3 = FightCards.new(card3_obj, 1, 3, 4, "res://scripts/effects/maintenance_effect.gd", FightCards.CardType.COMMUNICATION)
 
 	draw_pile = [card1, card2, card3]
 	

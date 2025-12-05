@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u7m02pno1qyo"
-path="res://.godot/imported/Etoile.png-d43235dea19ea7b074631c3ad85371ef.ctex"
+uid="uid://bgk83wv5g7jd5"
+path="res://.godot/imported/HealthBar.png-b729d83f86f135eb1442ae0467dcf133.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/Etoile.png"
-dest_files=["res://.godot/imported/Etoile.png-d43235dea19ea7b074631c3ad85371ef.ctex"]
+source_file="res://assets/icons/HealthBar.png"
+dest_files=["res://.godot/imported/HealthBar.png-b729d83f86f135eb1442ae0467dcf133.ctex"]
 
 [params]
 
