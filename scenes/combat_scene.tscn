@@ -13,20 +13,20 @@ offset_right = 142.0
 offset_bottom = 140.0
 
 [node name="DialogueBox" parent="." instance=ExtResource("1_ik0t7")]
-offset_left = 1100.0
-offset_top = 300.0
-offset_right = 1100.0
-offset_bottom = 300.0
+offset_left = 24.0
+offset_top = 248.0
+offset_right = 24.0
+offset_bottom = 248.0
 
 [node name="CombatManager" type="Node" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="CardZone2" type="ScrollContainer" parent="."]
-offset_left = 800.0
-offset_top = 754.0
-offset_right = 1262.0
-offset_bottom = 969.0
+offset_left = 1110.0
+offset_top = -1.0
+offset_right = 1572.0
+offset_bottom = 214.0
 script = ExtResource("3_a2e2y")
 
 [node name="SkillsBox" type="HBoxContainer" parent="CardZone2"]
@@ -35,10 +35,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 
 [node name="SlotZone" type="MarginContainer" parent="."]
-offset_left = 800.0
-offset_top = 500.0
-offset_right = 1560.0
-offset_bottom = 680.0
+offset_left = 1600.0
+offset_right = 2360.0
+offset_bottom = 180.0
 
 [node name="SlotHBox" type="HBoxContainer" parent="SlotZone"]
 layout_mode = 2
@@ -63,10 +62,11 @@ text = "Lancer le Combat"
 
 [node name="ConfirmationAttack" type="ConfirmationDialog" parent="."]
 title = "Veuillez confirmer..."
-position = Vector2i(200, 200)
+position = Vector2i(1300, 200)
 size = Vector2i(400, 200)
 ok_button_text = "Oui"
 dialog_autowrap = true
 cancel_button_text = "Annuler"
 
+[connection signal="pressed" from="StartCombat" to="." method="_on_start_combat_pressed"]
 [connection signal="pressed" from="StartCombat" to="." method="start_combat"]
