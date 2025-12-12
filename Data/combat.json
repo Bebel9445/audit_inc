@@ -1,782 +1,782 @@
 [
   {
-    "type": 0,
-    "niveau": 1,
-    "nom": "Junior Compta",
-    "image": "res://compta_img_1.png",
-    "attaque": {
-      "nom": "Saisie Factures",
-      "descritpion": "Saisit toutes les factures entrantes. Précision faible mais volume élevé.",
-      "temps": 1,
-      "degats": 40
-    },
-    "texte": "Cherche toujours le bon compte de tiers."
+	"type": 0,
+	"niveau": 1,
+	"nom": "Junior Compta",
+	"image": "res://compta_img_1.png",
+	"attaque": {
+	  "nom": "Saisie Factures",
+	  "descritpion": "Saisit toutes les factures entrantes. Précision faible mais volume élevé.",
+	  "temps": 1,
+	  "degats": 40
+	},
+	"texte": "Cherche toujours le bon compte de tiers."
   },
   {
-    "type": 0,
-    "niveau": 2,
-    "nom": "Assistant Fiduciaire",
-    "image": "res://compta_img_2.png",
-    "attaque": {
-      "nom": "Amortissement Linéaire",
-      "descritpion": "Applique une dépréciation régulière sur les immobilisations. Très stable mais lent.",
-      "temps": 2,
-      "degats": 80
-    },
-    "texte": "Maîtrise le plan comptable de A à Z."
+	"type": 0,
+	"niveau": 2,
+	"nom": "Assistant Fiduciaire",
+	"image": "res://compta_img_2.png",
+	"attaque": {
+	  "nom": "Amortissement Linéaire",
+	  "descritpion": "Applique une dépréciation régulière sur les immobilisations. Très stable mais lent.",
+	  "temps": 2,
+	  "degats": 80
+	},
+	"texte": "Maîtrise le plan comptable de A à Z."
   },
   {
-    "type": 0,
-    "niveau": 4,
-    "nom": "Expert-Comptable",
-    "image": "res://compta_img_3.png",
-    "attaque": {
-      "nom": "Clôture des Comptes",
-      "descritpion": "Réalise les ajustements finaux pour déterminer le résultat. Effet dévastateur sur les comptes non préparés.",
-      "temps": 4,
-      "degats": 200
-    },
-    "texte": "Son rapport est l'ultime vérité financière."
+	"type": 0,
+	"niveau": 4,
+	"nom": "Expert-Comptable",
+	"image": "res://compta_img_3.png",
+	"attaque": {
+	  "nom": "Clôture des Comptes",
+	  "descritpion": "Réalise les ajustements finaux pour déterminer le résultat. Effet dévastateur sur les comptes non préparés.",
+	  "temps": 4,
+	  "degats": 200
+	},
+	"texte": "Son rapport est l'ultime vérité financière."
   },
   {
-    "type": 0,
-    "niveau": 1,
-    "nom": "Stagiaire Fiscalité",
-    "image": "res://compta_img_4.png",
-    "attaque": {
-      "nom": "Déclaration TVA",
-      "descritpion": "Compile les données de TVA. Peut créer de la confusion si mal remplie.",
-      "temps": 1,
-      "degats": 45
-    },
-    "texte": "Peut réciter les articles du code des impôts."
+	"type": 0,
+	"niveau": 1,
+	"nom": "Stagiaire Fiscalité",
+	"image": "res://compta_img_4.png",
+	"attaque": {
+	  "nom": "Déclaration TVA",
+	  "descritpion": "Compile les données de TVA. Peut créer de la confusion si mal remplie.",
+	  "temps": 1,
+	  "degats": 45
+	},
+	"texte": "Peut réciter les articles du code des impôts."
   },
   {
-    "type": 0,
-    "niveau": 2,
-    "nom": "Contrôleur de Gestion",
-    "image": "res://compta_img_5.png",
-    "attaque": {
-      "nom": "Analyse d'Écart",
-      "descritpion": "Compare le réel au prévisionnel. Révèle les faiblesses opérationnelles.",
-      "temps": 2,
-      "degats": 90
-    },
-    "texte": "Son tableau de bord est toujours à jour."
+	"type": 0,
+	"niveau": 2,
+	"nom": "Contrôleur de Gestion",
+	"image": "res://compta_img_5.png",
+	"attaque": {
+	  "nom": "Analyse d'Écart",
+	  "descritpion": "Compare le réel au prévisionnel. Révèle les faiblesses opérationnelles.",
+	  "temps": 2,
+	  "degats": 90
+	},
+	"texte": "Son tableau de bord est toujours à jour."
   },
   {
-    "type": 0,
-    "niveau": 4,
-    "nom": "Commissaire aux Comptes",
-    "image": "res://compta_img_3.png",
-    "attaque": {
-      "nom": "Certification Sans Réserve",
-      "descritpion": "Valide la sincérité des comptes. Confiance maximale accordée.",
-      "temps": 5,
-      "degats": 240
-    },
-    "texte": "Garantit la fiabilité des informations financières."
+	"type": 0,
+	"niveau": 4,
+	"nom": "Commissaire aux Comptes",
+	"image": "res://compta_img_3.png",
+	"attaque": {
+	  "nom": "Certification Sans Réserve",
+	  "descritpion": "Valide la sincérité des comptes. Confiance maximale accordée.",
+	  "temps": 5,
+	  "degats": 240
+	},
+	"texte": "Garantit la fiabilité des informations financières."
   },
   {
-    "type": 0,
-    "niveau": 1,
-    "nom": "Aide-Comptable",
-    "image": "res://compta_img_1.png",
-    "attaque": {
-      "nom": "Pointage Bancaire",
-      "descritpion": "Vérifie la concordance entre le solde comptable et le relevé de banque.",
-      "temps": 1,
-      "degats": 35
-    },
-    "texte": "Travaille méticuleusement sur les rapprochements."
+	"type": 0,
+	"niveau": 1,
+	"nom": "Aide-Comptable",
+	"image": "res://compta_img_1.png",
+	"attaque": {
+	  "nom": "Pointage Bancaire",
+	  "descritpion": "Vérifie la concordance entre le solde comptable et le relevé de banque.",
+	  "temps": 1,
+	  "degats": 35
+	},
+	"texte": "Travaille méticuleusement sur les rapprochements."
   },
   {
-    "type": 0,
-    "niveau": 2,
-    "nom": "Auditeur Interne",
-    "image": "res://compta_img_2.png",
-    "attaque": {
-      "nom": "Revue des Procédures",
-      "descritpion": "Évalue l'efficacité du contrôle interne. Peut déstabiliser les départements.",
-      "temps": 2,
-      "degats": 100
-    },
-    "texte": "Ne laisse rien au hasard, vérifie tout en double."
+	"type": 0,
+	"niveau": 2,
+	"nom": "Auditeur Interne",
+	"image": "res://compta_img_2.png",
+	"attaque": {
+	  "nom": "Revue des Procédures",
+	  "descritpion": "Évalue l'efficacité du contrôle interne. Peut déstabiliser les départements.",
+	  "temps": 2,
+	  "degats": 100
+	},
+	"texte": "Ne laisse rien au hasard, vérifie tout en double."
   },
   {
-    "type": 0,
-    "niveau": 4,
-    "nom": "Directeur Financier (DF)",
-    "image": "res://compta_img_3.png",
-    "attaque": {
-      "nom": "Stratégie Budgétaire",
-      "descritpion": "Alloue les ressources et planifie les investissements. Impact sur le long terme.",
-      "temps": 4,
-      "degats": 220
-    },
-    "texte": "Décide de la direction économique de l'entreprise."
+	"type": 0,
+	"niveau": 4,
+	"nom": "Directeur Financier (DF)",
+	"image": "res://compta_img_3.png",
+	"attaque": {
+	  "nom": "Stratégie Budgétaire",
+	  "descritpion": "Alloue les ressources et planifie les investissements. Impact sur le long terme.",
+	  "temps": 4,
+	  "degats": 220
+	},
+	"texte": "Décide de la direction économique de l'entreprise."
   },
   {
-    "type": 0,
-    "niveau": 1,
-    "nom": "Gestionnaire de Paie",
-    "image": "res://compta_img_4.png",
-    "attaque": {
-      "nom": "Calcul Cotisations",
-      "descritpion": "Défalque les charges sociales. Précision vitale pour éviter les erreurs.",
-      "temps": 1,
-      "degats": 50
-    },
-    "texte": "Son obsession est le bon bulletin de salaire."
+	"type": 0,
+	"niveau": 1,
+	"nom": "Gestionnaire de Paie",
+	"image": "res://compta_img_4.png",
+	"attaque": {
+	  "nom": "Calcul Cotisations",
+	  "descritpion": "Défalque les charges sociales. Précision vitale pour éviter les erreurs.",
+	  "temps": 1,
+	  "degats": 50
+	},
+	"texte": "Son obsession est le bon bulletin de salaire."
   },
   {
-    "type": 0,
-    "niveau": 3,
-    "nom": "Analyste Financier",
-    "image": "res://compta_img_5.png",
-    "attaque": {
-      "nom": "Valorisation d'Actifs",
-      "descritpion": "Estime la valeur réelle d'une entreprise ou d'un projet.",
-      "temps": 3,
-      "degats": 140
-    },
-    "texte": "Ses modèles Excel sont légendaires."
+	"type": 0,
+	"niveau": 3,
+	"nom": "Analyste Financier",
+	"image": "res://compta_img_5.png",
+	"attaque": {
+	  "nom": "Valorisation d'Actifs",
+	  "descritpion": "Estime la valeur réelle d'une entreprise ou d'un projet.",
+	  "temps": 3,
+	  "degats": 140
+	},
+	"texte": "Ses modèles Excel sont légendaires."
   },
   {
-    "type": 0,
-    "niveau": 4,
-    "nom": "Trésorier Senior",
-    "image": "res://compta_img_3.png",
-    "attaque": {
-      "nom": "Optimisation des Flux",
-      "descritpion": "Gère la liquidité pour maximiser les placements et minimiser les coûts.",
-      "temps": 5,
-      "degats": 250
-    },
-    "texte": "Les banques lui font confiance les yeux fermés."
+	"type": 0,
+	"niveau": 4,
+	"nom": "Trésorier Senior",
+	"image": "res://compta_img_3.png",
+	"attaque": {
+	  "nom": "Optimisation des Flux",
+	  "descritpion": "Gère la liquidité pour maximiser les placements et minimiser les coûts.",
+	  "temps": 5,
+	  "degats": 250
+	},
+	"texte": "Les banques lui font confiance les yeux fermés."
   },
   {
-    "type": 0,
-    "niveau": 1,
-    "nom": "Commis aux Dépenses",
-    "image": "res://compta_img_1.png",
-    "attaque": {
-      "nom": "Note de Frais",
-      "descritpion": "Vérifie les justificatifs et rembourse les petites sommes.",
-      "temps": 1,
-      "degats": 30
-    },
-    "texte": "Ne perd jamais un ticket de caisse."
+	"type": 0,
+	"niveau": 1,
+	"nom": "Commis aux Dépenses",
+	"image": "res://compta_img_1.png",
+	"attaque": {
+	  "nom": "Note de Frais",
+	  "descritpion": "Vérifie les justificatifs et rembourse les petites sommes.",
+	  "temps": 1,
+	  "degats": 30
+	},
+	"texte": "Ne perd jamais un ticket de caisse."
   },
   {
-    "type": 0,
-    "niveau": 3,
-    "nom": "Fiscaliste International",
-    "image": "res://compta_img_4.png",
-    "attaque": {
-      "nom": "Prix de Transfert",
-      "descritpion": "Définit la juste rémunération entre filiales. Très complexe.",
-      "temps": 3,
-      "degats": 160
-    },
-    "texte": "Voyage souvent pour ses dossiers transfrontaliers."
+	"type": 0,
+	"niveau": 3,
+	"nom": "Fiscaliste International",
+	"image": "res://compta_img_4.png",
+	"attaque": {
+	  "nom": "Prix de Transfert",
+	  "descritpion": "Définit la juste rémunération entre filiales. Très complexe.",
+	  "temps": 3,
+	  "degats": 160
+	},
+	"texte": "Voyage souvent pour ses dossiers transfrontaliers."
   },
   {
-    "type": 0,
-    "niveau": 4,
-    "nom": "Chef Comptable",
-    "image": "res://compta_img_3.png",
-    "attaque": {
-      "nom": "Supervision Bilan",
-      "descritpion": "Assure la conformité légale et fiscale du bilan de fin d'année.",
-      "temps": 4,
-      "degats": 210
-    },
-    "texte": "C'est l'architecte des états financiers."
+	"type": 0,
+	"niveau": 4,
+	"nom": "Chef Comptable",
+	"image": "res://compta_img_3.png",
+	"attaque": {
+	  "nom": "Supervision Bilan",
+	  "descritpion": "Assure la conformité légale et fiscale du bilan de fin d'année.",
+	  "temps": 4,
+	  "degats": 210
+	},
+	"texte": "C'est l'architecte des états financiers."
   },
   {
-    "type": 0,
-    "niveau": 1,
-    "nom": "Opérateur SAGE",
-    "image": "res://compta_img_1.png",
-    "attaque": {
-      "nom": "Rapport Standard",
-      "descritpion": "Génère un rapport pré-formaté. Rapide et prévisible.",
-      "temps": 1,
-      "degats": 38
-    },
-    "texte": "Connaît tous les raccourcis clavier du logiciel."
+	"type": 0,
+	"niveau": 1,
+	"nom": "Opérateur SAGE",
+	"image": "res://compta_img_1.png",
+	"attaque": {
+	  "nom": "Rapport Standard",
+	  "descritpion": "Génère un rapport pré-formaté. Rapide et prévisible.",
+	  "temps": 1,
+	  "degats": 38
+	},
+	"texte": "Connaît tous les raccourcis clavier du logiciel."
   },
   {
-    "type": 0,
-    "niveau": 3,
-    "nom": "Spécialiste IFRS",
-    "image": "res://compta_img_5.png",
-    "attaque": {
-      "nom": "Conversion aux Normes",
-      "descritpion": "Adapte les comptes locaux aux normes internationales. Peut changer radicalement le résultat.",
-      "temps": 3,
-      "degats": 130
-    },
-    "texte": "Parle couramment plusieurs référentiels comptables."
+	"type": 0,
+	"niveau": 3,
+	"nom": "Spécialiste IFRS",
+	"image": "res://compta_img_5.png",
+	"attaque": {
+	  "nom": "Conversion aux Normes",
+	  "descritpion": "Adapte les comptes locaux aux normes internationales. Peut changer radicalement le résultat.",
+	  "temps": 3,
+	  "degats": 130
+	},
+	"texte": "Parle couramment plusieurs référentiels comptables."
   },
   {
-    "type": 0,
-    "niveau": 4,
-    "nom": "Directeur Audit",
-    "image": "res://compta_img_3.png",
-    "attaque": {
-      "nom": "Opinion Qualifiée",
-      "descritpion": "Exprime une réserve ou un désaccord majeur sur les comptes.",
-      "temps": 5,
-      "degats": 230
-    },
-    "texte": "Son jugement est sans appel."
+	"type": 0,
+	"niveau": 4,
+	"nom": "Directeur Audit",
+	"image": "res://compta_img_3.png",
+	"attaque": {
+	  "nom": "Opinion Qualifiée",
+	  "descritpion": "Exprime une réserve ou un désaccord majeur sur les comptes.",
+	  "temps": 5,
+	  "degats": 230
+	},
+	"texte": "Son jugement est sans appel."
   },
   {
-    "type": 0,
-    "niveau": 1,
-    "nom": "Classeur Archiviste",
-    "image": "res://compta_img_1.png",
-    "attaque": {
-      "nom": "Recherche de Pièce",
-      "descritpion": "Retrouve une pièce comptable perdue en moins de 2 minutes.",
-      "temps": 1,
-      "degats": 20
-    },
-    "texte": "Son organisation est chirurgicale."
+	"type": 0,
+	"niveau": 1,
+	"nom": "Classeur Archiviste",
+	"image": "res://compta_img_1.png",
+	"attaque": {
+	  "nom": "Recherche de Pièce",
+	  "descritpion": "Retrouve une pièce comptable perdue en moins de 2 minutes.",
+	  "temps": 1,
+	  "degats": 20
+	},
+	"texte": "Son organisation est chirurgicale."
   },
   {
-    "type": 0,
-    "niveau": 3,
-    "nom": "Consultant ERP",
-    "image": "res://compta_img_5.png",
-    "attaque": {
-      "nom": "Mapping des Flux",
-      "descritpion": "Modélise les processus financiers dans le système informatique. Optimise l'efficacité.",
-      "temps": 3,
-      "degats": 125
-    },
-    "texte": "Il sait comment le système fonctionne vraiment."
+	"type": 0,
+	"niveau": 3,
+	"nom": "Consultant ERP",
+	"image": "res://compta_img_5.png",
+	"attaque": {
+	  "nom": "Mapping des Flux",
+	  "descritpion": "Modélise les processus financiers dans le système informatique. Optimise l'efficacité.",
+	  "temps": 3,
+	  "degats": 125
+	},
+	"texte": "Il sait comment le système fonctionne vraiment."
   },
   {
-    "type": 1,
-    "niveau": 2,
-    "nom": "Clerc de Notaire",
-    "image": "res://juridique_img_1.png",
-    "attaque": {
-      "nom": "Authentification d'Acte",
-      "descritpion": "Appose le sceau officiel pour rendre un document incontestable.",
-      "temps": 2,
-      "degats": 80
-    },
-    "texte": "Sa signature a une valeur légale immédiate."
+	"type": 1,
+	"niveau": 2,
+	"nom": "Clerc de Notaire",
+	"image": "res://juridique_img_1.png",
+	"attaque": {
+	  "nom": "Authentification d'Acte",
+	  "descritpion": "Appose le sceau officiel pour rendre un document incontestable.",
+	  "temps": 2,
+	  "degats": 80
+	},
+	"texte": "Sa signature a une valeur légale immédiate."
   },
   {
-    "type": 1,
-    "niveau": 3,
-    "nom": "Juriste Contrat",
-    "image": "res://juridique_img_2.png",
-    "attaque": {
-      "nom": "Clause Suspensives",
-      "descritpion": "Ajoute des conditions qui peuvent annuler l'accord. Rend la situation incertaine.",
-      "temps": 3,
-      "degats": 150
-    },
-    "texte": "Ne signe jamais sans avoir lu les petites lignes."
+	"type": 1,
+	"niveau": 3,
+	"nom": "Juriste Contrat",
+	"image": "res://juridique_img_2.png",
+	"attaque": {
+	  "nom": "Clause Suspensives",
+	  "descritpion": "Ajoute des conditions qui peuvent annuler l'accord. Rend la situation incertaine.",
+	  "temps": 3,
+	  "degats": 150
+	},
+	"texte": "Ne signe jamais sans avoir lu les petites lignes."
   },
   {
-    "type": 1,
-    "niveau": 4,
-    "nom": "Avocat Associé",
-    "image": "res://juridique_img_3.png",
-    "attaque": {
-      "nom": "Plaidoirie Finale",
-      "descritpion": "Argumente le cas devant la cour avec une force de conviction maximale.",
-      "temps": 4,
-      "degats": 220
-    },
-    "texte": "Sa réputation précède son entrée au tribunal."
+	"type": 1,
+	"niveau": 4,
+	"nom": "Avocat Associé",
+	"image": "res://juridique_img_3.png",
+	"attaque": {
+	  "nom": "Plaidoirie Finale",
+	  "descritpion": "Argumente le cas devant la cour avec une force de conviction maximale.",
+	  "temps": 4,
+	  "degats": 220
+	},
+	"texte": "Sa réputation précède son entrée au tribunal."
   },
   {
-    "type": 1,
-    "niveau": 1,
-    "nom": "Étudiant Droit",
-    "image": "res://juridique_img_4.png",
-    "attaque": {
-      "nom": "Recherche Jurisprudence",
-      "descritpion": "Trouve un précédent légal pertinent. Faible dégât mais ouvre la voie.",
-      "temps": 1,
-      "degats": 30
-    },
-    "texte": "Toujours avec son Code Civil sous le bras."
+	"type": 1,
+	"niveau": 1,
+	"nom": "Étudiant Droit",
+	"image": "res://juridique_img_4.png",
+	"attaque": {
+	  "nom": "Recherche Jurisprudence",
+	  "descritpion": "Trouve un précédent légal pertinent. Faible dégât mais ouvre la voie.",
+	  "temps": 1,
+	  "degats": 30
+	},
+	"texte": "Toujours avec son Code Civil sous le bras."
   },
   {
-    "type": 1,
-    "niveau": 2,
-    "nom": "Conseiller Prud'hommes",
-    "image": "res://juridique_img_5.png",
-    "attaque": {
-      "nom": "Médiation Sociale",
-      "descritpion": "Tente de régler les litiges entre employeur et employé à l'amiable.",
-      "temps": 2,
-      "degats": 110
-    },
-    "texte": "Spécialiste du droit du travail."
+	"type": 1,
+	"niveau": 2,
+	"nom": "Conseiller Prud'hommes",
+	"image": "res://juridique_img_5.png",
+	"attaque": {
+	  "nom": "Médiation Sociale",
+	  "descritpion": "Tente de régler les litiges entre employeur et employé à l'amiable.",
+	  "temps": 2,
+	  "degats": 110
+	},
+	"texte": "Spécialiste du droit du travail."
   },
   {
-    "type": 1,
-    "niveau": 4,
-    "nom": "Magistrat Confirmé",
-    "image": "res://juridique_img_3.png",
-    "attaque": {
-      "nom": "Verdict Exécutoire",
-      "descritpion": "Rend une décision finale qui doit être appliquée sans délai.",
-      "temps": 5,
-      "degats": 240
-    },
-    "texte": "Représente la puissance de la loi."
+	"type": 1,
+	"niveau": 4,
+	"nom": "Magistrat Confirmé",
+	"image": "res://juridique_img_3.png",
+	"attaque": {
+	  "nom": "Verdict Exécutoire",
+	  "descritpion": "Rend une décision finale qui doit être appliquée sans délai.",
+	  "temps": 5,
+	  "degats": 240
+	},
+	"texte": "Représente la puissance de la loi."
   },
   {
-    "type": 1,
-    "niveau": 1,
-    "nom": "Paralégal",
-    "image": "res://juridique_img_1.png",
-    "attaque": {
-      "nom": "Dépôt de Pièces",
-      "descritpion": "Formalise l'envoi de documents essentiels. Assure la procédure.",
-      "temps": 1,
-      "degats": 25
-    },
-    "texte": "L'organisation des dossiers est sa force."
+	"type": 1,
+	"niveau": 1,
+	"nom": "Paralégal",
+	"image": "res://juridique_img_1.png",
+	"attaque": {
+	  "nom": "Dépôt de Pièces",
+	  "descritpion": "Formalise l'envoi de documents essentiels. Assure la procédure.",
+	  "temps": 1,
+	  "degats": 25
+	},
+	"texte": "L'organisation des dossiers est sa force."
   },
   {
-    "type": 1,
-    "niveau": 3,
-    "nom": "Fiscaliste Expert",
-    "image": "res://juridique_img_2.png",
-    "attaque": {
-      "nom": "Optimisation Fiscale",
-      "descritpion": "Trouve des failles légales pour réduire les impôts. Très efficace, mais risqué.",
-      "temps": 4,
-      "degats": 170
-    },
-    "texte": "Connaît les lois fiscales mieux que l'administration."
+	"type": 1,
+	"niveau": 3,
+	"nom": "Fiscaliste Expert",
+	"image": "res://juridique_img_2.png",
+	"attaque": {
+	  "nom": "Optimisation Fiscale",
+	  "descritpion": "Trouve des failles légales pour réduire les impôts. Très efficace, mais risqué.",
+	  "temps": 4,
+	  "degats": 170
+	},
+	"texte": "Connaît les lois fiscales mieux que l'administration."
   },
   {
-    "type": 1,
-    "niveau": 4,
-    "nom": "Juge d'Instruction",
-    "image": "res://juridique_img_3.png",
-    "attaque": {
-      "nom": "Mise en Examen",
-      "descritpion": "Démarre une enquête approfondie contre une partie. Pression énorme.",
-      "temps": 4,
-      "degats": 210
-    },
-    "texte": "Dirige la phase d'enquête préliminaire."
+	"type": 1,
+	"niveau": 4,
+	"nom": "Juge d'Instruction",
+	"image": "res://juridique_img_3.png",
+	"attaque": {
+	  "nom": "Mise en Examen",
+	  "descritpion": "Démarre une enquête approfondie contre une partie. Pression énorme.",
+	  "temps": 4,
+	  "degats": 210
+	},
+	"texte": "Dirige la phase d'enquête préliminaire."
   },
   {
-    "type": 1,
-    "niveau": 1,
-    "nom": "Secrétaire Juridique",
-    "image": "res://juridique_img_4.png",
-    "attaque": {
-      "nom": "Courrier Recommandé",
-      "descritpion": "Envoi de notification avec accusé de réception. Formalise l'engagement.",
-      "temps": 1,
-      "degats": 40
-    },
-    "texte": "Assure la traçabilité de toute la correspondance."
+	"type": 1,
+	"niveau": 1,
+	"nom": "Secrétaire Juridique",
+	"image": "res://juridique_img_4.png",
+	"attaque": {
+	  "nom": "Courrier Recommandé",
+	  "descritpion": "Envoi de notification avec accusé de réception. Formalise l'engagement.",
+	  "temps": 1,
+	  "degats": 40
+	},
+	"texte": "Assure la traçabilité de toute la correspondance."
   },
   {
-    "type": 1,
-    "niveau": 3,
-    "nom": "Spécialiste I.P. (Propriété Intellectuelle)",
-    "image": "res://juridique_img_5.png",
-    "attaque": {
-      "nom": "Dépôt de Brevet",
-      "descritpion": "Protège légalement une invention. Rend l'objet de l'attaque intouchable.",
-      "temps": 3,
-      "degats": 135
-    },
-    "texte": "Défend les créations et les marques."
+	"type": 1,
+	"niveau": 3,
+	"nom": "Spécialiste I.P. (Propriété Intellectuelle)",
+	"image": "res://juridique_img_5.png",
+	"attaque": {
+	  "nom": "Dépôt de Brevet",
+	  "descritpion": "Protège légalement une invention. Rend l'objet de l'attaque intouchable.",
+	  "temps": 3,
+	  "degats": 135
+	},
+	"texte": "Défend les créations et les marques."
   },
   {
-    "type": 1,
-    "niveau": 4,
-    "nom": "Procureur de la République",
-    "image": "res://juridique_img_3.png",
-    "attaque": {
-      "nom": "Réquisition Pénale",
-      "descritpion": "Demande une peine lourde au nom de la société.",
-      "temps": 5,
-      "degats": 230
-    },
-    "texte": "Représente les intérêts publics devant les tribunaux."
+	"type": 1,
+	"niveau": 4,
+	"nom": "Procureur de la République",
+	"image": "res://juridique_img_3.png",
+	"attaque": {
+	  "nom": "Réquisition Pénale",
+	  "descritpion": "Demande une peine lourde au nom de la société.",
+	  "temps": 5,
+	  "degats": 230
+	},
+	"texte": "Représente les intérêts publics devant les tribunaux."
   },
   {
-    "type": 1,
-    "niveau": 1,
-    "nom": "Greffier",
-    "image": "res://juridique_img_1.png",
-    "attaque": {
-      "nom": "Enregistrement d'Audience",
-      "descritpion": "Prend note de chaque mot prononcé. La précision est obligatoire.",
-      "temps": 1,
-      "degats": 35
-    },
-    "texte": "Garantit la fidélité des procès-verbaux."
+	"type": 1,
+	"niveau": 1,
+	"nom": "Greffier",
+	"image": "res://juridique_img_1.png",
+	"attaque": {
+	  "nom": "Enregistrement d'Audience",
+	  "descritpion": "Prend note de chaque mot prononcé. La précision est obligatoire.",
+	  "temps": 1,
+	  "degats": 35
+	},
+	"texte": "Garantit la fidélité des procès-verbaux."
   },
   {
-    "type": 1,
-    "niveau": 4,
-    "nom": "Avocat D'Affaires",
-    "image": "res://juridique_img_2.png",
-    "attaque": {
-      "nom": "Fusion-Acquisition",
-      "descritpion": "Structure légalement le rachat d'une autre entité. Très haut niveau de complexité.",
-      "temps": 4,
-      "degats": 190
-    },
-    "texte": "Négocie des accords à milliards."
+	"type": 1,
+	"niveau": 4,
+	"nom": "Avocat D'Affaires",
+	"image": "res://juridique_img_2.png",
+	"attaque": {
+	  "nom": "Fusion-Acquisition",
+	  "descritpion": "Structure légalement le rachat d'une autre entité. Très haut niveau de complexité.",
+	  "temps": 4,
+	  "degats": 190
+	},
+	"texte": "Négocie des accords à milliards."
   },
   {
-    "type": 1,
-    "niveau": 4,
-    "nom": "Bâtonnier (Ordre des Avocats)",
-    "image": "res://juridique_img_3.png",
-    "attaque": {
-      "nom": "Discipline Ordinale",
-      "descritpion": "Peut retirer le droit d'exercer. Peine maximale dans sa catégorie.",
-      "temps": 5,
-      "degats": 250
-    },
-    "texte": "Chef de l'Ordre, il veille au respect des règles."
+	"type": 1,
+	"niveau": 4,
+	"nom": "Bâtonnier (Ordre des Avocats)",
+	"image": "res://juridique_img_3.png",
+	"attaque": {
+	  "nom": "Discipline Ordinale",
+	  "descritpion": "Peut retirer le droit d'exercer. Peine maximale dans sa catégorie.",
+	  "temps": 5,
+	  "degats": 250
+	},
+	"texte": "Chef de l'Ordre, il veille au respect des règles."
   },
   {
-    "type": 1,
-    "niveau": 2,
-    "nom": "Huissier de Justice",
-    "image": "res://juridique_img_4.png",
-    "attaque": {
-      "nom": "Signification",
-      "descritpion": "Remise en mains propres d'un acte de justice. L'effet est immédiat.",
-      "temps": 2,
-      "degats": 70
-    },
-    "texte": "L'homme des constats et des exécutions."
+	"type": 1,
+	"niveau": 2,
+	"nom": "Huissier de Justice",
+	"image": "res://juridique_img_4.png",
+	"attaque": {
+	  "nom": "Signification",
+	  "descritpion": "Remise en mains propres d'un acte de justice. L'effet est immédiat.",
+	  "temps": 2,
+	  "degats": 70
+	},
+	"texte": "L'homme des constats et des exécutions."
   },
   {
-    "type": 1,
-    "niveau": 3,
-    "nom": "Délégué à la Protection des Données (DPO)",
-    "image": "res://juridique_img_5.png",
-    "attaque": {
-      "nom": "Mise en Conformité RGPD",
-      "descritpion": "Impose des règles strictes sur le traitement des données personnelles. Très pénalisant si non respecté.",
-      "temps": 3,
-      "degats": 125
-    },
-    "texte": "Le gardien de la vie privée numérique."
+	"type": 1,
+	"niveau": 3,
+	"nom": "Délégué à la Protection des Données (DPO)",
+	"image": "res://juridique_img_5.png",
+	"attaque": {
+	  "nom": "Mise en Conformité RGPD",
+	  "descritpion": "Impose des règles strictes sur le traitement des données personnelles. Très pénalisant si non respecté.",
+	  "temps": 3,
+	  "degats": 125
+	},
+	"texte": "Le gardien de la vie privée numérique."
   },
   {
-    "type": 1,
-    "niveau": 4,
-    "nom": "Conseil d'État",
-    "image": "res://juridique_img_3.png",
-    "attaque": {
-      "nom": "Annulation pour Excès de Pouvoir",
-      "descritpion": "Annule un acte administratif jugé illégal. Impact sur toute une politique publique.",
-      "temps": 5,
-      "degats": 250
-    },
-    "texte": "Le plus haut conseiller juridique du gouvernement."
+	"type": 1,
+	"niveau": 4,
+	"nom": "Conseil d'État",
+	"image": "res://juridique_img_3.png",
+	"attaque": {
+	  "nom": "Annulation pour Excès de Pouvoir",
+	  "descritpion": "Annule un acte administratif jugé illégal. Impact sur toute une politique publique.",
+	  "temps": 5,
+	  "degats": 250
+	},
+	"texte": "Le plus haut conseiller juridique du gouvernement."
   },
   {
-    "type": 1,
-    "niveau": 1,
-    "nom": "Documentaliste Juridique",
-    "image": "res://juridique_img_4.png",
-    "attaque": {
-      "nom": "Veille Législative",
-      "descritpion": "Informe sur les nouvelles lois et décrets. Préparation du terrain.",
-      "temps": 1,
-      "degats": 20
-    },
-    "texte": "Connaît toutes les sources officielles."
+	"type": 1,
+	"niveau": 1,
+	"nom": "Documentaliste Juridique",
+	"image": "res://juridique_img_4.png",
+	"attaque": {
+	  "nom": "Veille Législative",
+	  "descritpion": "Informe sur les nouvelles lois et décrets. Préparation du terrain.",
+	  "temps": 1,
+	  "degats": 20
+	},
+	"texte": "Connaît toutes les sources officielles."
   },
   {
-    "type": 1,
-    "niveau": 4,
-    "nom": "Arbitre Commercial",
-    "image": "res://juridique_img_2.png",
-    "attaque": {
-      "nom": "Sentence Arbitrale",
-      "descritpion": "Rend un jugement privé et confidentiel qui a force de loi entre les parties.",
-      "temps": 4,
-      "degats": 200
-    },
-    "texte": "Règle les différends complexes hors du tribunal."
+	"type": 1,
+	"niveau": 4,
+	"nom": "Arbitre Commercial",
+	"image": "res://juridique_img_2.png",
+	"attaque": {
+	  "nom": "Sentence Arbitrale",
+	  "descritpion": "Rend un jugement privé et confidentiel qui a force de loi entre les parties.",
+	  "temps": 4,
+	  "degats": 200
+	},
+	"texte": "Règle les différends complexes hors du tribunal."
   },
   {
-    "type": 2,
-    "niveau": 1,
-    "nom": "Community Manager Junior",
-    "image": "res://com_img_1.png",
-    "attaque": {
-      "nom": "Post sur Réseaux",
-      "descritpion": "Publie un contenu engageant. Vitesse de réaction élevée.",
-      "temps": 1,
-      "degats": 40
-    },
-    "texte": "Accro à son téléphone, toujours prêt à commenter."
+	"type": 2,
+	"niveau": 1,
+	"nom": "Community Manager Junior",
+	"image": "res://com_img_1.png",
+	"attaque": {
+	  "nom": "Post sur Réseaux",
+	  "descritpion": "Publie un contenu engageant. Vitesse de réaction élevée.",
+	  "temps": 1,
+	  "degats": 40
+	},
+	"texte": "Accro à son téléphone, toujours prêt à commenter."
   },
   {
-    "type": 2,
-    "niveau": 3,
-    "nom": "Attaché de Presse",
-    "image": "res://com_img_2.png",
-    "attaque": {
-      "nom": "Communiqué Urgent",
-      "descritpion": "Envoie une information cruciale aux médias. Peut retourner l'opinion publique.",
-      "temps": 3,
-      "degats": 120
-    },
-    "texte": "Son carnet d'adresses est rempli de journalistes."
+	"type": 2,
+	"niveau": 3,
+	"nom": "Attaché de Presse",
+	"image": "res://com_img_2.png",
+	"attaque": {
+	  "nom": "Communiqué Urgent",
+	  "descritpion": "Envoie une information cruciale aux médias. Peut retourner l'opinion publique.",
+	  "temps": 3,
+	  "degats": 120
+	},
+	"texte": "Son carnet d'adresses est rempli de journalistes."
   },
   {
-    "type": 2,
-    "niveau": 4,
-    "nom": "Directeur de l'Agence",
-    "image": "res://com_img_3.png",
-    "attaque": {
-      "nom": "Campagne Virale",
-      "descritpion": "Crée un buzz incontrôlable qui maximise la visibilité positive.",
-      "temps": 4,
-      "degats": 210
-    },
-    "texte": "Visionnaire, il dicte les tendances du marché."
+	"type": 2,
+	"niveau": 4,
+	"nom": "Directeur de l'Agence",
+	"image": "res://com_img_3.png",
+	"attaque": {
+	  "nom": "Campagne Virale",
+	  "descritpion": "Crée un buzz incontrôlable qui maximise la visibilité positive.",
+	  "temps": 4,
+	  "degats": 210
+	},
+	"texte": "Visionnaire, il dicte les tendances du marché."
   },
   {
-    "type": 2,
-    "niveau": 1,
-    "nom": "Graphiste Débutant",
-    "image": "res://com_img_4.png",
-    "attaque": {
-      "nom": "Création de Logo",
-      "descritpion": "Propose une identité visuelle simple. Effet immédiat sur la reconnaissance.",
-      "temps": 1,
-      "degats": 50
-    },
-    "texte": "Maîtrise les couleurs et les polices."
+	"type": 2,
+	"niveau": 1,
+	"nom": "Graphiste Débutant",
+	"image": "res://com_img_4.png",
+	"attaque": {
+	  "nom": "Création de Logo",
+	  "descritpion": "Propose une identité visuelle simple. Effet immédiat sur la reconnaissance.",
+	  "temps": 1,
+	  "degats": 50
+	},
+	"texte": "Maîtrise les couleurs et les polices."
   },
   {
-    "type": 2,
-    "niveau": 3,
-    "nom": "Rédacteur Web (SEO)",
-    "image": "res://com_img_5.png",
-    "attaque": {
-      "nom": "Optimisation Mot-Clé",
-      "descritpion": "Modifie le contenu pour ranker en première position Google. Amène un flux continu de trafic.",
-      "temps": 3,
-      "degats": 160
-    },
-    "texte": "Écrit pour les humains et les robots (des moteurs de recherche)."
+	"type": 2,
+	"niveau": 3,
+	"nom": "Rédacteur Web (SEO)",
+	"image": "res://com_img_5.png",
+	"attaque": {
+	  "nom": "Optimisation Mot-Clé",
+	  "descritpion": "Modifie le contenu pour ranker en première position Google. Amène un flux continu de trafic.",
+	  "temps": 3,
+	  "degats": 160
+	},
+	"texte": "Écrit pour les humains et les robots (des moteurs de recherche)."
   },
   {
-    "type": 2,
-    "niveau": 4,
-    "nom": "Crise Communicator",
-    "image": "res://com_img_3.png",
-    "attaque": {
-      "nom": "Damage Control",
-      "descritpion": "Gère une situation critique pour minimiser les dégâts de réputation. Sauvetage de dernière minute.",
-      "temps": 5,
-      "degats": 240
-    },
-    "texte": "Son sang-froid est légendaire sous la pression."
+	"type": 2,
+	"niveau": 4,
+	"nom": "Crise Communicator",
+	"image": "res://com_img_3.png",
+	"attaque": {
+	  "nom": "Damage Control",
+	  "descritpion": "Gère une situation critique pour minimiser les dégâts de réputation. Sauvetage de dernière minute.",
+	  "temps": 5,
+	  "degats": 240
+	},
+	"texte": "Son sang-froid est légendaire sous la pression."
   },
   {
-    "type": 2,
-    "niveau": 1,
-    "nom": "Standardiste",
-    "image": "res://com_img_1.png",
-    "attaque": {
-      "nom": "Transfert d'Appel",
-      "descritpion": "Oriente la communication vers le bon interlocuteur. Vitesse et précision.",
-      "temps": 1,
-      "degats": 30
-    },
-    "texte": "La première voix de l'entreprise."
+	"type": 2,
+	"niveau": 1,
+	"nom": "Standardiste",
+	"image": "res://com_img_1.png",
+	"attaque": {
+	  "nom": "Transfert d'Appel",
+	  "descritpion": "Oriente la communication vers le bon interlocuteur. Vitesse et précision.",
+	  "temps": 1,
+	  "degats": 30
+	},
+	"texte": "La première voix de l'entreprise."
   },
   {
-    "type": 2,
-    "niveau": 2,
-    "nom": "Content Strategist",
-    "image": "res://com_img_2.png",
-    "attaque": {
-      "nom": "Calendrier Éditorial",
-      "descritpion": "Planifie le contenu sur plusieurs mois. Assure une présence constante et cohérente.",
-      "temps": 2,
-      "degats": 100
-    },
-    "texte": "Ne publie jamais à l'improviste."
+	"type": 2,
+	"niveau": 2,
+	"nom": "Content Strategist",
+	"image": "res://com_img_2.png",
+	"attaque": {
+	  "nom": "Calendrier Éditorial",
+	  "descritpion": "Planifie le contenu sur plusieurs mois. Assure une présence constante et cohérente.",
+	  "temps": 2,
+	  "degats": 100
+	},
+	"texte": "Ne publie jamais à l'improviste."
   },
   {
-    "type": 2,
-    "niveau": 4,
-    "nom": "Lobbyiste Senior",
-    "image": "res://com_img_3.png",
-    "attaque": {
-      "nom": "Influence Législative",
-      "descritpion": "Plaide sa cause auprès des décideurs publics. Peut changer une loi.",
-      "temps": 5,
-      "degats": 250
-    },
-    "texte": "Ses dîners sont plus efficaces que n'importe quelle réunion."
+	"type": 2,
+	"niveau": 4,
+	"nom": "Lobbyiste Senior",
+	"image": "res://com_img_3.png",
+	"attaque": {
+	  "nom": "Influence Législative",
+	  "descritpion": "Plaide sa cause auprès des décideurs publics. Peut changer une loi.",
+	  "temps": 5,
+	  "degats": 250
+	},
+	"texte": "Ses dîners sont plus efficaces que n'importe quelle réunion."
   },
   {
-    "type": 2,
-    "niveau": 1,
-    "nom": "Modérateur en Ligne",
-    "image": "res://com_img_4.png",
-    "attaque": {
-      "nom": "Suppression Spam",
-      "descritpion": "Nettoie les commentaires inutiles ou malveillants. Maintient la crédibilité.",
-      "temps": 1,
-      "degats": 35
-    },
-    "texte": "Veille à la bonne ambiance sur les forums."
+	"type": 2,
+	"niveau": 1,
+	"nom": "Modérateur en Ligne",
+	"image": "res://com_img_4.png",
+	"attaque": {
+	  "nom": "Suppression Spam",
+	  "descritpion": "Nettoie les commentaires inutiles ou malveillants. Maintient la crédibilité.",
+	  "temps": 1,
+	  "degats": 35
+	},
+	"texte": "Veille à la bonne ambiance sur les forums."
   },
   {
-    "type": 2,
-    "niveau": 2,
-    "nom": "Copywriter Persuasif",
-    "image": "res://com_img_5.png",
-    "attaque": {
-      "nom": "Titre Accrocheur (Clickbait)",
-      "descritpion": "Force le destinataire à ouvrir et à lire. Taux de succès élevé.",
-      "temps": 2,
-      "degats": 115
-    },
-    "texte": "Ses mots transforment l'intérêt en action."
+	"type": 2,
+	"niveau": 2,
+	"nom": "Copywriter Persuasif",
+	"image": "res://com_img_5.png",
+	"attaque": {
+	  "nom": "Titre Accrocheur (Clickbait)",
+	  "descritpion": "Force le destinataire à ouvrir et à lire. Taux de succès élevé.",
+	  "temps": 2,
+	  "degats": 115
+	},
+	"texte": "Ses mots transforment l'intérêt en action."
   },
   {
-    "type": 2,
-    "niveau": 4,
-    "nom": "Spokesperson (Porte-Parole)",
-    "image": "res://com_img_3.png",
-    "attaque": {
-      "nom": "Conférence de Presse",
-      "descritpion": "Fait une déclaration publique devant tous les médias. Impact massif et instantané.",
-      "temps": 4,
-      "degats": 200
-    },
-    "texte": "Le visage et la voix de l'organisation."
+	"type": 2,
+	"niveau": 4,
+	"nom": "Spokesperson (Porte-Parole)",
+	"image": "res://com_img_3.png",
+	"attaque": {
+	  "nom": "Conférence de Presse",
+	  "descritpion": "Fait une déclaration publique devant tous les médias. Impact massif et instantané.",
+	  "temps": 4,
+	  "degats": 200
+	},
+	"texte": "Le visage et la voix de l'organisation."
   },
   {
-    "type": 2,
-    "niveau": 1,
-    "nom": "Chargé de Newsletter",
-    "image": "res://com_img_1.png",
-    "attaque": {
-      "nom": "Envoi Massif d'Email",
-      "descritpion": "Inonde les boîtes de réception avec de l'information. Efficace si le taux d'ouverture est bon.",
-      "temps": 1,
-      "degats": 45
-    },
-    "texte": "Obsédé par les taux d'ouverture et de clic."
+	"type": 2,
+	"niveau": 1,
+	"nom": "Chargé de Newsletter",
+	"image": "res://com_img_1.png",
+	"attaque": {
+	  "nom": "Envoi Massif d'Email",
+	  "descritpion": "Inonde les boîtes de réception avec de l'information. Efficace si le taux d'ouverture est bon.",
+	  "temps": 1,
+	  "degats": 45
+	},
+	"texte": "Obsédé par les taux d'ouverture et de clic."
   },
   {
-    "type": 2,
-    "niveau": 3,
-    "nom": "Planificateur Média",
-    "image": "res://com_img_2.png",
-    "attaque": {
-      "nom": "Achat d'Espaces Pub",
-      "descritpion": "Négocie l'emplacement et le prix des publicités. Augmente la portée de manière exponentielle.",
-      "temps": 3,
-      "degats": 130
-    },
-    "texte": "Gère des budgets de publicité colossaux."
+	"type": 2,
+	"niveau": 3,
+	"nom": "Planificateur Média",
+	"image": "res://com_img_2.png",
+	"attaque": {
+	  "nom": "Achat d'Espaces Pub",
+	  "descritpion": "Négocie l'emplacement et le prix des publicités. Augmente la portée de manière exponentielle.",
+	  "temps": 3,
+	  "degats": 130
+	},
+	"texte": "Gère des budgets de publicité colossaux."
   },
   {
-    "type": 2,
-    "niveau": 4,
-    "nom": "Directeur Marketing",
-    "image": "res://com_img_3.png",
-    "attaque": {
-      "nom": "Refonte de Marque",
-      "descritpion": "Change l'identité et le positionnement global de l'entreprise. Changement de paradigme.",
-      "temps": 5,
-      "degats": 230
-    },
-    "texte": "Il est la stratégie derrière chaque message."
+	"type": 2,
+	"niveau": 4,
+	"nom": "Directeur Marketing",
+	"image": "res://com_img_3.png",
+	"attaque": {
+	  "nom": "Refonte de Marque",
+	  "descritpion": "Change l'identité et le positionnement global de l'entreprise. Changement de paradigme.",
+	  "temps": 5,
+	  "degats": 230
+	},
+	"texte": "Il est la stratégie derrière chaque message."
   },
   {
-    "type": 2,
-    "niveau": 1,
-    "nom": "Photographe Corporate",
-    "image": "res://com_img_4.png",
-    "attaque": {
-      "nom": "Shooting de Produits",
-      "descritpion": "Capture le meilleur angle d'un objet. Améliore la perception de qualité.",
-      "temps": 1,
-      "degats": 25
-    },
-    "texte": "Travaille toujours avec la meilleure lumière."
+	"type": 2,
+	"niveau": 1,
+	"nom": "Photographe Corporate",
+	"image": "res://com_img_4.png",
+	"attaque": {
+	  "nom": "Shooting de Produits",
+	  "descritpion": "Capture le meilleur angle d'un objet. Améliore la perception de qualité.",
+	  "temps": 1,
+	  "degats": 25
+	},
+	"texte": "Travaille toujours avec la meilleure lumière."
   },
   {
-    "type": 2,
-    "niveau": 3,
-    "nom": "Influenceur Pro",
-    "image": "res://com_img_5.png",
-    "attaque": {
-      "nom": "Story Partenariat",
-      "descritpion": "Met en avant un produit devant des millions de followers. Résultat immédiat sur les ventes.",
-      "temps": 3,
-      "degats": 150
-    },
-    "texte": "Chacun de ses mots est suivi par une foule."
+	"type": 2,
+	"niveau": 3,
+	"nom": "Influenceur Pro",
+	"image": "res://com_img_5.png",
+	"attaque": {
+	  "nom": "Story Partenariat",
+	  "descritpion": "Met en avant un produit devant des millions de followers. Résultat immédiat sur les ventes.",
+	  "temps": 3,
+	  "degats": 150
+	},
+	"texte": "Chacun de ses mots est suivi par une foule."
   },
   {
-    "type": 2,
-    "niveau": 4,
-    "nom": "Chief Communication Officer (CCO)",
-    "image": "res://com_img_3.png",
-    "attaque": {
-      "nom": "Vision Globale",
-      "descritpion": "Alignement de toutes les communications internes et externes. Cohérence totale.",
-      "temps": 5,
-      "degats": 250
-    },
-    "texte": "Gère l'image et la réputation à l'échelle mondiale."
+	"type": 2,
+	"niveau": 4,
+	"nom": "Chief Communication Officer (CCO)",
+	"image": "res://com_img_3.png",
+	"attaque": {
+	  "nom": "Vision Globale",
+	  "descritpion": "Alignement de toutes les communications internes et externes. Cohérence totale.",
+	  "temps": 5,
+	  "degats": 250
+	},
+	"texte": "Gère l'image et la réputation à l'échelle mondiale."
   },
   {
-    "type": 2,
-    "niveau": 2,
-    "nom": "Monteur Vidéo",
-    "image": "res://com_img_1.png",
-    "attaque": {
-      "nom": "Clip 'Tuto'",
-      "descritpion": "Crée une courte vidéo explicative. Augmente l'engagement du public.",
-      "temps": 2,
-      "degats": 60
-    },
-    "texte": "Rend un sujet complexe facile à comprendre en 60 secondes."
+	"type": 2,
+	"niveau": 2,
+	"nom": "Monteur Vidéo",
+	"image": "res://com_img_1.png",
+	"attaque": {
+	  "nom": "Clip 'Tuto'",
+	  "descritpion": "Crée une courte vidéo explicative. Augmente l'engagement du public.",
+	  "temps": 2,
+	  "degats": 60
+	},
+	"texte": "Rend un sujet complexe facile à comprendre en 60 secondes."
   },
   {
-    "type": 2,
-    "niveau": 3,
-    "nom": "Data Analyst (Com')",
-    "image": "res://com_img_2.png",
-    "attaque": {
-      "nom": "Test A/B",
-      "descritpion": "Compare deux messages pour voir lequel est le plus efficace. Méthode scientifique.",
-      "temps": 3,
-      "degats": 125
-    },
-    "texte": "Ses décisions sont toujours basées sur les chiffres."
+	"type": 2,
+	"niveau": 3,
+	"nom": "Data Analyst (Com')",
+	"image": "res://com_img_2.png",
+	"attaque": {
+	  "nom": "Test A/B",
+	  "descritpion": "Compare deux messages pour voir lequel est le plus efficace. Méthode scientifique.",
+	  "temps": 3,
+	  "degats": 125
+	},
+	"texte": "Ses décisions sont toujours basées sur les chiffres."
   }
 ]

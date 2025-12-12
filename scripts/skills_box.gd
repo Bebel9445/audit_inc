@@ -13,9 +13,6 @@ func _drop_data(position, data):
 	if data.get_parent():
 		data.get_parent().remove_child(data)
 		
-	# --- REDIMENSIONNEMENT ---
-	# C'est ici qu'on force la taille plus petite !
-	# Par exemple : 140x180 (au lieu de la taille standard qui est souvent plus grande)
 	data.custom_minimum_size = Vector2(140, 180)
 	
 	# On l'ajoute au conteneur

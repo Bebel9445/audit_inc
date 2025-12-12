@@ -1,23 +1,23 @@
 {
-    "0" : [
-        "Les comptes sont dans le rouge !",
-        "Il faut absolument que nous fassions des économies.",
-        "Peut-être devrions-nous envisager de réduire les dépenses non essentielles.",
-        "Il faut aussi penser à l'impact sur le moral de l'équipe.",
-        "Trouvons un équilibre entre économies et bien-être des employés."
-    ],
-    "1" : [
-        "Les licenses logiciels doivent être renouvelées bientôt.",
-        "Les termes du contrat ont changé cette année.",
-        "Les employés doivent être informés des nouvelles conditions.",
-        "Les employés cumulent trop de congés non pris.",
-        "Il faut mettre en place une politique pour gérer cela."
-    ],
-    "2" : [
-        "Les réseax sociaux sont devenus un outil de marketing essentiel.",
-        "Nous devons élaborer une stratégie pour maximiser notre présence en ligne.",
-        "Notre audiance sur les réseaux sociaux a considérablement diminué.",
-        "Il est crucial d'analyser les tendances actuelles pour adapter notre contenu.",
-        "Engageons un expert en médias sociaux pour nous aider."
-    ]
+	"0" : [
+		"Les comptes sont dans le rouge !",
+		"Il faut absolument que nous fassions des économies.",
+		"Peut-être devrions-nous envisager de réduire les dépenses non essentielles.",
+		"Il faut aussi penser à l'impact sur le moral de l'équipe.",
+		"Trouvons un équilibre entre économies et bien-être des employés."
+	],
+	"1" : [
+		"Les licenses logiciels doivent être renouvelées bientôt.",
+		"Les termes du contrat ont changé cette année.",
+		"Les employés doivent être informés des nouvelles conditions.",
+		"Les employés cumulent trop de congés non pris.",
+		"Il faut mettre en place une politique pour gérer cela."
+	],
+	"2" : [
+		"Les réseax sociaux sont devenus un outil de marketing essentiel.",
+		"Nous devons élaborer une stratégie pour maximiser notre présence en ligne.",
+		"Notre audiance sur les réseaux sociaux a considérablement diminué.",
+		"Il est crucial d'analyser les tendances actuelles pour adapter notre contenu.",
+		"Engageons un expert en médias sociaux pour nous aider."
+	]
 }

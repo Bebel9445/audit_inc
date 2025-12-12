@@ -165,6 +165,35 @@ func execute_turn():
 	if state_changed:
 		print("Des états ont changé.")
 
+
+func mark_node_as_secured(service_node: ServiceNode):
+	# Le noeud devient bleu
+	service_node.set_completed()
+
+	# Influence sur les voisins
+	for neighbor in service_node.links:
+		neighbor.reduce_difficulty()
+		
+	# Met à jour les lignes visuelles si besoin
+	update_links_visual()
+	
+	
+
+func get_organization_score() -> int:
+	var score = 0
+	for s in services:
+		# On vérifie que c'est bien un ServiceNode valide
+		if not is_instance_valid(s): continue
+		
+		match s.state:
+			"red":    score -= 10
+			"orange": score -= 5
+			"green":  score += 0 # Neutre
+			"blue":   score += 10 # Positif car sécurisé
+	
+	return score
+
+
 func get_random_state() -> String:
 	var roll = randf()
 	if roll < 0.5: return "green"

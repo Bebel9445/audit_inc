@@ -9,10 +9,10 @@ script = ExtResource("1_7p1mj")
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 visible = false
-offset_left = 1005.0
-offset_top = 273.0
-offset_right = 1774.0
-offset_bottom = 481.0
+offset_left = 10.0
+offset_top = 235.0
+offset_right = 779.0
+offset_bottom = 443.0
 nine_patch_stretch = true
 texture_under = ExtResource("2_4ra3w")
 texture_progress = ExtResource("3_5uy6h")

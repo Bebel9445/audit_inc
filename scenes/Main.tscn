@@ -14,3 +14,9 @@ script = ExtResource("1_0bbpv")
 visible = false
 
 [node name="Enemy" parent="." instance=ExtResource("4_rarhs")]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="TimeLabel" type="Label" parent="HUD"]
+offset_right = 40.0
+offset_bottom = 23.0
