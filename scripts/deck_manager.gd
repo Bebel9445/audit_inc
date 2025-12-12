@@ -4,7 +4,7 @@ class_name DeckManager
 
 # ---  IMAGES DES CADRES (Niveaux) ---
 const FRAME_COMMON = preload("res://assets/cards/SkillCardsCommon.png")  # Niv 1
-const FRAME_RARE   = preload("res://assets/cards/SkillCardsRare..png")    # Niv 2
+const FRAME_RARE   = preload("res://assets/cards/SkillCardsRare.png")    # Niv 2
 const FRAME_EPIC   = preload("res://assets/cards/SkillCardsEpic.png")    # Niv 3
 const FRAME_MYTHIC = preload("res://assets/cards/SkillCardsMythic.png")  # Niv 4
 
@@ -89,7 +89,7 @@ func add_skill_reward():
 	)
 	
 	var new_skill = skill_card.new(
-		visual_skill, 1, data.get("nom", ""), 1, card_type, GENERIC_SKILL_SCRIPT
+		visual_skill, 1, data.get("nom", ""), 30, card_type, GENERIC_SKILL_SCRIPT
 	)
 	
 	skill_pile.append(new_skill)

@@ -103,11 +103,10 @@ func _on_resized():
 
 func update_visuals(new_level: int):
 	_niveau = new_level
-	
-	var new_frame_path = "res://assets/cards/skillcardcommon.png"
-	if _niveau == 2: new_frame_path = "res://assets/cards/skillcardrare.png"
-	elif _niveau == 3: new_frame_path = "res://assets/cards/skillcardepic.png"
-	elif _niveau == 4: new_frame_path = "res://assets/cards/skillcardmythic.png"
+	var new_frame_path = "res://assets/cards/SkillCardsCommon.png"
+	if _niveau == 2: new_frame_path = "res://assets/cards/SkillCardsRare.png"
+	elif _niveau == 3: new_frame_path = "res://assets/cards/SkillCardsEpic.png"
+	elif _niveau == 4: new_frame_path = "res://assets/cards/SkillCardsMythic.png"
 	
 	if ResourceLoader.exists(new_frame_path):
 		texture_frame.texture = load(new_frame_path)

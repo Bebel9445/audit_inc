@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dqt1o3wgt5dw6"
-path="res://.godot/imported/SkillCardsRare..png-9a3f58f624635b7108ee47594e2a2c05.ctex"
+path="res://.godot/imported/SkillCardsRare.png-9bd382104d8730f29401fb5a0b415ae8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/cards/SkillCardsRare..png"
-dest_files=["res://.godot/imported/SkillCardsRare..png-9a3f58f624635b7108ee47594e2a2c05.ctex"]
+source_file="res://assets/cards/SkillCardsRare.png"
+dest_files=["res://.godot/imported/SkillCardsRare.png-9bd382104d8730f29401fb5a0b415ae8.ctex"]
 
 [params]
 

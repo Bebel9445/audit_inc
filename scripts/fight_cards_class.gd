@@ -48,20 +48,19 @@ func calculate_efficiency(equipped_skills: Array[skill_card]):
 	for skill in equipped_skills:
 		if skill.getType() == _type and skill.getNiveau() >= _lvl:
 			requirement_met = true
+			_damage_with_bonus = _damage + skill.getBonus()
 			break
 	
 	if requirement_met:
 		# CONDITION REMPLIE : 100% Efficacité
-		_damage_with_bonus = _damage
 		_have_bonus = true
 	else:
 		# CONDITION NON REMPLIE :
 		# Au lieu de 20%, on met une valeur fixe faible (ex: 3 dégâts).
 		# Ça symbolise "J'ai bossé mais je n'ai rien trouvé d'intéressant".
 		# Oui bon après si quelqu'un est plus créatif que moi on peut changer ce truc la
-		_damage_with_bonus = 3 
+		_damage_with_bonus = _damage
 		_have_bonus = false
-
 	update_visual_text()
 
 func update_visual_text():
