@@ -27,7 +27,7 @@ func _init(carte_instance: FightCardsObject, lvl: int,  cout_valeur: int, damage
 	_damage = damage
 	effect_script = effect_path
 	_type = type
-	_damage_with_bonus = damage # Valeur par défaut
+	_damage_with_bonus = _damage # Valeur par défaut
 
 # --- Méthodes ---
 func getLvl() -> int: return _lvl

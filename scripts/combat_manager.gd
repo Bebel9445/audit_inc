@@ -4,6 +4,7 @@ class_name CombatManager
 signal combat_start
 signal card_played(FightCards)
 signal combat_turn_ended
+signal give_up
 
 # --- POLICE PIXEL ART ---
 const FONT_PIXEL = preload("res://assets/icons/ByteBounce.ttf")
@@ -13,6 +14,7 @@ const FONT_PIXEL = preload("res://assets/icons/ByteBounce.ttf")
 @onready var service_display = $ServiceDisplay
 @onready var dialogue_box = $DialogueBox
 @onready var start_button = $StartCombat
+@onready var give_up_button = $GiveUp
 @onready var main_hand = $MainHand
 @onready var player = preload("res://scripts/player.gd").new()
 
@@ -101,6 +103,9 @@ func _on_start_combat_pressed():
 	player.reset()
 	update_hand_efficiency()
 	combat_start.emit()
+
+func _on_give_up_pressed():
+	give_up.emit()
 
 func update_hand_efficiency():
 	var active_skills: Array[skill_card] = []

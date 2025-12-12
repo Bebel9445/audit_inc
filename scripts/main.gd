@@ -41,6 +41,8 @@ func _ready():
 	service_graph.hide()
 	combat_scene.hide()
 	enemy.get_node("HealthBar").hide()
+	
+	combat_scene.give_up.connect(on_combat_give_up)
 
 # --- MENU & DÉMARRAGE ---
 func _on_start_game():
@@ -128,6 +130,17 @@ func on_combat_defeat():
 	# --- ATTENTE DU DIALOGUE ---
 	await combat_scene.dialogue_box.dialogue_finished
 	
+	end_week_sequence()
+
+func on_combat_give_up():
+	if is_combat_resolved: return
+	is_combat_resolved = true
+	
+	# Pas de changement graphe, petite récompense
+	deck_manager.add_reward_card() 
+	
+	combat_scene.dialogue_box.show_text("Temps écoulé. On fera mieux la prochaine fois.")
+
 	end_week_sequence()
 
 func end_week_sequence():
