@@ -41,7 +41,6 @@ func getDescription() -> String: return _carte.texte
 func haveBonus() -> bool: return _have_bonus
 func setHaveBonus(have_bonus: bool): _have_bonus = have_bonus
 
-
 func calculate_efficiency(equipped_skills: Array[skill_card]):
 	var requirement_met = false
 	
@@ -69,5 +68,5 @@ func update_visual_text():
 			_carte.labelState.text = "Dégâts : " + str(_damage_with_bonus) + " (OK)"
 			_carte.labelState.modulate = Color.GREEN
 		else:
-			_carte.labelState.text = "Dégâts : " + str(_damage_with_bonus) + " (Inadapté)"
+			_carte.labelState.text = "Dégâts : " + str(_damage_with_bonus) + " (Nul)"
 			_carte.labelState.modulate = Color.RED

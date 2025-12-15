@@ -1,40 +1,40 @@
 {
 	"pnj": {
 		"0" : {
-			"Majda" : "res://majda.png",
+			"Majda" : "res://assets/pnj/majda.png",
 			"Mainguy" : "res://mainguy.png"
 		},
 		"1" : {
-			"Roy" : "res://roy.png",
-			"Masdak" : "res://masdak.png"
+			"Roy" : "res://assets/pnj/roy.png",
+			"Masdak" : "res://assets/pnj/masdak.png"
 		},
 		"2" : {
-			"Wessler" : "res://wessler.png",
-			"Community manager" : "res://cm.png"
+			"Wessler" : "res://assets/pnj/wessler.png",
+			"Community manager" : "res://assets/pnj/cm.png"
 		},
 		"all" : {
-			"Z" : "res://z.png",
-			"Ali" : "res://ali.png",
-			"Gossa" : "res://gossa.png",
-			"Blindauer" : "res://blindauer.png",
-			"Secretaire" : "res://secretaire.png",
-			"Stagiaire" : "res://stagiaire.png",
-			"Employe" : "res://employe.png"
+			"Z" : "res://assets/pnj/z.png",
+			"Ali" : "res://assets/pnj/ali.png",
+			"Gossa" : "res://assets/pnj/gossa.png",
+			"Blindauer" : "res://assets/pnj/blindauer.png",
+			"Secretaire" : "res://assets/pnj/secretaire.png",
+			"Stagiaire" : "res://assets/pnj/stagiaire.png",
+			"Employe" : "res://assets/pnj/employe.png"
 		}
 	},
 
 	"perso cle" : {
 		"0" : {
-			"Chef comptable" : "res://chef_comptable.png",
-			"Josianne de la compta" : "res://josianne.png"
+			"Chef comptable" : "res://assets/pnj/chef_comptable.png",
+			"Josianne de la compta" : "res://assets/pnj/josianne.png"
 		},
 		"1" : {
-			"Avocat d'entreprise" : "res://avocat.png",
-			"Consultant en droit" : "res://consultant_droit.png"
+			"Avocat d'entreprise" : "res://assets/pnj/avocat.png",
+			"Consultant en droit" : "res://assets/pnj/consultant_droit.png"
 		},
 		"2" : {
-			"Directeur des ressources humaines" : "res://drh.png",
-			"Responsable publicitaire" : "res://publicitaire.png"
+			"Directeur des ressources humaines" : "res://assets/pnj/drh.png",
+			"Responsable publicitaire" : "res://assets/pnj/publicitaire.png"
 		}
 	}
 }

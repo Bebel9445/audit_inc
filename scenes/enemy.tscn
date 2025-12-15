@@ -4,15 +4,19 @@
 [ext_resource type="Texture2D" uid="uid://drtgu6yyyiq43" path="res://assets/icons/HealthBarEmpty.png" id="2_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://bgk83wv5g7jd5" path="res://assets/icons/HealthBar.png" id="3_5uy6h"]
 
-[node name="Enemy" type="Node"]
+[node name="Enemy" type="Node2D"]
 script = ExtResource("1_7p1mj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(400, 408)
+scale = Vector2(6, 6)
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 visible = false
-offset_left = 10.0
-offset_top = 235.0
-offset_right = 779.0
-offset_bottom = 443.0
+offset_left = 36.0
+offset_top = 738.0
+offset_right = 805.0
+offset_bottom = 946.0
 nine_patch_stretch = true
 texture_under = ExtResource("2_4ra3w")
 texture_progress = ExtResource("3_5uy6h")
