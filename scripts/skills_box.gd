@@ -13,7 +13,7 @@ func _drop_data(position, data):
 	if data.get_parent():
 		data.get_parent().remove_child(data)
 		
-	data.custom_minimum_size = Vector2(140, 180)
+	data.custom_minimum_size = Vector2(180, 310)
 	
 	# On l'ajoute au conteneur
 	container.add_child(data)

@@ -1,12 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://ci6284mim63qb"]
+[gd_scene load_steps=6 format=3 uid="uid://ci6284mim63qb"]
 
 [ext_resource type="PackedScene" uid="uid://bqspirjqpmj3d" path="res://scenes/ui/dialogue_box.tscn" id="1_ik0t7"]
 [ext_resource type="Script" uid="uid://c7rbe5ddbd12r" path="res://scripts/combat_manager.gd" id="1_ofoda"]
 [ext_resource type="Script" uid="uid://belgi76t7hh3w" path="res://scripts/skills_box.gd" id="3_a2e2y"]
 [ext_resource type="PackedScene" uid="uid://du3ie6k23cb33" path="res://scenes/main_hand_manager.tscn" id="3_m17q1"]
+[ext_resource type="Texture2D" uid="uid://6bd2tukkotj3" path="res://assets/backgroundFight.png" id="5_m2d54"]
 
 [node name="CombatScene" type="Node2D"]
 script = ExtResource("1_ofoda")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(1920, 948)
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -239.0
+offset_right = 1906.0
+offset_bottom = 1233.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_m2d54")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="ServiceDisplay" type="TextureRect" parent="."]
 offset_right = 142.0
@@ -68,5 +85,5 @@ ok_button_text = "Oui"
 dialog_autowrap = true
 cancel_button_text = "Annuler"
 
-[connection signal="pressed" from="StartCombat" to="." method="_on_start_combat_pressed"]
 [connection signal="pressed" from="StartCombat" to="." method="start_combat"]
+[connection signal="pressed" from="StartCombat" to="." method="_on_start_combat_pressed"]

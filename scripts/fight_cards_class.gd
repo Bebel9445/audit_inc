@@ -41,7 +41,6 @@ func getDescription() -> String: return _carte.texte
 func haveBonus() -> bool: return _have_bonus
 func setHaveBonus(have_bonus: bool): _have_bonus = have_bonus
 
-
 func calculate_efficiency(equipped_skills: Array[skill_card]):
 	var requirement_met = false
 	
@@ -51,14 +50,9 @@ func calculate_efficiency(equipped_skills: Array[skill_card]):
 			break
 	
 	if requirement_met:
-		# CONDITION REMPLIE : 100% Efficacité
 		_damage_with_bonus = _damage
 		_have_bonus = true
 	else:
-		# CONDITION NON REMPLIE :
-		# Au lieu de 20%, on met une valeur fixe faible (ex: 3 dégâts).
-		# Ça symbolise "J'ai bossé mais je n'ai rien trouvé d'intéressant".
-		# Oui bon après si quelqu'un est plus créatif que moi on peut changer ce truc la
 		_damage_with_bonus = 3 
 		_have_bonus = false
 
@@ -70,5 +64,5 @@ func update_visual_text():
 			_carte.labelState.text = "Dégâts : " + str(_damage_with_bonus) + " (OK)"
 			_carte.labelState.modulate = Color.GREEN
 		else:
-			_carte.labelState.text = "Dégâts : " + str(_damage_with_bonus) + " (Inadapté)"
+			_carte.labelState.text = "Dégâts : " + str(_damage_with_bonus) + " (Nul)"
 			_carte.labelState.modulate = Color.RED
