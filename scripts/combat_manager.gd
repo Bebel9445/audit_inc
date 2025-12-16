@@ -161,6 +161,10 @@ func _on_card_clicked(event: InputEvent, carte_info: FightCards):
 		$ConfirmationAttack.show()
 
 func _on_confirm_play(carte_info):
+	var music = AudioStreamPlayer.new() # un peu de musique ou quoi????
+	music.stream = preload("res://music/rot.wav")
+	music.play()
+	
 	apply_card_effect(carte_info) 
 	card_played.emit(carte_info)
 	current_deck_ref.discard(carte_info)

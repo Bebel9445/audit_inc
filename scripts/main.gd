@@ -29,6 +29,7 @@ func _ready():
 	add_child(game_ui)
 	game_ui.start_game_requested.connect(_on_start_game)
 	game_ui.restart_game_requested.connect(_on_restart_game)
+	game_ui.credits_requested.connect(_print_credits)
 	
 	# Connexions Jeu
 	service_graph.initiate_combat.connect(on_initiate_combat)
@@ -44,8 +45,15 @@ func _ready():
 	
 	combat_scene.give_up.connect(on_combat_give_up)
 
+# --- CREDITS ---
+func _print_credits():
+	game_ui.main_menu.hide()
+	$Cerdits.show()
+
 # --- MENU & DÉMARRAGE ---
 func _on_start_game():
+	$Music.play()
+	
 	game_ui.main_menu.hide()
 	$HUD.show()
 	service_graph.show()
@@ -114,6 +122,8 @@ func on_enemy_victory():
 	combat_scene.dialogue_box.show_text("Excellent travail. Dossier sécurisé.")
 	
 	await combat_scene.dialogue_box.dialogue_finished
+	
+	$Music.play()
 	
 	end_week_sequence()
 

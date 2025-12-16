@@ -75,6 +75,6 @@ offset_right = 1877.0
 offset_bottom = 890.0
 text = "Abandonner"
 
-[connection signal="pressed" from="StartCombat" to="." method="_on_start_combat_pressed"]
 [connection signal="pressed" from="StartCombat" to="." method="start_combat"]
+[connection signal="pressed" from="StartCombat" to="." method="_on_start_combat_pressed"]
 [connection signal="pressed" from="GiveUp" to="." method="_on_give_up_pressed"]
