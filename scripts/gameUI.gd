@@ -3,6 +3,7 @@ class_name GameUI
 
 signal start_game_requested
 signal restart_game_requested
+signal credits_requested
 
 # --- CHARGEMENT DE LA POLICE ---
 const FONT_PIXEL = preload("res://assets/icons/ByteBounce.ttf")
@@ -98,6 +99,17 @@ func _create_main_menu():
 	btn.custom_minimum_size.y = 80
 	btn.pressed.connect(func(): emit_signal("start_game_requested"))
 	vbox.add_child(btn)
+	
+	var btnCredits = Button.new()
+	btnCredits.text = "  CREDITS  "
+	# Police Pixel Art
+	btnCredits.add_theme_font_override("font", FONT_PIXEL)
+	btnCredits.add_theme_font_size_override("font_size", 48)
+	
+	btnCredits.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	btnCredits.custom_minimum_size.y = 80
+	btnCredits.pressed.connect(func(): emit_signal("credits_requested"))
+	vbox.add_child(btnCredits)
 
 func _create_end_screen():
 	end_screen = Control.new()
