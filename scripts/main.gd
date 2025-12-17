@@ -29,6 +29,7 @@ func _ready():
 	add_child(game_ui)
 	game_ui.start_game_requested.connect(_on_start_game)
 	game_ui.restart_game_requested.connect(_on_restart_game)
+	game_ui.credits_requested.connect(_print_credits)
 	
 	# --- ETAPE CRUCIALE : CONNECTION ---
 	combat_scene.enemy_ref = enemy 
@@ -51,8 +52,15 @@ func _ready():
 	enemy.get_node("HealthBar").hide()
 	
 
+# --- CREDITS ---
+func _print_credits():
+	game_ui.main_menu.hide()
+	$Cerdits.show()
+
 # --- MENU & DÉMARRAGE ---
 func _on_start_game():
+	$Music.play()
+	
 	game_ui.main_menu.hide()
 	$HUD.show()
 	service_graph.show()
@@ -119,10 +127,12 @@ func on_enemy_victory():
 	combat_scene.dialogue_box.show_text("Excellent travail. Dossier sécurisé.")
 	await combat_scene.dialogue_box.dialogue_finished
 	
-	# Important : Si le jeu s'est terminé pendant le dialogue (via le signal), 
-	# game_started sera false, donc on ne relance pas la semaine suivante.
+	$Music.play()
+
 	if game_started:
 		end_week_sequence()
+
+	
 
 # --- DEFAITE (FIN DU TOUR / TEMPS) ---
 func on_combat_defeat():
