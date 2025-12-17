@@ -215,6 +215,7 @@ func _on_card_clicked(event: InputEvent, carte_info: FightCards):
 func _on_confirm_play(carte_info):
 	var music = AudioStreamPlayer.new() # un peu de musique ou quoi????
 	music.stream = preload("res://music/rot.wav")
+	add_child(music)
 	music.play()
 	
 	apply_card_effect(carte_info) 
