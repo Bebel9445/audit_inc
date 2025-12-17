@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ci6284mim63qb"]
+[gd_scene load_steps=7 format=3 uid="uid://ci6284mim63qb"]
 
 [ext_resource type="PackedScene" uid="uid://bqspirjqpmj3d" path="res://scenes/ui/dialogue_box.tscn" id="1_ik0t7"]
 [ext_resource type="Script" uid="uid://c7rbe5ddbd12r" path="res://scripts/combat_manager.gd" id="1_ofoda"]
 [ext_resource type="Script" uid="uid://belgi76t7hh3w" path="res://scripts/skills_box.gd" id="3_a2e2y"]
 [ext_resource type="PackedScene" uid="uid://du3ie6k23cb33" path="res://scenes/main_hand_manager.tscn" id="3_m17q1"]
 [ext_resource type="Texture2D" uid="uid://6bd2tukkotj3" path="res://assets/backgroundFight.png" id="5_m2d54"]
+[ext_resource type="FontFile" uid="uid://d21dge175n1og" path="res://assets/icons/ByteBounce.ttf" id="6_ikfks"]
 
 [node name="CombatScene" type="Node2D"]
 script = ExtResource("1_ofoda")
@@ -63,10 +64,10 @@ layout_mode = 2
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 1400.0
-offset_top = 600.0
-offset_right = 1400.0
-offset_bottom = 600.0
+offset_left = 1300.0
+offset_top = 700.0
+offset_right = 1302.0
+offset_bottom = 700.0
 grow_horizontal = 1
 grow_vertical = 1
 
@@ -75,6 +76,8 @@ offset_left = 1677.0
 offset_top = 909.0
 offset_right = 1877.0
 offset_bottom = 959.0
+theme_override_fonts/font = ExtResource("6_ikfks")
+theme_override_font_sizes/font_size = 30
 text = "Lancer le Combat"
 
 [node name="ConfirmationAttack" type="ConfirmationDialog" parent="."]
@@ -90,8 +93,10 @@ offset_left = 1677.0
 offset_top = 840.0
 offset_right = 1877.0
 offset_bottom = 890.0
+theme_override_fonts/font = ExtResource("6_ikfks")
+theme_override_font_sizes/font_size = 30
 text = "Abandonner"
 
-[connection signal="pressed" from="StartCombat" to="." method="_on_start_combat_pressed"]
 [connection signal="pressed" from="StartCombat" to="." method="start_combat"]
+[connection signal="pressed" from="StartCombat" to="." method="_on_start_combat_pressed"]
 [connection signal="pressed" from="GiveUp" to="." method="_on_give_up_pressed"]

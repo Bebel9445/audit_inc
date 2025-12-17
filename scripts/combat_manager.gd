@@ -69,7 +69,7 @@ func _setup_layout():
 	card_inspector = CardInspector.new()
 	add_child(card_inspector)
 	card_inspector.z_index = 100 
-	var inspector_x = reserve_start_x - 50 
+	var inspector_x = reserve_start_x + 200 
 	var inspector_y = margin_top + slot_h + 20 
 	card_inspector.global_position = Vector2(inspector_x, inspector_y)
 	

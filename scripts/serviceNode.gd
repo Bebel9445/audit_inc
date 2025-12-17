@@ -5,7 +5,7 @@ signal combat_requested(service: ServiceNode)
 
 enum ServiceType { ECONOMY, WELLBEING, FINANCE, RH }
 @export var type: ServiceType = ServiceType.ECONOMY
-@export var dialogue_combat_type: FightCards.CardType = FightCards.CardType.ECONOMY
+@export var dialogue_combat_type: FightCards.CardType = FightCards.CardType.LEGAL
 
 const ICON_ECO = preload("res://assets/icons/icon_eco.png")
 const ICON_WELLBEING = preload("res://assets/icons/icon_wellbeing.png")

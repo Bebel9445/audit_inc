@@ -1,48 +1,40 @@
 extends Node2D
+class_name ServiceGraph # J'ai ajouté le class_name pour faciliter le typage si besoin
 
 # Signal global vers le CombatManager
 signal initiate_combat(service: ServiceNode)
+# NOUVEAU SIGNAL : Victoire totale
+signal all_nodes_secured 
 
 @export_category("Configuration Graphique")
 @export var service_scene : PackedScene = preload("res://scenes/ui/service_node.tscn")
 @export var background_texture : Texture2D = preload("res://assets/background.png")
 
 @export_group("Ajustement du Graphe")
-# Permet de décaler le centre du graphe (ex: Vector2(0, 50) pour le descendre)
 @export var graph_center_offset : Vector2 = Vector2(0,40) 
-# Permet de réduire/agrandir l'ellipse pour qu'elle rentre dans ta "fenêtre" (0.8 = 80% de la taille standard)
 @export_range(0.1, 2.0) var graph_scale : float = 0.7
 
 var services := [] 
 
 func _ready():
-	# On attend une frame pour être sûr que la taille de l'écran est correcte
 	call_deferred("create_graph")
 
 func create_graph():
 	randomize()
 	
-	# Nettoyage
 	for child in get_children():
 		child.queue_free()
 	services.clear()
 
-	# Creation du fond
 	create_background()
 
-	# Config
 	var total_services = randi_range(4, 6)
 	var viewport_size = get_viewport_rect().size
-	
-	# Calcul du centre
 	var center_screen = (viewport_size / 2) + graph_center_offset
 	
-	# calcul de l'espace (formation en ellipse)
-	# On applique le multiplicateur 'graph_scale' pour réduire/agrandir l'écartement
 	var radius_x = (viewport_size.x * 0.42) * graph_scale
 	var radius_y = (viewport_size.y * 0.35) * graph_scale
 	
-	# Création des noeuds
 	for i in range(total_services):
 		var s_instance = service_scene.instantiate()
 		var s : ServiceNode = s_instance as ServiceNode
@@ -52,12 +44,10 @@ func create_graph():
 		s.name = "Service %d" % i
 		s.nameService = "Pole %d" % (i + 1)
 		
-		# Stats aléatoires
 		s.state = get_random_state()
 		s.size = randi_range(1, 3) 
 		s.type = randi() % 4
 		
-		# positionnement moment
 		var angle_step = TAU / total_services
 		var base_angle = (angle_step * i) - (PI / 2)
 		
@@ -69,7 +59,6 @@ func create_graph():
 		
 		s.position = center_screen + Vector2(x_pos, y_pos)
 		
-		# Connexion des signaux ects
 		s.connect("combat_requested", Callable(self, "_on_service_clicked"))
 		
 		if s.has_signal("mouse_entered"):
@@ -85,7 +74,6 @@ func create_graph():
 		services.append(s)
 		s.update_visual() 
 	
-	# --- 5. CRÉATION DES LIENS ---
 	for i in range(total_services):
 		services[i].add_link(services[(i+1) % total_services])
 		if randf() < 0.25:
@@ -97,27 +85,21 @@ func create_graph():
 
 func create_background():
 	var bg
-	
 	if background_texture:
 		bg = TextureRect.new()
 		bg.texture = background_texture
-		# EXPAND_IGNORE_SIZE permet de redimensionner l'image arbitrairement
 		bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		# STRETCH_SCALE va étirer l'image pour qu'elle remplisse exactement l'écran 
 		bg.stretch_mode = TextureRect.STRETCH_SCALE 
 	else:
 		bg = ColorRect.new()
 		bg.color = Color(0.106, 0.247, 0.250, 0.8) 
 	
-	# On utilise les ancres pour que ça colle parfaitement à tout l'écran
 	bg.anchor_right = 1
 	bg.anchor_bottom = 1
 	bg.size = get_viewport_rect().size
 	bg.position = Vector2.ZERO
-	
 	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE 
 	bg.z_index = -100 
-	
 	add_child(bg)
 
 func update_links_visual():
@@ -165,34 +147,42 @@ func execute_turn():
 	if state_changed:
 		print("Des états ont changé.")
 
-
+# --- NOUVELLE LOGIQUE CENTRALISÉE ---
 func mark_node_as_secured(service_node: ServiceNode):
-	# Le noeud devient bleu
+	# 1. Le noeud devient bleu
 	service_node.set_completed()
 
-	# Influence sur les voisins
+	# 2. Influence sur les voisins
 	for neighbor in service_node.links:
-		neighbor.reduce_difficulty()
+		if neighbor.has_method("reduce_difficulty"):
+			neighbor.reduce_difficulty()
 		
-	# Met à jour les lignes visuelles si besoin
+	# 3. Met à jour les lignes visuelles
 	update_links_visual()
 	
+	# 4. Vérification de la victoire
+	_check_victory_condition()
+
+func _check_victory_condition():
+	for s in services:
+		# Si un seul service n'est pas bleu, on n'a pas encore gagné
+		if s.state != "blue":
+			return
 	
+	# Si on arrive ici, tout est bleu !
+	emit_signal("all_nodes_secured")
+# ------------------------------------
 
 func get_organization_score() -> int:
 	var score = 0
 	for s in services:
-		# On vérifie que c'est bien un ServiceNode valide
 		if not is_instance_valid(s): continue
-		
 		match s.state:
 			"red":    score -= 10
 			"orange": score -= 5
-			"green":  score += 0 # Neutre
-			"blue":   score += 10 # Positif car sécurisé
-	
+			"green":  score += 0 
+			"blue":   score += 10 
 	return score
-
 
 func get_random_state() -> String:
 	var roll = randf()

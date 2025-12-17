@@ -5,11 +5,11 @@ class_name DeckManager
 # C'EST ICI QUE TU METS TON IMAGE UNIQUE POUR LES CARTES DE COMBAT
 const FRAME_FIGHT_CARD = preload("res://assets/cards/images/defaultfightcards.png") 
 
-# ---  IMAGES DES CADRES (Niveaux) ---
-const FRAME_COMMON = preload("res://assets/cards/SkillCardsCommon.png")  # Niv 1
-const FRAME_RARE   = preload("res://assets/cards/SkillCardsRare.png")    # Niv 2
-const FRAME_EPIC   = preload("res://assets/cards/SkillCardsEpic.png")    # Niv 3
-const FRAME_MYTHIC = preload("res://assets/cards/SkillCardsMythic.png")  # Niv 4
+# Frames pour les SKILLS (si tu veux garder la distinction de rareté pour les skills)
+const FRAME_COMMON = preload("res://assets/cards/SkillCardsCommon.png")
+const FRAME_RARE   = preload("res://assets/cards/SkillCardsRare.png")
+const FRAME_EPIC   = preload("res://assets/cards/SkillCardsEpic.png")
+const FRAME_MYTHIC = preload("res://assets/cards/SkillCardsMythic.png")
 
 # Icones Types
 const ICON_ECO   = preload("res://assets/cards/eco.png")
@@ -90,7 +90,7 @@ func add_skill_reward():
 	)
 	
 	var new_skill = skill_card.new(
-		visual_skill, 1, data.get("nom", ""), 30, card_type, GENERIC_SKILL_SCRIPT
+		visual_skill, 1, data.get("nom", ""), 1, card_type, GENERIC_SKILL_SCRIPT
 	)
 	
 	skill_pile.append(new_skill)

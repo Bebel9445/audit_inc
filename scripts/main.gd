@@ -1,5 +1,4 @@
 extends Node
-# Pas besoin de class_name ici, c'est le root
 
 # --- Gestion du Temps ---
 var current_week: int = 1
@@ -13,7 +12,7 @@ var game_started: bool = false
 @onready var deck_manager = DeckManager.new() 
 @onready var combat_scene = $CombatScene  # Instance de CombatManager
 @onready var service_graph = $ServiceGraph
-@onready var enemy = $Enemy               # Instance de Enemy
+@onready var enemy = $Enemy                # Instance de Enemy
 @onready var hud_label = $HUD/TimeLabel 
 
 # Notre nouvelle UI
@@ -32,7 +31,6 @@ func _ready():
 	game_ui.restart_game_requested.connect(_on_restart_game)
 	
 	# --- ETAPE CRUCIALE : CONNECTION ---
-	# On donne la référence de l'ennemi au CombatManager
 	combat_scene.enemy_ref = enemy 
 	# -----------------------------------
 	
@@ -41,6 +39,10 @@ func _ready():
 	combat_scene.card_played.connect(on_card_effect_applied)
 	enemy.enemy_dead.connect(on_enemy_victory)
 	combat_scene.combat_turn_ended.connect(on_combat_defeat)
+	combat_scene.give_up.connect(on_combat_give_up)
+
+	# NOUVEAU : On connecte le signal de victoire du graphe
+	service_graph.all_nodes_secured.connect(finish_game)
 	
 	# 4. État initial (Caché)
 	$HUD.hide()
@@ -48,7 +50,6 @@ func _ready():
 	combat_scene.hide()
 	enemy.get_node("HealthBar").hide()
 	
-	combat_scene.give_up.connect(on_combat_give_up)
 
 # --- MENU & DÉMARRAGE ---
 func _on_start_game():
@@ -80,7 +81,7 @@ func on_initiate_combat(service: ServiceNode):
 	# Gestion Visibilité
 	service_graph.hide()
 	combat_scene.show()
-	enemy.show() # On affiche l'ennemi
+	enemy.show() 
 	enemy.get_node("HealthBar").show()
 	
 	# Difficulté dynamique (Calcul PV)
@@ -94,12 +95,11 @@ func on_initiate_combat(service: ServiceNode):
 	
 	enemy.setHealthBar(final_hp)
 	
-	# SETUP DU COMBAT MANAGER (Lui va changer l'image de l'ennemi)
+	# SETUP DU COMBAT MANAGER
 	combat_scene.setup_preparation_phase(service.dialogue_combat_type, deck_manager)
 
 # --- EFFETS PENDANT LE COMBAT ---
 func on_card_effect_applied(card: FightCards):
-	# C'est ici qu'on applique les dégâts calculés
 	enemy.take_damage(card.getDamageWithBonus())
 
 # --- VICTOIRE ---
@@ -107,11 +107,10 @@ func on_enemy_victory():
 	if is_combat_resolved: return
 	is_combat_resolved = true
 	
-	# Conséquences sur le graphe
-	current_service_node.set_completed() 
-	for neighbor in current_service_node.links:
-		if neighbor.has_method("reduce_difficulty"):
-			neighbor.reduce_difficulty()
+	# MODIFICATION : On délègue la gestion des conséquences au graphe
+	# C'est ici que le graphe peut émettre "all_nodes_secured" si c'était le dernier
+	if current_service_node:
+		service_graph.mark_node_as_secured(current_service_node)
 	
 	# Récompenses
 	deck_manager.add_reward_card()
@@ -120,7 +119,10 @@ func on_enemy_victory():
 	combat_scene.dialogue_box.show_text("Excellent travail. Dossier sécurisé.")
 	await combat_scene.dialogue_box.dialogue_finished
 	
-	end_week_sequence()
+	# Important : Si le jeu s'est terminé pendant le dialogue (via le signal), 
+	# game_started sera false, donc on ne relance pas la semaine suivante.
+	if game_started:
+		end_week_sequence()
 
 # --- DEFAITE (FIN DU TOUR / TEMPS) ---
 func on_combat_defeat():
@@ -132,18 +134,19 @@ func on_combat_defeat():
 	combat_scene.dialogue_box.show_text("Temps écoulé. On fera mieux la prochaine fois.")
 	await combat_scene.dialogue_box.dialogue_finished
 	
-	end_week_sequence()
+	if game_started:
+		end_week_sequence()
 
 func on_combat_give_up():
 	if is_combat_resolved: return
 	is_combat_resolved = true
 	
-	# Pas de changement graphe, petite récompense
 	deck_manager.add_reward_card() 
 	
-	combat_scene.dialogue_box.show_text("Temps écoulé. On fera mieux la prochaine fois.")
-
-	end_week_sequence()
+	combat_scene.dialogue_box.show_text("Abandon. On se replie.")
+	
+	if game_started:
+		end_week_sequence()
 
 func end_week_sequence():
 	# Nettoyage main visuelle
@@ -152,7 +155,7 @@ func end_week_sequence():
 		main_hand_node.remove_child(c)
 		
 	combat_scene.hide()
-	enemy.hide() # On cache l'ennemi
+	enemy.hide() 
 	
 	current_week += 1
 	
@@ -164,6 +167,9 @@ func end_week_sequence():
 
 func finish_game():
 	print("Fin de partie !")
+	# On bloque le jeu pour ne pas que end_week_sequence continue
+	game_started = false 
+	
 	$HUD.hide()
 	service_graph.hide()
 	combat_scene.hide()

@@ -2,7 +2,7 @@
 	"pnj": {
 		"0" : {
 			"Majda" : "res://assets/pnj/majda.png",
-			"Mainguy" : "res://mainguy.png"
+			"Mainguy" : "res://assets/mainguy.png"
 		},
 		"1" : {
 			"Roy" : "res://assets/pnj/roy.png",
