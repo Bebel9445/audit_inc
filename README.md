@@ -19,20 +19,25 @@ Pour plus d'informations, merci de consulter le [wiki](./doc/WIKI.md).
 
 ### Installation
 
+Pour jouer, rendez-vous dans la section **Déploiement > Releases** (ou "Version" dans le menu de gauche) de ce dépôt GitLab pour télécharger les fichiers de la dernière version.
+
 #### Windows :
 
-- Cliquez sur [ce lien](https://example.com) pour télécharger l'installeur
-- Double-cliquez dessus et suivez les instruction
-- Cliquez sur l'icone sur votre bureau
+1.  Téléchargez l'installateur Windows (fichier `.exe`, ex: `Installateur_AuditInc.exe`).
+2.  Double-cliquez sur le fichier pour lancer l'assistant d'installation.
+3.  Suivez les instructions à l'écran.
+4.  Une fois terminé, lancez le jeu via le raccourci créé sur votre Bureau ou dans le menu Démarrer.
 
 #### Linux :
 
-
-- Ouvrez un terminal bash
-- Clonez le repo (téléchargez le .zip, faites `git clone git@git.unistra.fr:MET25-T4-B/t4.git` si vous avez votre ssh de configuré ou `git clone https://git.unistra.fr/MET25-T4-B/t4.git`)
-- Allez dans le dossier **build**
-- Faites les commandes suivantes :
-```
-chmod u+x ./build/linux/AuditInc
-./build/linux/AuditInc
-```
+1.  Téléchargez l'archive `.zip` pour Linux.
+2.  Décompressez l'archive dans le dossier de votre choix.
+3.  Ouvrez un terminal dans ce dossier.
+4.  Donnez les droits d'exécution au fichier binaire (remplacez le nom si nécessaire) :
+    ```bash
+    chmod +x AuditInc.x86_64
+    ```
+5.  Lancez le jeu :
+    ```bash
+    ./AuditInc.x86_64
+    ```
