@@ -23,7 +23,7 @@ var is_combat_resolved: bool = false
 func _ready():
 	add_child(deck_manager)
 	game_ui = GameUI.new()
-	add_child(game_ui)
+	add_child(game_ui) 
 	game_ui.start_game_requested.connect(_on_start_game)
 	game_ui.restart_game_requested.connect(_on_restart_game)
 	game_ui.credits_requested.connect(_print_credits)
@@ -71,6 +71,8 @@ func _on_restart_game():
 
 func on_initiate_combat(service: ServiceNode):
 	if not game_started: return
+	$Music.stop()
+	$MusicCombat.play()
 	is_combat_resolved = false
 	current_service_node = service
 	
@@ -145,7 +147,7 @@ func on_enemy_victory():
 			combat_scene.dialogue_box.show_text("- Compétence acquise : " + s.getCompetence())
 			await combat_scene.dialogue_box.dialogue_finished
 	
-	$Music.play()
+
 	if game_started: end_week_sequence(1)
 
 # --- DEFAITE (ÉCHÉANCE DÉPASSÉE) ---
@@ -196,9 +198,19 @@ func on_combat_give_up():
 	if game_started: end_week_sequence(2)
 
 func end_week_sequence(weeks_to_add: int = 1):
+	# 1. On coupe la musique de combat
+	$MusicCombat.stop()
+
+	# 2. On relance la musique du bureau (Graphe)
+	if not $Music.playing:
+		$Music.play()
+	
 	var main_hand_node = combat_scene.get_node("MainHand")
-	for c in main_hand_node.get_children():
-		main_hand_node.remove_child(c)
+	
+	# --- LA CORRECTION EST ICI ---
+	# Au lieu de supprimer tous les enfants comme un barbare :
+	main_hand_node.clear_hand()
+	# -----------------------------
 		
 	combat_scene.hide()
 	enemy.hide() 

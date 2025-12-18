@@ -31,7 +31,6 @@ var card_inspector: CardInspector
 
 func _ready():
 	_load_json_data()
-	
 	if start_button:
 		if not start_button.is_connected("pressed", Callable(self, "_on_start_combat_pressed")):
 			start_button.connect("pressed", Callable(self, "_on_start_combat_pressed"))
