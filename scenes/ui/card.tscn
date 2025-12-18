@@ -1,6 +1,21 @@
 [gd_scene load_steps=2 format=3 uid="uid://rdm73kf57451"]
 
-[ext_resource type="Script" uid="uid://cprc8g07wqimh" path="res://scripts/card.gd" id="1_2rkeb"]
+[sub_resource type="GDScript" id="GDScript_xlc1h"]
+script/source = "extends Area2D
+
+
+func _ready():
+	var img = load(\"res://icon.svg\")
+	var carte = FightCardsObject.new(\"test\", 0, \"Le test a fonctionné gros ;)\", 0, img)
+	add_child(carte)
+	
+	#var carte = ObjetCarteCombat.new(\"test\", 0, \"Le test a fonctionné gros ;)\", 0, img)
+	#add_child(carte)
+	#
+	#var info = CarteDeCombat.new(carte, 3, 10, 10)
+	#print(info.getNiveau())
+	
+"
 
 [node name="Card" type="Area2D"]
-script = ExtResource("1_2rkeb")
+script = SubResource("GDScript_xlc1h")

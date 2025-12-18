@@ -4,15 +4,17 @@ class_name CardInspector
 # --- POLICE PIXEL ART ---
 const FONT_PIXEL = preload("res://assets/icons/ByteBounce.ttf")
 
+# --- COMPOSANTS UI ---
 var title_label: Label
+var level_label: Label
 var desc_label: Label
 var stats_label: Label
 var texture_rect: TextureRect
 
 func _init():
-	# Configuration UI 
+	# --- CONFIGURATION STYLE ---
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	custom_minimum_size = Vector2(250, 400) 
+	custom_minimum_size = Vector2(250, 450) 
 	
 	var sb = StyleBoxFlat.new()
 	sb.bg_color = Color(0.1, 0.1, 0.1, 0.95)
@@ -25,12 +27,11 @@ func _init():
 	sb.corner_radius_top_right = 10
 	sb.corner_radius_bottom_left = 10
 	sb.corner_radius_bottom_right = 10
-	# Désactive l'anti-aliasing pour pixel art
 	sb.anti_aliasing = false 
 	add_theme_stylebox_override("panel", sb)
 	
 	var vbox = VBoxContainer.new()
-	vbox.add_theme_constant_override("separation", 15)
+	vbox.add_theme_constant_override("separation", 10)
 	
 	var margin = MarginContainer.new()
 	margin.add_theme_constant_override("margin_left", 20)
@@ -40,63 +41,80 @@ func _init():
 	add_child(margin)
 	margin.add_child(vbox)
 	
-	# Titre
+	# 1. Titre
 	title_label = Label.new()
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title_label.add_theme_color_override("font_color", Color(1, 0.8, 0.2)) 
-	# STYLE PIXEL
 	title_label.add_theme_font_override("font", FONT_PIXEL)
-	title_label.add_theme_font_size_override("font_size", 48) # Très gros titre
+	title_label.add_theme_font_size_override("font_size", 48) 
 	vbox.add_child(title_label)
 	
-	# Image
+	# 2. Niveau
+	level_label = Label.new()
+	level_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	level_label.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7)) 
+	level_label.add_theme_font_override("font", FONT_PIXEL)
+	level_label.add_theme_font_size_override("font_size", 32)
+	vbox.add_child(level_label)
+	
+	# 3. Image
 	texture_rect = TextureRect.new()
 	texture_rect.custom_minimum_size = Vector2(0, 150)
 	texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	vbox.add_child(texture_rect)
 	
-	# Stats
+	# 4. Stats (Dégâts)
 	stats_label = Label.new()
 	stats_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	# STYLE PIXEL
 	stats_label.add_theme_font_override("font", FONT_PIXEL)
 	stats_label.add_theme_font_size_override("font_size", 32)
 	vbox.add_child(stats_label)
 	
-	# Description
+	# 5. Description
 	desc_label = Label.new()
 	desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	desc_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	desc_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	# STYLE PIXEL
 	desc_label.add_theme_font_override("font", FONT_PIXEL)
-	desc_label.add_theme_font_size_override("font_size", 32) # Très lisible
+	desc_label.add_theme_font_size_override("font_size", 32) 
 	vbox.add_child(desc_label)
 	
 	hide()
 
+## Affiche les données de la carte survolée dans l'inspecteur.
+## Met à jour les textes et la couleur des dégâts (Rouge/Vert).
 func show_card(card_data: FightCards):
 	if card_data == null: 
 		hide()
 		return
 		
 	show()
-	title_label.text = card_data.getName()
 	
+	# Textes de base
+	title_label.text = card_data.getName()
+	level_label.text = "Niveau " + str(card_data.getLvl()) 
+	desc_label.text = card_data.getDescription() 
+	
+	# Image
 	if card_data.getImage():
 		texture_rect.texture = card_data.getImage()
 		texture_rect.show()
 	else:
 		texture_rect.hide()
 		
-	var dmg_text = "Degats : " + str(card_data.getDamageWithBonus())
+	# --- CALCUL ET AFFICHAGE DES DÉGÂTS ---
+	var final_damage = card_data.getDamageWithBonus()
+	var dmg_text = ""
+	
 	if card_data.haveBonus():
-		stats_label.modulate = Color.GREEN
-		dmg_text += " (OK !)"
+		# BONUS ACTIF : Texte Vert
+		stats_label.modulate = Color(0.2, 1.0, 0.2) 
+		dmg_text = "Degats : " + str(final_damage) + "\n(Bonus Actif)"
 	else:
-		stats_label.modulate = Color(1, 0.4, 0.4) 
-		dmg_text += " (Malus)"
+		# MALUS : Texte Rouge + Division par 2
+		final_damage = int(final_damage * 0.5)
+		stats_label.modulate = Color(1.0, 0.4, 0.4) 
+		dmg_text = "Degats : " + str(final_damage) + "\n(MALUS -50%)"
 		
 	stats_label.text = dmg_text
-	desc_label.text = card_data.getDescription()
