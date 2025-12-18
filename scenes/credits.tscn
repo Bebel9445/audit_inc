@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://ba3soiobldo4q"]
+[gd_scene load_steps=3 format=3 uid="uid://c4pu6qbkenesa"]
 
 [ext_resource type="Script" uid="uid://25quyd4hxqc3" path="res://scripts/credits.gd" id="1_0bpdh"]
 [ext_resource type="AudioStream" uid="uid://b4cw3pryiq0n0" path="res://music/OUGA BOUGA.wav" id="2_2ckv8"]

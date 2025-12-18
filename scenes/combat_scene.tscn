@@ -74,6 +74,7 @@ grow_vertical = 1
 mouse_filter = 2
 
 [node name="NextButton" type="Button" parent="MainHand"]
+layout_mode = 0
 offset_left = 330.0
 offset_top = 168.0
 offset_right = 430.0
@@ -83,6 +84,7 @@ theme_override_font_sizes/font_size = 45
 text = ">"
 
 [node name="PrevButton" type="Button" parent="MainHand"]
+layout_mode = 0
 offset_left = -439.0
 offset_top = 170.0
 offset_right = -339.0

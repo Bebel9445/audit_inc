@@ -20,51 +20,42 @@ var hover_spread := 30
 var animation_speed := 0.15
 var hovered_card: FightCardsObject = null
 
-# --- BOUTONS (Référence directe) ---
+# --- BOUTONS ---
 @onready var btn_prev: BaseButton = $PrevButton
 @onready var btn_next: BaseButton = $NextButton
 
-# --- INITIALISATION ---
-
 func _ready():
-	# 1. Connexion des signaux
 	if btn_prev:
 		btn_prev.pressed.connect(func(): change_page(-1))
 		btn_prev.z_index = 200 
-	else:
-		push_error("MainHand: 'PrevButton' introuvable !")
-
 	if btn_next:
 		btn_next.pressed.connect(func(): change_page(1))
 		btn_next.z_index = 200
-	else:
-		push_error("MainHand: 'NextButton' introuvable !")
 
 # --- GESTION DU DECK ---
 
-## Fonction clé pour vider la main sans tuer les boutons
 func clear_hand():
-	# 1. On vide les listes logiques et visuelles
+	# 1. On vide les listes
 	visible_cards_objects.clear()
 	all_cards_logic.clear()
 	
-	# 2. On supprime les noeuds enfants SAUF les boutons
+	# 2. On retire les enfants de l'arbre SANS LES DÉTRUIRE
 	for child in get_children():
+		# On ne touche pas aux boutons
 		if child == btn_prev or child == btn_next:
 			continue
 		
-		remove_child(child)
-		child.queue_free()
+		# --- CORRECTION ICI ---
+		# On utilise remove_child() pour ranger la carte dans l'inventaire
+		# MAIS ON NE FAIT PAS queue_free(), sinon elle meurt pour toujours !
+		remove_child(child) 
+		# ----------------------
 	
-	# 3. Reset pagination
 	current_page_index = 0
 	_update_buttons_state()
 
 func load_full_deck(deck: Array[FightCards]):
-	# On utilise notre fonction sécurisée d'abord
 	clear_hand()
-	
-	# Ensuite on charge
 	all_cards_logic = deck.duplicate() 
 	current_page_index = 0
 	_refresh_display()
@@ -72,7 +63,6 @@ func load_full_deck(deck: Array[FightCards]):
 func remove_card_logic(card_logic: FightCards):
 	if all_cards_logic.has(card_logic):
 		all_cards_logic.erase(card_logic)
-		# Gestion des pages vides
 		if current_page_index > 0:
 			var total_pages = ceil(float(all_cards_logic.size()) / float(CARDS_PER_PAGE))
 			if current_page_index >= total_pages:
@@ -94,7 +84,7 @@ func change_page(direction: int):
 # --- AFFICHAGE ---
 
 func _refresh_display():
-	# On retire visuellement les cartes actuelles
+	# Pour l'affichage courant, on retire juste les enfants pour les réorganiser
 	for c in visible_cards_objects:
 		if c and c.get_parent() == self: 
 			remove_child(c)
@@ -108,7 +98,6 @@ func _refresh_display():
 	var start_idx = current_page_index * CARDS_PER_PAGE
 	var end_idx = min(start_idx + CARDS_PER_PAGE, all_cards_logic.size())
 	
-	# Instanciation
 	for i in range(start_idx, end_idx):
 		var logic = all_cards_logic[i]
 		_instantiate_visual_card(logic)
@@ -118,25 +107,26 @@ func _refresh_display():
 
 func _instantiate_visual_card(logic: FightCards):
 	var visual = logic._carte
-	if not visual: return
 	
-	# --- TAILLE FIXE ---
+	# Petite sécurité supplémentaire : si la carte visuelle a disparu (bug), on ne crash pas
+	if not is_instance_valid(visual): 
+		push_warning("Carte visuelle invalide ou détruite pour : " + logic.getName())
+		return
+	
 	var fixed_size = Vector2(220, 340)
 	visual.custom_minimum_size = fixed_size
 	visual.size = fixed_size
 	visual.set_anchors_preset(Control.PRESET_TOP_LEFT)
 	
-	# --- NOM ---
 	if logic.getName() != "":
 		visual.name = logic.getName().validate_node_name()
 	
-	# --- GESTION PARENTÉ ---
 	if visual.get_parent(): visual.get_parent().remove_child(visual)
 	
 	add_child(visual)
 	visible_cards_objects.append(visual)
 	
-	# --- CONNEXIONS ---
+	# Reconnexion propre des signaux
 	if visual.is_connected("mouse_entered", Callable(self, "_on_card_mouse_enter")):
 		visual.disconnect("mouse_entered", Callable(self, "_on_card_mouse_enter"))
 	if visual.is_connected("mouse_exited", Callable(self, "_on_card_mouse_exit")):
@@ -152,7 +142,6 @@ func _update_buttons_state():
 	if btn_prev:
 		btn_prev.disabled = (current_page_index == 0)
 		btn_prev.modulate.a = 0.5 if btn_prev.disabled else 1.0
-		
 	if btn_next:
 		var max_page = 0
 		if all_cards_logic.size() > 0:
@@ -161,7 +150,7 @@ func _update_buttons_state():
 		btn_next.modulate.a = 0.5 if btn_next.disabled else 1.0
 
 # --- EVENTS SOURIS ---
-
+# (Reste inchangé, copie le bloc précédent si besoin)
 func _on_card_gui_input(event: InputEvent, card_logic: FightCards):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		emit_signal("card_clicked", card_logic)
@@ -190,17 +179,11 @@ func _update_positions(instantly := false):
 		if not is_instance_valid(card): continue
 		
 		var t := (i - (count - 1) / 2.0)
-		
-		# Position X
 		var target_x := start_x + i * spacing - (card.size.x / 2)
-		
-		# Position Y (Arc de cercle)
 		var target_y = -abs(t) * abs(t) * 2 + arc_height + 40
-		
 		var target_rot = deg_to_rad(t * 5)
 		var target_scale := 1.0
 
-		# Gestion du survol
 		if card == hovered_card:
 			target_y -= hover_raise
 			target_scale = hover_scale
@@ -216,7 +199,6 @@ func _update_positions(instantly := false):
 		else:
 			card.z_index = i
 
-		# Application
 		if instantly:
 			card.position = Vector2(target_x, target_y)
 			card.rotation = target_rot

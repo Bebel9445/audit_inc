@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ci6284mim63qb" path="res://scenes/combat_scene.tscn" id="2_rvslj"]
 [ext_resource type="PackedScene" uid="uid://dpfxc7xyxcfdx" path="res://scenes/enemy.tscn" id="4_rarhs"]
 [ext_resource type="AudioStream" uid="uid://dnwwpe0ecj5l4" path="res://music/feels-good-beig-bad-instrumental-261571.mp3" id="5_c01mt"]
-[ext_resource type="PackedScene" uid="uid://ba3soiobldo4q" path="res://scenes/credits.tscn" id="6_c01mt"]
+[ext_resource type="PackedScene" uid="uid://c4pu6qbkenesa" path="res://scenes/credits.tscn" id="6_c01mt"]
 [ext_resource type="AudioStream" uid="uid://b66u1552mly4l" path="res://music/fight.mp3" id="7_nxtc6"]
 
 [node name="Main" type="Node"]
