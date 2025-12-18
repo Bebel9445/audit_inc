@@ -2,7 +2,7 @@ extends MarginContainer
 class_name object_skill_card
 
 # --- CONSTANTES & RESSOURCES ---
-const FONT_PIXEL = preload("res://assets/icons/ByteBounce.ttf")
+const FONT_PIXEL = preload("res://assets/fonts/ByteBounce.ttf")
 const BASE_SIZE = Vector2(75, 128) # Taille de référence interne pour l'art
 
 # --- VARIABLES ---
