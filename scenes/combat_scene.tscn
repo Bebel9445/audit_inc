@@ -119,6 +119,16 @@ theme_override_fonts/font = ExtResource("6_ikfks")
 theme_override_font_sizes/font_size = 30
 text = "Abandonner"
 
+[node name="PopupSkillCards" type="Button" parent="."]
+offset_left = 1029.0
+offset_top = 391.0
+offset_right = 1363.0
+offset_bottom = 498.0
+theme_override_fonts/font = ExtResource("6_ikfks")
+theme_override_font_sizes/font_size = 45
+text = "afficher l'inventaire"
+
 [connection signal="pressed" from="StartCombat" to="." method="start_combat"]
 [connection signal="pressed" from="StartCombat" to="." method="_on_start_combat_pressed"]
 [connection signal="pressed" from="GiveUp" to="." method="_on_give_up_pressed"]
+[connection signal="pressed" from="PopupSkillCards" to="." method="popup_skill_cards"]

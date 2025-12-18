@@ -28,7 +28,8 @@ const JSON_PATH = "res://data/pnj.json"
 @onready var start_button = $StartCombat
 @onready var give_up_button = $GiveUp
 @onready var main_hand = $MainHand
-@onready var confirm_popup = $ConfirmationAttack 
+@onready var confirm_popup = $ConfirmationAttack
+@onready var popup_skill_cards_scene = preload("res://scenes/skill_cards_popup.tscn").instantiate()
 
 # --- BOUTONS PAGINATION ---
 @onready var btn_prev = $MainHand/PrevButton
@@ -44,7 +45,10 @@ var card_inspector: CardInspector # Fenêtre d'info au survol
 func _ready():
 	_load_json_data()
 	
-	# Connexion Bouton Start
+	add_child(popup_skill_cards_scene)
+	popup_skill_cards_scene.on_close.connect(close_popup_skill_cards)
+	
+	# Connexion sécurisée du bouton start
 	if start_button:
 		if not start_button.is_connected("pressed", Callable(self, "_on_start_combat_pressed")):
 			start_button.connect("pressed", Callable(self, "_on_start_combat_pressed"))
@@ -139,6 +143,7 @@ func setup_preparation_phase(type_id: int, deck_manager_ref: DeckManager):
 	# Affichage de l'interface de préparation
 	start_button.show()
 	card_zone2.show()
+	$PopupSkillCards.show()
 	slot_zone.get_parent().show()
 
 	# Nettoyage des slots (on retire les cartes précédentes)
@@ -162,7 +167,8 @@ func _on_start_combat_pressed():
 	
 	# On cache l'interface de prépa
 	start_button.hide()
-	card_zone2.hide()
+	card_zone2.hide() # On cache la réserve de skills
+	$PopupSkillCards.hide()
 	
 	update_hand_efficiency() # Calcul initial des bonus
 	combat_start.emit()
@@ -170,7 +176,30 @@ func _on_start_combat_pressed():
 func _on_give_up_pressed():
 	give_up.emit()
 
-## Recalcule l'efficacité des cartes en main selon les compétences dans les slots.
+func popup_skill_cards():
+	start_button.hide()
+	var cards: Array[object_skill_card]
+	var card_zone = card_zone2.get_node("SkillsBox")
+	for card in card_zone.get_children():
+		if card is object_skill_card:
+			cards.append(card)
+	popup_skill_cards_scene.open(cards)
+
+func close_popup_skill_cards(cards: Array[object_skill_card]):
+	start_button.show()
+	var card_zone = card_zone2.get_node("SkillsBox")
+	for card in cards:
+		if card is not object_skill_card:
+			continue
+		if card.get_parent(): card.get_parent().remove_child(card)
+		card.custom_minimum_size = Vector2(180, 310)
+		card_zone.add_child(card)
+		card.position = Vector2.ZERO
+
+# --- CŒUR DU GAMEPLAY : SYNERGIES ---
+
+## Vérifie les synergies entre les Skills équipés (Slots) et les Cartes Action (Main).
+## Met à jour visuellement les cartes (Vert = Bonus, Rouge = Malus).
 func update_hand_efficiency():
 	var active_skills: Array[skill_card] = []
 	
