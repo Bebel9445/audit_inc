@@ -7,7 +7,7 @@ signal on_close(Array)
 @onready var title := $Panel/VBoxContainer/TitleAndClose/Title
 
 # --- POLICE PIXEL ART ---
-const FONT_PIXEL = preload("res://assets/icons/ByteBounce.ttf")
+const FONT_PIXEL = preload("res://assets/fonts/ByteBounce.ttf")
 
 func _ready():
 	# La popup est cachée par défaut

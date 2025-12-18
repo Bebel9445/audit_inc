@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bl3tfbafcnu1m"
-path="res://.godot/imported/PointingAFinger.jpg-07387ffe398fb81af5165a2d5c4ae4bf.ctex"
+uid="uid://cke33jmjnhsse"
+path="res://.godot/imported/logochargement.jpg-f5df9f786917722a7cd0346ee9cff5d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/PointingAFinger.jpg"
-dest_files=["res://.godot/imported/PointingAFinger.jpg-07387ffe398fb81af5165a2d5c4ae4bf.ctex"]
+source_file="res://assets/icons/logochargement.jpg"
+dest_files=["res://.godot/imported/logochargement.jpg-f5df9f786917722a7cd0346ee9cff5d9.ctex"]
 
 [params]
 

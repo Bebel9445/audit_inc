@@ -241,12 +241,7 @@ func _on_card_clicked_signal(carte_info: FightCards):
 
 ## Joue la carte une fois confirmée.
 func _on_confirm_play(carte_info):
-	# Son
-	var music = AudioStreamPlayer.new() 
-	music.stream = preload("res://music/rot.wav")
-	add_child(music)
-	music.play()
-	
+
 	apply_card_effect(carte_info) 
 	card_played.emit(carte_info)
 	current_deck_ref.discard(carte_info) # Défausse logique
