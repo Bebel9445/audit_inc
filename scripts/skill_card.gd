@@ -177,7 +177,7 @@ func _get_drag_data(_position):
 func _can_drop_data(_position, donnee):
 	if donnee == null or donnee == self: return false
 	
-	if donnee.nom_competence == nom_competence && donnee._niveau == _niveau:
+	if donnee.nom_competence == nom_competence && donnee._niveau == _niveau && _niveau != 4:
 		panel.add_theme_stylebox_override("panel", surlignement_possible)
 		return true
 	else:
