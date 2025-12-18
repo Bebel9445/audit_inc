@@ -1,7 +1,15 @@
 extends PanelContainer
 class_name CardInspector
 
-# --- POLICE PIXEL ART ---
+# ==============================================================================
+# INSPECTEUR DE CARTE (Tooltip Géant)
+# ==============================================================================
+# Rôle : Affiche les détails complets d'une carte au survol de la souris.
+# - Affiche Nom, Niveau, Image, Description.
+# - Affiche les dégâts en temps réel (Vert/Rouge selon bonus).
+# ==============================================================================
+
+# --- RESSOURCES ---
 const FONT_PIXEL = preload("res://assets/fonts/ByteBounce.ttf")
 
 # --- COMPOSANTS UI ---
@@ -13,9 +21,10 @@ var texture_rect: TextureRect
 
 func _init():
 	# --- CONFIGURATION STYLE ---
-	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	mouse_filter = Control.MOUSE_FILTER_IGNORE # Ne bloque pas les clics
 	custom_minimum_size = Vector2(250, 450) 
 	
+	# Style du panneau (Fond sombre, bordures blanches)
 	var sb = StyleBoxFlat.new()
 	sb.bg_color = Color(0.1, 0.1, 0.1, 0.95)
 	sb.border_color = Color(1, 1, 1, 0.5)
@@ -30,9 +39,11 @@ func _init():
 	sb.anti_aliasing = false 
 	add_theme_stylebox_override("panel", sb)
 	
+	# Structure Verticale
 	var vbox = VBoxContainer.new()
 	vbox.add_theme_constant_override("separation", 10)
 	
+	# Marges internes
 	var margin = MarginContainer.new()
 	margin.add_theme_constant_override("margin_left", 20)
 	margin.add_theme_constant_override("margin_right", 20)
@@ -41,7 +52,9 @@ func _init():
 	add_child(margin)
 	margin.add_child(vbox)
 	
-	# 1. Titre
+	# --- CREATION DES ELEMENTS ---
+	
+	# 1. Titre (Jaune)
 	title_label = Label.new()
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title_label.add_theme_color_override("font_color", Color(1, 0.8, 0.2)) 
@@ -49,7 +62,7 @@ func _init():
 	title_label.add_theme_font_size_override("font_size", 48) 
 	vbox.add_child(title_label)
 	
-	# 2. Niveau
+	# 2. Niveau (Gris)
 	level_label = Label.new()
 	level_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	level_label.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7)) 
@@ -64,14 +77,14 @@ func _init():
 	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	vbox.add_child(texture_rect)
 	
-	# 4. Stats (Dégâts)
+	# 4. Stats / Dégâts (Vert ou Rouge)
 	stats_label = Label.new()
 	stats_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	stats_label.add_theme_font_override("font", FONT_PIXEL)
 	stats_label.add_theme_font_size_override("font_size", 32)
 	vbox.add_child(stats_label)
 	
-	# 5. Description
+	# 5. Description (Blanc)
 	desc_label = Label.new()
 	desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	desc_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -80,7 +93,7 @@ func _init():
 	desc_label.add_theme_font_size_override("font_size", 32) 
 	vbox.add_child(desc_label)
 	
-	hide()
+	hide() # Caché par défaut
 
 ## Affiche les données de la carte survolée dans l'inspecteur.
 ## Met à jour les textes et la couleur des dégâts (Rouge/Vert).
@@ -103,7 +116,7 @@ func show_card(card_data: FightCards):
 	else:
 		texture_rect.hide()
 		
-	# --- CALCUL ET AFFICHAGE DES DÉGÂTS ---
+	# --- CALCUL ET AFFICHAGE DYNAMIQUE DES DÉGÂTS ---
 	var final_damage = card_data.getDamageWithBonus()
 	var dmg_text = ""
 	
@@ -112,7 +125,7 @@ func show_card(card_data: FightCards):
 		stats_label.modulate = Color(0.2, 1.0, 0.2) 
 		dmg_text = "Degats : " + str(final_damage) + "\n(Bonus Actif)"
 	else:
-		# MALUS : Texte Rouge + Division par 2
+		# MALUS : Texte Rouge + Division par 2 affichée
 		final_damage = int(final_damage * 0.5)
 		stats_label.modulate = Color(1.0, 0.4, 0.4) 
 		dmg_text = "Degats : " + str(final_damage) + "\n(MALUS -50%)"

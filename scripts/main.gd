@@ -1,6 +1,15 @@
 extends Node
 class_name Main
 
+# ==============================================================================
+# CLASSE PRINCIPALE DU JEU (Main)
+# ==============================================================================
+# Rôle : Chef d'orchestre global.
+# - Gère le cycle de vie du jeu (Début, Semaines, Fin).
+# - Connecte tous les systèmes entre eux (Combat, Graphe, UI, Deck).
+# - Gère la musique et les transitions d'écran.
+# ==============================================================================
+
 # --- GESTION DU TEMPS ---
 var current_week: int = 1
 const MAX_WEEKS: int = 16
@@ -94,7 +103,7 @@ func on_initiate_combat(service: ServiceNode):
 	var multiplier: float = 1.0
 	match service.state:
 		"red":    multiplier = 1.45 
-		"orange": multiplier = 1.1
+		"orange": multiplier = 1.25
 		"green":  multiplier = 0.65 
 	
 	var final_hp = int(total_hp * multiplier) + randi_range(-5, 5)
@@ -212,8 +221,7 @@ func end_week_sequence(weeks_to_add: int = 1):
 	
 	var main_hand_node = combat_scene.get_node("MainHand")
 	
-	# --- LA CORRECTION EST ICI ---
-	# Au lieu de supprimer tous les enfants comme un barbare :
+
 	main_hand_node.clear_hand()
 	# -----------------------------
 		

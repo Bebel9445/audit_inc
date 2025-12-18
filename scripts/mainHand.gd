@@ -1,6 +1,10 @@
 extends Control
 class_name MainHand
 
+# ==============================================================================
+# GESTIONNAIRE DE LA MAIN (MainHand) - VERSION CORRIGÉE
+# ==============================================================================
+
 # --- SIGNAUX ---
 signal card_hovered(card_data)
 signal card_clicked(card_data)
@@ -10,11 +14,14 @@ var all_cards_logic: Array[FightCards] = []
 var current_page_index: int = 0
 const CARDS_PER_PAGE: int = 5
 
+# --- MEMOIRE DES BONUS ---
+var active_skills_cache: Array[skill_card] = []
+
 # --- VISUEL ---
 var visible_cards_objects: Array[FightCardsObject] = []
 var spacing := 100        
-var arc_height := 25     
-var hover_raise := 40    
+var arc_height := 25      
+var hover_raise := 40     
 var hover_scale := 1.2 
 var hover_spread := 30  
 var animation_speed := 0.15
@@ -35,21 +42,13 @@ func _ready():
 # --- GESTION DU DECK ---
 
 func clear_hand():
-	# 1. On vide les listes
 	visible_cards_objects.clear()
 	all_cards_logic.clear()
 	
-	# 2. On retire les enfants de l'arbre SANS LES DÉTRUIRE
 	for child in get_children():
-		# On ne touche pas aux boutons
 		if child == btn_prev or child == btn_next:
 			continue
-		
-		# --- CORRECTION ICI ---
-		# On utilise remove_child() pour ranger la carte dans l'inventaire
-		# MAIS ON NE FAIT PAS queue_free(), sinon elle meurt pour toujours !
 		remove_child(child) 
-		# ----------------------
 	
 	current_page_index = 0
 	_update_buttons_state()
@@ -58,6 +57,10 @@ func load_full_deck(deck: Array[FightCards]):
 	clear_hand()
 	all_cards_logic = deck.duplicate() 
 	current_page_index = 0
+	
+	# Reset complet des bonus au chargement
+	update_bonuses_from_skills([]) 
+	
 	_refresh_display()
 
 func remove_card_logic(card_logic: FightCards):
@@ -68,6 +71,25 @@ func remove_card_logic(card_logic: FightCards):
 			if current_page_index >= total_pages:
 				current_page_index = max(0, int(total_pages) - 1)
 		_refresh_display()
+
+# --- GESTION CENTRALE DES BONUS (CORRIGÉE) ---
+
+## Cette fonction est appelée par CombatManager quand les slots changent.
+func update_bonuses_from_skills(active_skills: Array[skill_card]):
+	# 1. Sauvegarde pour les changements de page
+	active_skills_cache = active_skills
+	
+	# 2. Mise à jour LOGIQUE de TOUTES les cartes (sur toutes les pages)
+	for card in all_cards_logic:
+		# C'est ici que la donnée "haveBonus" est mise à jour en interne
+		card.calculate_efficiency(active_skills)
+		
+	# 3. Mise à jour VISUELLE des cartes actuellement affichées
+	for visuel in visible_cards_objects:
+		if visuel.has_method("update_visual_state"):
+			visuel.update_visual_state()
+
+# --- NAVIGATION ---
 
 func change_page(direction: int):
 	var new_index = current_page_index + direction
@@ -84,7 +106,6 @@ func change_page(direction: int):
 # --- AFFICHAGE ---
 
 func _refresh_display():
-	# Pour l'affichage courant, on retire juste les enfants pour les réorganiser
 	for c in visible_cards_objects:
 		if c and c.get_parent() == self: 
 			remove_child(c)
@@ -100,6 +121,13 @@ func _refresh_display():
 	
 	for i in range(start_idx, end_idx):
 		var logic = all_cards_logic[i]
+		
+		# --- SECURITE SUPPLEMENTAIRE ---
+		# Avant d'instancier, on s'assure que la logique est à jour avec le cache
+		if not active_skills_cache.is_empty():
+			logic.calculate_efficiency(active_skills_cache)
+		# -------------------------------
+			
 		_instantiate_visual_card(logic)
 	
 	_update_buttons_state()
@@ -107,11 +135,12 @@ func _refresh_display():
 
 func _instantiate_visual_card(logic: FightCards):
 	var visual = logic._carte
+	if not is_instance_valid(visual): return
 	
-	# Petite sécurité supplémentaire : si la carte visuelle a disparu (bug), on ne crash pas
-	if not is_instance_valid(visual): 
-		push_warning("Carte visuelle invalide ou détruite pour : " + logic.getName())
-		return
+	# --- APPLICATION IMMEDIATE DU BONUS ---
+	# On force le calcul AVANT de l'ajouter à l'arbre
+	if not active_skills_cache.is_empty():
+		logic.calculate_efficiency(active_skills_cache)
 	
 	var fixed_size = Vector2(220, 340)
 	visual.custom_minimum_size = fixed_size
@@ -126,7 +155,13 @@ func _instantiate_visual_card(logic: FightCards):
 	add_child(visual)
 	visible_cards_objects.append(visual)
 	
-	# Reconnexion propre des signaux
+	# --- MISE A JOUR VISUELLE FORCEE ---
+	# Maintenant que la carte est dans l'arbre, on force l'update visuel (couleur)
+	if visual.has_method("update_visual_state"):
+		visual.update_visual_state()
+	# -----------------------------------
+	
+	# Connexions
 	if visual.is_connected("mouse_entered", Callable(self, "_on_card_mouse_enter")):
 		visual.disconnect("mouse_entered", Callable(self, "_on_card_mouse_enter"))
 	if visual.is_connected("mouse_exited", Callable(self, "_on_card_mouse_exit")):
@@ -150,7 +185,7 @@ func _update_buttons_state():
 		btn_next.modulate.a = 0.5 if btn_next.disabled else 1.0
 
 # --- EVENTS SOURIS ---
-# (Reste inchangé, copie le bloc précédent si besoin)
+
 func _on_card_gui_input(event: InputEvent, card_logic: FightCards):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		emit_signal("card_clicked", card_logic)
