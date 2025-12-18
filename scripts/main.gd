@@ -93,11 +93,16 @@ func on_initiate_combat(service: ServiceNode):
 	
 	var multiplier: float = 1.0
 	match service.state:
-		"red":    multiplier = 1.35 
-		"orange": multiplier = 1.0 
+		"red":    multiplier = 1.45 
+		"orange": multiplier = 1.1
 		"green":  multiplier = 0.65 
 	
 	var final_hp = int(total_hp * multiplier) + randi_range(-5, 5)
+
+	var max_hp_cap = 750
+	if final_hp > max_hp_cap:
+		final_hp = max_hp_cap
+		
 	if final_hp < 50: final_hp = 50
 	
 	# IMMERSION : On parle de "Charge de travail"
