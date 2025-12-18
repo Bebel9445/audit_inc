@@ -150,8 +150,13 @@ func text_print():
 	make_label("Lien pour ajouter Jean en ami sur Clash royale :", 45, default_color)
 	make_label("https://link.clashroyale.com/invite/friend/fr?tag=RYRR090PR&token=6hk6ye8g&platform=android", 45, Color.SKY_BLUE)
 	
+	make_space(80)
+	
 	make_rich_label(45, "[center]Grosse pensée à [color=yellow]la rivière de pisse[/color] qui nous à accompagner durant tout le projet[/center]")
 	make_image("res://assets/cards/RiverOfPiss.png")
+	
+	make_space(100)
+	make_label("Merci!", 100, Color.SPRING_GREEN)
 	
 	make_space(1000)
 	make_label("Grau Caka", 100, Color.BROWN)

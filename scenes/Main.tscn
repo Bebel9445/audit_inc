@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ci6284mim63qb" path="res://scenes/combat_scene.tscn" id="2_rvslj"]
 [ext_resource type="PackedScene" uid="uid://dpfxc7xyxcfdx" path="res://scenes/enemy.tscn" id="4_rarhs"]
 [ext_resource type="AudioStream" uid="uid://cimqju7h5grnw" path="res://music/yamete.wav" id="5_vcsgt"]
-[ext_resource type="PackedScene" path="res://scenes/credits.tscn" id="6_c01mt"]
+[ext_resource type="PackedScene" uid="uid://c4pu6qbkenesa" path="res://scenes/credits.tscn" id="6_c01mt"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0bbpv")
