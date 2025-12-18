@@ -97,6 +97,6 @@ theme_override_fonts/font = ExtResource("6_ikfks")
 theme_override_font_sizes/font_size = 30
 text = "Abandonner"
 
-[connection signal="pressed" from="StartCombat" to="." method="_on_start_combat_pressed"]
 [connection signal="pressed" from="StartCombat" to="." method="start_combat"]
+[connection signal="pressed" from="StartCombat" to="." method="_on_start_combat_pressed"]
 [connection signal="pressed" from="GiveUp" to="." method="_on_give_up_pressed"]
