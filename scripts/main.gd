@@ -31,6 +31,8 @@ func _ready():
 	game_ui.restart_game_requested.connect(_on_restart_game)
 	game_ui.credits_requested.connect(_print_credits)
 	
+	$Credits.end_credit.connect(_end_credit)
+	
 	# --- ETAPE CRUCIALE : CONNECTION ---
 	combat_scene.enemy_ref = enemy 
 	# -----------------------------------
@@ -55,7 +57,12 @@ func _ready():
 # --- CREDITS ---
 func _print_credits():
 	game_ui.main_menu.hide()
-	$Cerdits.show()
+	$Credits.show()
+	$Credits.start_credit()
+
+func _end_credit():
+	$Credits.hide()
+	game_ui.main_menu.show()
 
 # --- MENU & DÉMARRAGE ---
 func _on_start_game():

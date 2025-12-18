@@ -26,5 +26,5 @@ offset_bottom = 23.0
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_vcsgt")
 
-[node name="Cerdits" parent="." instance=ExtResource("6_c01mt")]
+[node name="Credits" parent="." instance=ExtResource("6_c01mt")]
 visible = false
