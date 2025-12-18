@@ -116,7 +116,7 @@ func _create_main_menu():
 	
 	# TEXTE D'INTRO
 	var intro = Label.new()
-	intro.text = "Vous etes un auditeur junior.\n\nVotre mission : Acquérir de l'experience et\nassainir cette organisation en auditant différents poles,     en 16 semaines.\n\nAttention : Chaque semaine compte."
+	intro.text = "Vous etes un auditeur junior.\n\nVotre mission : Acquérir de l'experience et\nassainir cette organisation en auditant différents poles, en 16 semaines.\n\nAttention : Chaque semaine compte."
 	intro.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	intro.add_theme_font_override("font", FONT_PIXEL)
 	intro.add_theme_font_size_override("font_size", 32) 

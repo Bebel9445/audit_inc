@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://r2hmrg3iqa17"
-valid=false
+uid="uid://ejkuytxgyr7o"
+path="res://.godot/imported/logojeu.jpg-586ef9f3594a4cba1f6b6afe2eeea79f.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://assets/icons/PointingAFinger.png"
+source_file="res://assets/icons/logojeu.jpg"
+dest_files=["res://.godot/imported/logojeu.jpg-586ef9f3594a4cba1f6b6afe2eeea79f.ctex"]
 
 [params]
 

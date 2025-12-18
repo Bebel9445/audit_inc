@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://du3ie6k23cb33" path="res://scenes/main_hand_manager.tscn" id="3_m17q1"]
 [ext_resource type="Texture2D" uid="uid://6bd2tukkotj3" path="res://assets/backgroundFight.png" id="5_m2d54"]
 [ext_resource type="FontFile" uid="uid://bef6ci33eek74" path="res://assets/fonts/ByteBounce.ttf" id="6_0vylu"]
-[ext_resource type="FontFile" uid="uid://d21dge175n1og" path="res://assets/icons/ByteBounce.ttf" id="6_ikfks"]
+[ext_resource type="FontFile" uid="uid://bef6ci33eek74" path="res://assets/fonts/ByteBounce.ttf" id="6_ikfks"]
 
 [node name="CombatScene" type="Node2D"]
 script = ExtResource("1_ofoda")

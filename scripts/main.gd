@@ -102,8 +102,8 @@ func on_initiate_combat(service: ServiceNode):
 	
 	var multiplier: float = 1.0
 	match service.state:
-		"red":    multiplier = 1.45 
-		"orange": multiplier = 1.25
+		"red":    multiplier = 1.85
+		"orange": multiplier = 1.45
 		"green":  multiplier = 0.65 
 	
 	var final_hp = int(total_hp * multiplier) + randi_range(-5, 5)
