@@ -16,8 +16,8 @@ signal combat_turn_ended
 signal give_up
 
 # --- RESSOURCES ---
-const FONT_PIXEL = preload("res://assets/icons/ByteBounce.ttf")
-const JSON_PATH = "res://Data/pnj.json"
+const FONT_PIXEL = preload("res://assets/fonts/ByteBounce.ttf")
+const JSON_PATH = "res://data/pnj.json"
 
 # --- RÉFÉRENCES SCÈNE (UI & LOGIQUE) ---
 @onready var card_zone2 = $CardZone2

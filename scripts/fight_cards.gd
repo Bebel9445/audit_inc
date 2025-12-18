@@ -2,7 +2,7 @@ class_name FightCardsObject
 extends MarginContainer
 
 # --- RESSOURCES ---
-const FONT_PIXEL = preload("res://assets/icons/ByteBounce.ttf")
+const FONT_PIXEL = preload("res://assets/fonts/ByteBounce.ttf")
 
 # --- VARIABLES ---
 

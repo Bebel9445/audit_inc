@@ -2,7 +2,7 @@ extends Node
 class_name DeckManager
 
 # --- RESSOURCES GRAPHIQUES ---
-const FRAME_FIGHT_CARD = preload("res://assets/cards/images/defaultfightcards.png") 
+const FRAME_FIGHT_CARD = preload("res://assets/cards/defaultfightcards.png") 
 
 const FRAME_COMMON = preload("res://assets/cards/SkillCardsCommon.png")
 const FRAME_RARE   = preload("res://assets/cards/SkillCardsRare.png")
@@ -16,8 +16,8 @@ const ICON_COMM   = preload("res://assets/cards/comm.png")
 const FALLBACK_IMAGE = "res://icon.svg"
 
 # --- CHEMINS DE DONNÉES ---
-const COMBAT_JSON_PATH = "res://Data/combat.json"
-const SKILL_JSON_PATH = "res://Data/competence.json"
+const COMBAT_JSON_PATH = "res://data/combat.json"
+const SKILL_JSON_PATH = "res://data/competence.json"
 ## Script attaché aux cartes d'attaque générées.
 const GENERIC_ATTACK_SCRIPT = "res://scripts/effects/generic_attack.gd"
 ## Script attaché aux compétences générées.

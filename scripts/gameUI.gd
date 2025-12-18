@@ -13,7 +13,7 @@ signal restart_game_requested
 signal credits_requested
 
 # --- RESSOURCES ---
-const FONT_PIXEL = preload("res://assets/icons/ByteBounce.ttf")
+const FONT_PIXEL = preload("res://assets/fonts/ByteBounce.ttf")
 
 # --- COMPOSANTS UI ---
 var main_menu: Control

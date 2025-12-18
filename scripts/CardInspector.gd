@@ -2,7 +2,7 @@ extends PanelContainer
 class_name CardInspector
 
 # --- POLICE PIXEL ART ---
-const FONT_PIXEL = preload("res://assets/icons/ByteBounce.ttf")
+const FONT_PIXEL = preload("res://assets/fonts/ByteBounce.ttf")
 
 # --- COMPOSANTS UI ---
 var title_label: Label

@@ -14,8 +14,8 @@ signal end_credit
 # Vitesse de défilement des crédits (en pixels par frame)
 
 # --- POLICE PIXEL ART ---
-const FONT_PIXEL = preload("res://assets/icons/ByteBounce.ttf")
 # Police pixel art utilisée pour tous les textes des crédits
+const FONT_PIXEL = preload("res://assets/fonts/ByteBounce.ttf")
 
 func _ready() -> void:
 	# Fonction appelée lorsque la scène est prête
