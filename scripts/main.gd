@@ -1,84 +1,65 @@
 extends Node
+class_name Main
 
-# --- Gestion du Temps ---
+# --- GESTION DU TEMPS ---
 var current_week: int = 1
 const MAX_WEEKS: int = 16
 
-# --- Scoring ---
+# --- SCORING ---
 var initial_score: int = 0
 var game_started: bool = false
 
-# --- Références ---
+# --- RÉFÉRENCES ---
 @onready var deck_manager = DeckManager.new() 
-@onready var combat_scene = $CombatScene  # Instance de CombatManager
+@onready var combat_scene = $CombatScene 
 @onready var service_graph = $ServiceGraph
-@onready var enemy = $Enemy                # Instance de Enemy
+@onready var enemy = $Enemy 
 @onready var hud_label = $HUD/TimeLabel 
 
-# Notre nouvelle UI
 var game_ui: GameUI
 var current_service_node: ServiceNode = null
 var is_combat_resolved: bool = false
 
 func _ready():
-	# 1. Gestionnaire de Deck
 	add_child(deck_manager)
-	
-	# 2. Instanciation de l'UI
 	game_ui = GameUI.new()
 	add_child(game_ui)
 	game_ui.start_game_requested.connect(_on_start_game)
 	game_ui.restart_game_requested.connect(_on_restart_game)
 	game_ui.credits_requested.connect(_print_credits)
-	
-	# --- ETAPE CRUCIALE : CONNECTION ---
 	combat_scene.enemy_ref = enemy 
-	# -----------------------------------
 	
-	# 3. Connexions des signaux
 	service_graph.initiate_combat.connect(on_initiate_combat)
 	combat_scene.card_played.connect(on_card_effect_applied)
 	enemy.enemy_dead.connect(on_enemy_victory)
 	combat_scene.combat_turn_ended.connect(on_combat_defeat)
 	combat_scene.give_up.connect(on_combat_give_up)
-
-	# NOUVEAU : On connecte le signal de victoire du graphe
 	service_graph.all_nodes_secured.connect(finish_game)
 	
-	# 4. État initial (Caché)
 	$HUD.hide()
 	service_graph.hide()
 	combat_scene.hide()
 	enemy.get_node("HealthBar").hide()
-	
 
-# --- CREDITS ---
 func _print_credits():
 	game_ui.main_menu.hide()
 	$Cerdits.show()
 
-# --- MENU & DÉMARRAGE ---
 func _on_start_game():
 	$Music.play()
-	
 	game_ui.main_menu.hide()
 	$HUD.show()
 	service_graph.show()
-	
 	await get_tree().process_frame
 	initial_score = service_graph.get_organization_score()
-	print("Score Initial : ", initial_score)
-	
 	game_started = true
 	update_time_display()
 
 func _on_restart_game():
 	get_tree().reload_current_scene()
 
-# --- BOUCLE DE JEU : LANCEMENT DU COMBAT ---
 func on_initiate_combat(service: ServiceNode):
 	if not game_started: return
-	
 	is_combat_resolved = false
 	current_service_node = service
 	
@@ -86,88 +67,131 @@ func on_initiate_combat(service: ServiceNode):
 		finish_game()
 		return
 
-	# Gestion Visibilité
 	service_graph.hide()
 	combat_scene.show()
 	enemy.show() 
 	enemy.get_node("HealthBar").show()
 	
-	# Difficulté dynamique (Calcul PV)
-	var base_hp = service.size * 50 
+	# --- EQUILIBRAGE DOUX ---
+	var base_difficulty = 70 
+	var weekly_scaling = (current_week - 1) * 40  
+	var size_scaling = service.size * 40    
+	var total_hp = base_difficulty + weekly_scaling + size_scaling
+	
 	var multiplier: float = 1.0
 	match service.state:
-		"red":    multiplier = 1.3 
-		"orange": multiplier = 1.0
-		"green":  multiplier = 0.8
-	var final_hp = int(base_hp * multiplier) + randi_range(-5, 5)
+		"red":    multiplier = 1.35 
+		"orange": multiplier = 1.0 
+		"green":  multiplier = 0.65 
+	
+	var final_hp = int(total_hp * multiplier) + randi_range(-5, 5)
+	if final_hp < 50: final_hp = 50
+	
+	# IMMERSION : On parle de "Charge de travail"
+	print("--- MISSION D'AUDIT ---")
+	print("Semaine : ", current_week, " | Complexité : ", service.state)
+	print("Charge de travail estimée (PV) : ", final_hp)
+	print("-----------------------")
 	
 	enemy.setHealthBar(final_hp)
 	
-	# SETUP DU COMBAT MANAGER
 	combat_scene.setup_preparation_phase(service.dialogue_combat_type, deck_manager)
 
-# --- EFFETS PENDANT LE COMBAT ---
 func on_card_effect_applied(card: FightCards):
-	enemy.take_damage(card.getDamageWithBonus())
+	var final_damage = card.getDamageWithBonus()
+	if not card.haveBonus():
+		final_damage = int(final_damage * 0.5)
+	enemy.take_damage(final_damage)
 
-# --- VICTOIRE ---
+# --- VICTOIRE (MISSION RÉUSSIE) ---
 func on_enemy_victory():
 	if is_combat_resolved: return
 	is_combat_resolved = true
 	
-	# MODIFICATION : On délègue la gestion des conséquences au graphe
-	# C'est ici que le graphe peut émettre "all_nodes_secured" si c'était le dernier
 	if current_service_node:
 		service_graph.mark_node_as_secured(current_service_node)
 	
-	# Récompenses
-	deck_manager.add_reward_card()
-	deck_manager.add_skill_reward()
+	var new_card = deck_manager.add_reward_card()
+	var skills_gagnes = []
+	for i in range(3):
+		var s = deck_manager.add_skill_reward()
+		if s: skills_gagnes.append(s)
 	
-	combat_scene.dialogue_box.show_text("Excellent travail. Dossier sécurisé.")
+	# IMMERSION : Vocabulaire de validation
+	combat_scene.dialogue_box.show_text("Audit clôturé sans réserve. Le dossier est classé.")
 	await combat_scene.dialogue_box.dialogue_finished
 	
-	$Music.play()
-
-	if game_started:
-		end_week_sequence()
-
+	if new_card:
+		# IMMERSION : On recrute du staff
+		combat_scene.dialogue_box.show_text("Nouvelle carte d'auditeur obtenu : '" + new_card.getName())
+		await combat_scene.dialogue_box.dialogue_finished
 	
+	if skills_gagnes.size() > 0:
+		# IMMERSION : REX (Retour d'Expérience)
+		combat_scene.dialogue_box.show_text("Retour d'Expérience, : " + str(skills_gagnes.size()) + " méthodes validées.")
+		await combat_scene.dialogue_box.dialogue_finished
+		for s in skills_gagnes:
+			combat_scene.dialogue_box.show_text("- Compétence acquise : " + s.getCompetence())
+			await combat_scene.dialogue_box.dialogue_finished
+	
+	$Music.play()
+	if game_started: end_week_sequence(1)
 
-# --- DEFAITE (FIN DU TOUR / TEMPS) ---
+# --- DEFAITE (ÉCHÉANCE DÉPASSÉE) ---
 func on_combat_defeat():
 	if is_combat_resolved: return
 	is_combat_resolved = true
 	
-	deck_manager.add_reward_card() 
+	var skills_gagnes = []
+	for i in range(2):
+		var s = deck_manager.add_skill_reward()
+		if s: skills_gagnes.append(s)
 	
-	combat_scene.dialogue_box.show_text("Temps écoulé. On fera mieux la prochaine fois.")
+	# IMMERSION : On a manqué de temps
+	combat_scene.dialogue_box.show_text("Échéance dépassée. Le rapport n'est pas prêt à temps.")
 	await combat_scene.dialogue_box.dialogue_finished
-	
-	if game_started:
-		end_week_sequence()
 
+	if skills_gagnes.size() > 0:
+		# IMMERSION : Formation corrective
+		combat_scene.dialogue_box.show_text("Formation corrective imposée, de nouvelles compétences ont été acquéries : " + str(skills_gagnes.size()) + " mises à niveau.")
+		await combat_scene.dialogue_box.dialogue_finished
+		for s in skills_gagnes:
+			combat_scene.dialogue_box.show_text("- Méthode révisée : " + s.getCompetence())
+			await combat_scene.dialogue_box.dialogue_finished
+	
+	if game_started: end_week_sequence(1) 
+
+# --- ABANDON (REPORT DE MISSION) ---
 func on_combat_give_up():
 	if is_combat_resolved: return
 	is_combat_resolved = true
 	
-	deck_manager.add_reward_card() 
+	var skills_gagnes = []
+	for i in range(2):
+		var s = deck_manager.add_skill_reward()
+		if s: skills_gagnes.append(s)
 	
-	combat_scene.dialogue_box.show_text("Abandon. On se replie.")
+	# IMMERSION : Le joueur décide d'arrêter
+	combat_scene.dialogue_box.show_text("Mission reportée. Pénalités de retard appliquées (2 semaines).")
+	await combat_scene.dialogue_box.dialogue_finished
 	
-	if game_started:
-		end_week_sequence()
+	if skills_gagnes.size() > 0:
+		combat_scene.dialogue_box.show_text("Analyse de l'échec : " + str(skills_gagnes.size()) + " points d'amélioration identifiés.")
+		await combat_scene.dialogue_box.dialogue_finished
+		for s in skills_gagnes:
+			combat_scene.dialogue_box.show_text("- Compétence théorique obtenu : " + s.getCompetence())
+			await combat_scene.dialogue_box.dialogue_finished
+	
+	if game_started: end_week_sequence(2)
 
-func end_week_sequence():
-	# Nettoyage main visuelle
+func end_week_sequence(weeks_to_add: int = 1):
 	var main_hand_node = combat_scene.get_node("MainHand")
 	for c in main_hand_node.get_children():
 		main_hand_node.remove_child(c)
 		
 	combat_scene.hide()
 	enemy.hide() 
-	
-	current_week += 1
+	current_week += weeks_to_add
 	
 	if current_week > MAX_WEEKS:
 		finish_game()
@@ -176,15 +200,12 @@ func end_week_sequence():
 		update_time_display()
 
 func finish_game():
-	print("Fin de partie !")
-	# On bloque le jeu pour ne pas que end_week_sequence continue
+	print("Fin de l'exercice comptable !")
 	game_started = false 
-	
 	$HUD.hide()
 	service_graph.hide()
 	combat_scene.hide()
 	enemy.hide()
-	
 	var final_score = service_graph.get_organization_score()
 	game_ui.show_end_screen(initial_score, final_score)
 

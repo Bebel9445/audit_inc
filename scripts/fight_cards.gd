@@ -5,28 +5,36 @@ extends MarginContainer
 const FONT_PIXEL = preload("res://assets/icons/ByteBounce.ttf")
 
 # --- VARIABLES ---
-var assigned_class: FightCards
+
+## Référence vers la logique métier de la carte.
+var assigned_class: FightCards 
+
+## Label affichant les dégâts (change de couleur selon le bonus).
 var labelState: Label
+
 var texte: String
 var damage: int
 
-# On passe la texture de fond (bg_texture) directement dans le constructeur
-func _init(nom: String, level: int, texte_desc: String, degats: int, char_image: Texture2D, bg_texture: Texture2D):
+# --- INITIALISATION UI ---
+
+## Constructeur : Crée toute la hiérarchie de nœuds par code (VBox, HBox, Labels...).
+func _init(nom: String, level: int, texte_desc: String, degats: int, _char_image: Texture2D, bg_texture: Texture2D):
 	name = nom
 	texte = texte_desc
+	damage = degats 
 	
-	# --- CONFIGURATION DE LA CARTE ---
+	# Configuration de base
 	custom_minimum_size = Vector2(200, 280) 
 	size = Vector2(300, 380)
-	pivot_offset = Vector2(100, 140) 
+	pivot_offset = Vector2(100, 140) # Pour que la rotation se fasse au centre
 
-	# Marges internes
+	# Marges internes pour ne pas coller au bord
 	add_theme_constant_override("margin_left", 12)
 	add_theme_constant_override("margin_top", 12)
 	add_theme_constant_override("margin_right", 12)
 	add_theme_constant_override("margin_bottom", 12)
 	
-	# --- 1. LE FOND (Toujours en premier) ---
+	# 1. LE FOND (Background)
 	var bg_rect := TextureRect.new()
 	bg_rect.texture = bg_texture
 	bg_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -36,17 +44,15 @@ func _init(nom: String, level: int, texte_desc: String, degats: int, char_image:
 	bg_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE 
 	add_child(bg_rect)
 
-	# --- 2. CONTENEUR PRINCIPAL ---
-	# Il va contenir : Le Header (Haut) et une Zone Centrale (Milieu)
+	# 2. CONTENEUR VERTICAL PRINCIPAL
 	var main_vbox := VBoxContainer.new()
 	main_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	main_vbox.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	main_vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	# On ajoute un peu d'espace entre les éléments
 	main_vbox.add_theme_constant_override("separation", 10) 
 	add_child(main_vbox) 
 	
-	# --- A. HEADER (Nom + Level) ---
+	# A. EN-TÊTE (Nom + Niveau)
 	var hbox_header := HBoxContainer.new()
 	hbox_header.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	hbox_header.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
@@ -69,19 +75,17 @@ func _init(nom: String, level: int, texte_desc: String, degats: int, char_image:
 	labelLvl.add_theme_constant_override("outline_size", 4)
 	hbox_header.add_child(labelLvl)
 
-	# --- B. ZONE CENTRALE (Dégâts + Description) ---
-	# Cette VBox va prendre toute la place restante et centrer son contenu
+	# B. CORPS (Dégâts + Description)
 	var center_vbox := VBoxContainer.new()
 	center_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	center_vbox.size_flags_vertical = Control.SIZE_EXPAND_FILL # Prend toute la hauteur dispo
-	center_vbox.alignment = BoxContainer.ALIGNMENT_CENTER      # Centre le contenu verticalement
+	center_vbox.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	center_vbox.alignment = BoxContainer.ALIGNMENT_CENTER      
 	center_vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	main_vbox.add_child(center_vbox)
 
-	# 1. Label Dégâts
+	# Label Dégâts Dynamique
 	labelState = Label.new()
 	labelState.text = "Degats : " + str(degats)
-	damage = degats
 	labelState.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	labelState.add_theme_font_override("font", FONT_PIXEL)
 	labelState.add_theme_font_size_override("font_size", 32)
@@ -89,30 +93,45 @@ func _init(nom: String, level: int, texte_desc: String, degats: int, char_image:
 	labelState.add_theme_constant_override("outline_size", 8)
 	center_vbox.add_child(labelState)
 
-	# 2. Label Description
+	# Label Description
 	var labelDesc := Label.new()
-	labelDesc.text = ""
-	
-	# On force une largeur minimale pour que l'autowrap sache quand revenir à la ligne
+	labelDesc.text = "" # Le texte est géré dynamiquement ou via l'inspecteur
 	labelDesc.custom_minimum_size = Vector2(180, 0) 
 	labelDesc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	labelDesc.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	
 	labelDesc.add_theme_font_override("font", FONT_PIXEL)
 	labelDesc.add_theme_font_size_override("font_size", 20)
 	labelDesc.add_theme_color_override("font_outline_color", Color.BLACK)
 	labelDesc.add_theme_constant_override("outline_size", 4)
-	
-	# On s'assure que la couleur est visible (Blanc par défaut)
 	labelDesc.add_theme_color_override("font_color", Color.WHITE) 
-	
 	center_vbox.add_child(labelDesc)
-	
 
+# --- GESTION DE L'ÉTAT VISUEL ---
+
+## Initialise le lien avec la classe logique.
+func setup_card(data: FightCards):
+	assigned_class = data
+	update_visual_state()
+
+## Met à jour la couleur et le texte des dégâts selon si le bonus est actif ou non.
+func update_visual_state():
+	if not assigned_class: return
 	
+	var final_damage = assigned_class.getDamageWithBonus()
+	var has_bonus = assigned_class.haveBonus()
 	
+	if not has_bonus:
+		# MALUS VISUEL : On affiche la valeur réduite et en ROUGE
+		final_damage = int(final_damage * 0.5)
+		labelState.modulate = Color(1.0, 0.4, 0.4) 
+	else:
+		# BONUS VISUEL : On affiche la valeur boostée et en VERT
+		labelState.modulate = Color(0.2, 1.0, 0.2) 
+		
+	labelState.text = "Degats : " + str(final_damage)
+
+## Utilitaire pour récupérer l'image de la carte (pour l'inspecteur).
 func getImage() -> Texture2D:
-	# On cherche l'image du perso (dans la VBox), pas le fond
 	for child in get_children():
 		if child is VBoxContainer:
 			for sub in child.get_children():

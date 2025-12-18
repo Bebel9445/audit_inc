@@ -1,40 +1,81 @@
 extends Node2D
-class_name ServiceGraph # J'ai ajouté le class_name pour faciliter le typage si besoin
+class_name ServiceGraph
 
-# Signal global vers le CombatManager
+# --- SIGNAUX ---
+
+## Signal émis lorsqu'un joueur clique sur un noeud pour lancer un combat.
 signal initiate_combat(service: ServiceNode)
-# NOUVEAU SIGNAL : Victoire totale
+
+## Signal émis lorsque tous les noeuds sont sécurisés (Bleu).
 signal all_nodes_secured 
+
+# --- CONFIGURATION (Export) ---
 
 @export_category("Configuration Graphique")
 @export var service_scene : PackedScene = preload("res://scenes/ui/service_node.tscn")
 @export var background_texture : Texture2D = preload("res://assets/background.png")
 
+## Police utilisée pour les labels des noeuds.
+@export var font_bytebounce : FontFile = preload("res://assets/icons/ByteBounce.ttf") 
+
 @export_group("Ajustement du Graphe")
+## Décalage du centre du graphe par rapport au centre de l'écran.
 @export var graph_center_offset : Vector2 = Vector2(0,40) 
 @export_range(0.1, 2.0) var graph_scale : float = 0.7
 
+## Liste de toutes les instances de ServiceNode actives.
 var services := [] 
 
 func _ready():
+	# On differe la création pour s'assurer que le viewport est prêt
 	call_deferred("create_graph")
 
+# --- GÉNÉRATION PROCÉDURALE ---
+
+## Génère le graphe complet : Noeuds, Couleurs, Positions et Liens.
 func create_graph():
 	randomize()
 	
+	# Nettoyage
 	for child in get_children():
 		child.queue_free()
 	services.clear()
 
 	create_background()
 
+	# Nombre aléatoire de noeuds
 	var total_services = randi_range(4, 6)
+	
+	# --- LOGIQUE DU SAC (BAG SYSTEM) ---
+	# Garantit une distribution équilibrée de la difficulté.
+	var color_bag: Array[String] = []
+	
+	# Règle 1 : Minimum 3 Verts (Facile) pour le farm
+	for i in range(3):
+		color_bag.append("green")
+		
+	# Règle 2 : Maximum 1 Rouge (Boss)
+	color_bag.append("red")
+	
+	# Règle 3 : Le reste en Orange (Normal)
+	while color_bag.size() < total_services:
+		color_bag.append("orange")
+	
+	# Sécurité (Si la configuration change)
+	if color_bag.size() > total_services:
+		color_bag.resize(total_services)
+		
+	# Mélange pour répartir les difficultés
+	color_bag.shuffle()
+	# -----------------------------------
+
+	# Calcul de la géométrie (Cercle)
 	var viewport_size = get_viewport_rect().size
 	var center_screen = (viewport_size / 2) + graph_center_offset
-	
 	var radius_x = (viewport_size.x * 0.42) * graph_scale
 	var radius_y = (viewport_size.y * 0.35) * graph_scale
 	
+	# Instanciation des noeuds
 	for i in range(total_services):
 		var s_instance = service_scene.instantiate()
 		var s : ServiceNode = s_instance as ServiceNode
@@ -42,25 +83,27 @@ func create_graph():
 		if s == null: continue
 
 		s.name = "Service %d" % i
-		s.nameService = "Pole %d" % (i + 1)
 		
-		s.state = get_random_state()
+		# Application de la couleur piochée
+		s.state = color_bag[i] 
+		
 		s.size = randi_range(1, 3) 
-		s.type = randi() % 4
+		s.type = randi() % 4 
 		
+		# Positionnement en cercle avec légère variation aléatoire
 		var angle_step = TAU / total_services
 		var base_angle = (angle_step * i) - (PI / 2)
-		
 		var random_angle = base_angle + randf_range(-0.15, 0.15)
 		var dist_mod = randf_range(0.9, 1.05)
 		
 		var x_pos = cos(random_angle) * radius_x * dist_mod
 		var y_pos = sin(random_angle) * radius_y * dist_mod
-		
 		s.position = center_screen + Vector2(x_pos, y_pos)
 		
+		# Connexion des signaux
 		s.connect("combat_requested", Callable(self, "_on_service_clicked"))
 		
+		# Gestion curseur souris
 		if s.has_signal("mouse_entered"):
 			s.connect("mouse_entered", Callable(self, "_on_service_hover_enter"))
 			s.connect("mouse_exited", Callable(self, "_on_service_hover_exit"))
@@ -72,10 +115,18 @@ func create_graph():
 		
 		add_child(s)
 		services.append(s)
+		
+		if s.label and font_bytebounce:
+			s.label.add_theme_font_override("font", font_bytebounce)
+		
 		s.update_visual() 
 	
+	# Création des liens (Arêtes du graphe)
 	for i in range(total_services):
+		# Lien vers le suivant (Cercle fermé)
 		services[i].add_link(services[(i+1) % total_services])
+		
+		# Lien aléatoire supplémentaire (Croisement) -> 25% de chance
 		if randf() < 0.25:
 			var target_index = (i + 2) % total_services
 			if not services[target_index] in services[i].links:
@@ -83,6 +134,7 @@ func create_graph():
 	
 	update_links_visual()
 
+## Crée ou met à jour le fond d'écran.
 func create_background():
 	var bg
 	if background_texture:
@@ -102,6 +154,7 @@ func create_background():
 	bg.z_index = -100 
 	add_child(bg)
 
+## Dessine les lignes (Line2D) entre les noeuds connectés.
 func update_links_visual():
 	for child in get_children():
 		if child is Line2D:
@@ -114,6 +167,7 @@ func update_links_visual():
 		for neighbor in node_a.links:
 			var node_b = neighbor as ServiceNode
 			
+			# Astuce pour ne pas dessiner deux fois la même ligne (A->B et B->A)
 			var id_1 = node_a.get_instance_id()
 			var id_2 = node_b.get_instance_id()
 			var key = str(min(id_1, id_2)) + "_" + str(max(id_1, id_2))
@@ -126,53 +180,35 @@ func update_links_visual():
 			line.default_color = Color(0.5, 0.5, 0.5, 0.5)
 			line.z_index = -1 
 			
+			# Calcul des points d'attache sur le bord du cercle
 			var p1 = node_a.get_edge_position(node_b.position)
 			var p2 = node_b.get_edge_position(node_a.position)
 			
 			line.points = [p1, p2]
 			add_child(line)
 
-func execute_turn():
-	var next_states = {}
-	for s in services:
-		next_states[s] = s.calculate_next_state()
-	
-	var state_changed = false
-	for s in services:
-		if s.state != next_states[s]:
-			s.state = next_states[s]
-			s.update_visual()
-			state_changed = true
-			
-	if state_changed:
-		print("Des états ont changé.")
+# --- LOGIQUE DE JEU ---
 
-# --- NOUVELLE LOGIQUE CENTRALISÉE ---
+## Applique la réussite d'un noeud (passage au Bleu) et propage l'effet.
 func mark_node_as_secured(service_node: ServiceNode):
-	# 1. Le noeud devient bleu
 	service_node.set_completed()
 
-	# 2. Influence sur les voisins
+	# Réduction de difficulté sur les voisins
 	for neighbor in service_node.links:
 		if neighbor.has_method("reduce_difficulty"):
 			neighbor.reduce_difficulty()
 		
-	# 3. Met à jour les lignes visuelles
 	update_links_visual()
-	
-	# 4. Vérification de la victoire
 	_check_victory_condition()
 
+## Vérifie si tous les noeuds sont Bleus.
 func _check_victory_condition():
 	for s in services:
-		# Si un seul service n'est pas bleu, on n'a pas encore gagné
 		if s.state != "blue":
 			return
-	
-	# Si on arrive ici, tout est bleu !
 	emit_signal("all_nodes_secured")
-# ------------------------------------
 
+## Calcule le score actuel basé sur l'état des noeuds.
 func get_organization_score() -> int:
 	var score = 0
 	for s in services:
@@ -184,11 +220,7 @@ func get_organization_score() -> int:
 			"blue":   score += 10 
 	return score
 
-func get_random_state() -> String:
-	var roll = randf()
-	if roll < 0.5: return "green"
-	elif roll < 0.8: return "orange"
-	else: return "red"
+# --- CALLBACKS UI ---
 
 func _on_service_clicked(service: ServiceNode):
 	Input.set_default_cursor_shape(Input.CURSOR_ARROW)

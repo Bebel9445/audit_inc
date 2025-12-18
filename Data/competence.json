@@ -26,25 +26,25 @@
 	{
 		"type" : 1,
 		"niveau" : 1,
-		"nom" : "jurtypeique",
+		"nom" : "juridique",
 		"image" : "res://jurtypeique1.png"
 	},
 	{
 		"type" : 1,
 		"niveau" : 2,
-		"nom" : "jurtypeique",
+		"nom" : "juridique",
 		"image" : "res://jurtypeique2.png"
 	},
 	{
 		"type" : 1,
 		"niveau" : 3,
-		"nom" : "jurtypeique",
+		"nom" : "juridique",
 		"image" : "res://jurtypeique3.png"
 	},
 	{
 		"type" : 1,
 		"niveau" : 4,
-		"nom" : "jurtypeique",
+		"nom" : "juridique",
 		"image" : "res://jurtypeique4.png"
 	},
 	{
