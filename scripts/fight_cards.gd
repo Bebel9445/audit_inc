@@ -52,7 +52,7 @@ func _init(nom: String, level: int, texte_desc: String, degats: int, _char_image
 	main_vbox.add_theme_constant_override("separation", 10) 
 	add_child(main_vbox) 
 	
-	# A. EN-TÊTE (Nom + Niveau)
+# A. EN-TÊTE (Nom + Niveau)
 	var hbox_header := HBoxContainer.new()
 	hbox_header.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	hbox_header.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
@@ -60,7 +60,17 @@ func _init(nom: String, level: int, texte_desc: String, degats: int, _char_image
 	
 	var labelNom := Label.new()
 	labelNom.text = nom
+	
+	# 1. On lui dit de prendre toute la place DISPONIBLE, mais pas plus
 	labelNom.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	
+	# 2. IMPORTANT : On active le "Trim" (couper avec "...")
+	labelNom.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	
+	# 3. Optionnel mais recommandé : Ajouter une infobulle pour voir le titre entier au survol
+	labelNom.mouse_filter = Control.MOUSE_FILTER_PASS # Nécessaire pour le tooltip
+	labelNom.tooltip_text = nom 
+	
 	labelNom.add_theme_font_override("font", FONT_PIXEL)
 	labelNom.add_theme_font_size_override("font_size", 25) 
 	labelNom.add_theme_color_override("font_outline_color", Color.BLACK)

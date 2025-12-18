@@ -15,16 +15,41 @@ signal credits_requested
 # --- RESSOURCES ---
 const FONT_PIXEL = preload("res://assets/fonts/ByteBounce.ttf")
 
+# REMPLACE CE CHEMIN par le vrai chemin de ta musique (.mp3, .wav ou .ogg)
+const MUSIC_TRACK = preload("res://music/smooth-menu-background-449731.mp3") 
+
 # --- COMPOSANTS UI ---
 var main_menu: Control
 var end_screen: Control
 var score_label: Label
 var result_label: Label
 
+# Composant Audio
+var music_player: AudioStreamPlayer
+
 func _ready():
+	# 1. On construit toute l'interface
 	_create_main_menu()
 	_create_end_screen()
+	
+	# 2. On lance la musique
+	_setup_audio()
+	
+	# 3. On affiche le menu de départ
 	show_main_menu()
+
+## Configure et lance la musique de fond.
+func _setup_audio():
+	music_player = AudioStreamPlayer.new()
+	if MUSIC_TRACK:
+		music_player.stream = MUSIC_TRACK
+		music_player.autoplay = true # Se lance tout seul
+		music_player.volume_db = -10.0 # Réduit un peu le volume (-10 décibels)
+		music_player.bus = "Master"
+	else:
+		push_warning("GameUI: Aucune musique trouvée dans la constante MUSIC_TRACK")
+	
+	add_child(music_player)
 
 ## Affiche le menu principal et cache l'écran de fin.
 func show_main_menu():
@@ -32,7 +57,6 @@ func show_main_menu():
 	end_screen.hide()
 
 ## Affiche l'écran de fin de partie avec le bilan comptable.
-## Calcule la différence entre le score initial et final pour déterminer la victoire.
 func show_end_screen(initial_score: int, final_score: int):
 	main_menu.hide()
 	end_screen.show()
@@ -92,7 +116,7 @@ func _create_main_menu():
 	
 	# TEXTE D'INTRO
 	var intro = Label.new()
-	intro.text = "Vous etes un auditeur junior.\n\nVotre mission : Acquérir de l'experience et\nassainir cette organisation en auditant différents poles,	 en 16 semaines.\n\nAttention : Chaque semaine compte."
+	intro.text = "Vous etes un auditeur junior.\n\nVotre mission : Acquérir de l'experience et\nassainir cette organisation en auditant différents poles,     en 16 semaines.\n\nAttention : Chaque semaine compte."
 	intro.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	intro.add_theme_font_override("font", FONT_PIXEL)
 	intro.add_theme_font_size_override("font_size", 32) 
@@ -110,7 +134,14 @@ func _create_main_menu():
 	btn.add_theme_font_size_override("font_size", 48)
 	btn.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	btn.custom_minimum_size.y = 80
-	btn.pressed.connect(func(): emit_signal("start_game_requested"))
+	
+	# --- MODIFICATION ICI : On coupe la musique puis on lance le jeu ---
+	btn.pressed.connect(func(): 
+		if music_player: music_player.stop()
+		emit_signal("start_game_requested")
+	)
+	# -------------------------------------------------------------------
+	
 	vbox.add_child(btn)
 	
 	# BOUTON CREDITS

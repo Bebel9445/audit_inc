@@ -1,6 +1,15 @@
 extends Node
 class_name Main
 
+# ==============================================================================
+# CLASSE PRINCIPALE DU JEU (Main)
+# ==============================================================================
+# Rôle : Chef d'orchestre global.
+# - Gère le cycle de vie du jeu (Début, Semaines, Fin).
+# - Connecte tous les systèmes entre eux (Combat, Graphe, UI, Deck).
+# - Gère la musique et les transitions d'écran.
+# ==============================================================================
+
 # --- GESTION DU TEMPS ---
 var current_week: int = 1
 const MAX_WEEKS: int = 16
@@ -23,7 +32,7 @@ var is_combat_resolved: bool = false
 func _ready():
 	add_child(deck_manager)
 	game_ui = GameUI.new()
-	add_child(game_ui)
+	add_child(game_ui) 
 	game_ui.start_game_requested.connect(_on_start_game)
 	game_ui.restart_game_requested.connect(_on_restart_game)
 	game_ui.credits_requested.connect(_print_credits)
@@ -71,6 +80,8 @@ func _on_restart_game():
 
 func on_initiate_combat(service: ServiceNode):
 	if not game_started: return
+	$Music.stop()
+	$MusicCombat.play()
 	is_combat_resolved = false
 	current_service_node = service
 	
@@ -91,11 +102,16 @@ func on_initiate_combat(service: ServiceNode):
 	
 	var multiplier: float = 1.0
 	match service.state:
-		"red":    multiplier = 1.35 
-		"orange": multiplier = 1.0 
+		"red":    multiplier = 1.45 
+		"orange": multiplier = 1.25
 		"green":  multiplier = 0.65 
 	
 	var final_hp = int(total_hp * multiplier) + randi_range(-5, 5)
+
+	var max_hp_cap = 750
+	if final_hp > max_hp_cap:
+		final_hp = max_hp_cap
+		
 	if final_hp < 50: final_hp = 50
 	
 	# IMMERSION : On parle de "Charge de travail"
@@ -145,7 +161,7 @@ func on_enemy_victory():
 			combat_scene.dialogue_box.show_text("- Compétence acquise : " + s.getCompetence())
 			await combat_scene.dialogue_box.dialogue_finished
 	
-	$Music.play()
+
 	if game_started: end_week_sequence(1)
 
 # --- DEFAITE (ÉCHÉANCE DÉPASSÉE) ---
@@ -196,9 +212,18 @@ func on_combat_give_up():
 	if game_started: end_week_sequence(2)
 
 func end_week_sequence(weeks_to_add: int = 1):
+	# 1. On coupe la musique de combat
+	$MusicCombat.stop()
+
+	# 2. On relance la musique du bureau (Graphe)
+	if not $Music.playing:
+		$Music.play()
+	
 	var main_hand_node = combat_scene.get_node("MainHand")
-	for c in main_hand_node.get_children():
-		main_hand_node.remove_child(c)
+	
+
+	main_hand_node.clear_hand()
+	# -----------------------------
 		
 	combat_scene.hide()
 	enemy.hide() 

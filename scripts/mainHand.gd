@@ -1,157 +1,244 @@
 extends Control
 class_name MainHand
 
+# ==============================================================================
+# GESTIONNAIRE DE LA MAIN (MainHand) - VERSION CORRIGÉE
+# ==============================================================================
+
 # --- SIGNAUX ---
+signal card_hovered(card_data)
+signal card_clicked(card_data)
 
-## Signal émis quand la souris survole (ou quitte) une carte.
-## Renvoie les DONNÉES logiques (FightCards) de la carte pour l'afficher dans l'inspecteur.
-signal card_hovered(card_data) 
+# --- LOGIQUE ---
+var all_cards_logic: Array[FightCards] = []
+var current_page_index: int = 0
+const CARDS_PER_PAGE: int = 5
 
-# --- CONFIGURATION VISUELLE ---
+# --- MEMOIRE DES BONUS ---
+var active_skills_cache: Array[skill_card] = []
 
-## Liste des objets visuels (FightCardsObject) actuellement en main.
-var cartes: Array[FightCardsObject] = []
-
-## Espace horizontal entre chaque carte (en pixels).
-var spacing := 80        
-
-## Hauteur de l'arc de cercle (plus c'est haut, plus la main est courbée).
-var arc_height := 30     
-
-## De combien de pixels la carte remonte quand on la survole.
-var hover_raise := 60    
-
-## Grossissement de la carte survolée (1.25 = +25%).
-var hover_scale := 1.25  
-
-## Ecartement des cartes voisines quand on en survole une (pour faire de la place).
-var hover_spread := 30   
-
-## Vitesse de l'animation (Lerp). Plus c'est bas (ex: 0.1), plus c'est "mou/fluide".
+# --- VISUEL ---
+var visible_cards_objects: Array[FightCardsObject] = []
+var spacing := 100        
+var arc_height := 25      
+var hover_raise := 40     
+var hover_scale := 1.2 
+var hover_spread := 30  
 var animation_speed := 0.15
-
-## Référence vers la carte actuellement sous la souris.
 var hovered_card: FightCardsObject = null
 
-# --- GESTION DE LA MAIN ---
+# --- BOUTONS ---
+@onready var btn_prev: BaseButton = $PrevButton
+@onready var btn_next: BaseButton = $NextButton
 
-## Vide complètement la main (visuellement et logiquement).
+func _ready():
+	if btn_prev:
+		btn_prev.pressed.connect(func(): change_page(-1))
+		btn_prev.z_index = 200 
+	if btn_next:
+		btn_next.pressed.connect(func(): change_page(1))
+		btn_next.z_index = 200
+
+# --- GESTION DU DECK ---
+
 func clear_hand():
-	cartes.clear()
-	for child in get_children():
-		remove_child(child)
-		child.queue_free() # Important de libérer la mémoire
-
-## Ajoute une carte visuelle à la main et connecte les événements souris.
-func add_card(carte: FightCardsObject):
-	cartes.append(carte)
-	add_child(carte)
-
-	# On connecte les signaux de la carte pour gérer le survol
-	if not carte.is_connected("mouse_entered", Callable(self, "_on_card_mouse_enter")):
-		carte.mouse_entered.connect(_on_card_mouse_enter.bind(carte))
-	if not carte.is_connected("mouse_exited", Callable(self, "_on_card_mouse_exit")):
-		carte.mouse_exited.connect(_on_card_mouse_exit.bind(carte))
-
-	# On force une mise à jour immédiate (true) pour qu'elle apparaisse direct au bon endroit
-	_update_positions(true)
-
-## Retire une carte de la main (ex: quand elle est jouée).
-func remove_card(carte: FightCardsObject):
-	if cartes.has(carte):
-		cartes.erase(carte)
+	visible_cards_objects.clear()
+	all_cards_logic.clear()
 	
-	if carte.get_parent() == self:
-		remove_child(carte)
-		
-	# On réorganise les cartes restantes
-	_update_positions(true)
+	for child in get_children():
+		if child == btn_prev or child == btn_next:
+			continue
+		remove_child(child) 
+	
+	current_page_index = 0
+	_update_buttons_state()
 
-# --- GESTION DES ÉVÉNEMENTS SOURIS ---
+func load_full_deck(deck: Array[FightCards]):
+	clear_hand()
+	all_cards_logic = deck.duplicate() 
+	current_page_index = 0
+	
+	# Reset complet des bonus au chargement
+	update_bonuses_from_skills([]) 
+	
+	_refresh_display()
+
+func remove_card_logic(card_logic: FightCards):
+	if all_cards_logic.has(card_logic):
+		all_cards_logic.erase(card_logic)
+		if current_page_index > 0:
+			var total_pages = ceil(float(all_cards_logic.size()) / float(CARDS_PER_PAGE))
+			if current_page_index >= total_pages:
+				current_page_index = max(0, int(total_pages) - 1)
+		_refresh_display()
+
+# --- GESTION CENTRALE DES BONUS (CORRIGÉE) ---
+
+## Cette fonction est appelée par CombatManager quand les slots changent.
+func update_bonuses_from_skills(active_skills: Array[skill_card]):
+	# 1. Sauvegarde pour les changements de page
+	active_skills_cache = active_skills
+	
+	# 2. Mise à jour LOGIQUE de TOUTES les cartes (sur toutes les pages)
+	for card in all_cards_logic:
+		# C'est ici que la donnée "haveBonus" est mise à jour en interne
+		card.calculate_efficiency(active_skills)
+		
+	# 3. Mise à jour VISUELLE des cartes actuellement affichées
+	for visuel in visible_cards_objects:
+		if visuel.has_method("update_visual_state"):
+			visuel.update_visual_state()
+
+# --- NAVIGATION ---
+
+func change_page(direction: int):
+	var new_index = current_page_index + direction
+	var max_page = 0
+	if all_cards_logic.size() > 0:
+		max_page = ceil(float(all_cards_logic.size()) / float(CARDS_PER_PAGE)) - 1
+	
+	if new_index < 0: return
+	if new_index > max_page: return
+	
+	current_page_index = new_index
+	_refresh_display()
+
+# --- AFFICHAGE ---
+
+func _refresh_display():
+	for c in visible_cards_objects:
+		if c and c.get_parent() == self: 
+			remove_child(c)
+	
+	visible_cards_objects.clear()
+	
+	if all_cards_logic.is_empty():
+		_update_buttons_state()
+		return
+
+	var start_idx = current_page_index * CARDS_PER_PAGE
+	var end_idx = min(start_idx + CARDS_PER_PAGE, all_cards_logic.size())
+	
+	for i in range(start_idx, end_idx):
+		var logic = all_cards_logic[i]
+		
+		# --- SECURITE SUPPLEMENTAIRE ---
+		# Avant d'instancier, on s'assure que la logique est à jour avec le cache
+		if not active_skills_cache.is_empty():
+			logic.calculate_efficiency(active_skills_cache)
+		# -------------------------------
+			
+		_instantiate_visual_card(logic)
+	
+	_update_buttons_state()
+	_update_positions(true) 
+
+func _instantiate_visual_card(logic: FightCards):
+	var visual = logic._carte
+	if not is_instance_valid(visual): return
+	
+	# --- APPLICATION IMMEDIATE DU BONUS ---
+	# On force le calcul AVANT de l'ajouter à l'arbre
+	if not active_skills_cache.is_empty():
+		logic.calculate_efficiency(active_skills_cache)
+	
+	var fixed_size = Vector2(220, 340)
+	visual.custom_minimum_size = fixed_size
+	visual.size = fixed_size
+	visual.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	
+	if logic.getName() != "":
+		visual.name = logic.getName().validate_node_name()
+	
+	if visual.get_parent(): visual.get_parent().remove_child(visual)
+	
+	add_child(visual)
+	visible_cards_objects.append(visual)
+	
+	# --- MISE A JOUR VISUELLE FORCEE ---
+	# Maintenant que la carte est dans l'arbre, on force l'update visuel (couleur)
+	if visual.has_method("update_visual_state"):
+		visual.update_visual_state()
+	# -----------------------------------
+	
+	# Connexions
+	if visual.is_connected("mouse_entered", Callable(self, "_on_card_mouse_enter")):
+		visual.disconnect("mouse_entered", Callable(self, "_on_card_mouse_enter"))
+	if visual.is_connected("mouse_exited", Callable(self, "_on_card_mouse_exit")):
+		visual.disconnect("mouse_exited", Callable(self, "_on_card_mouse_exit"))
+	if visual.is_connected("gui_input", Callable(self, "_on_card_gui_input")):
+		visual.disconnect("gui_input", Callable(self, "_on_card_gui_input"))
+		
+	visual.mouse_entered.connect(_on_card_mouse_enter.bind(visual))
+	visual.mouse_exited.connect(_on_card_mouse_exit.bind(visual))
+	visual.gui_input.connect(_on_card_gui_input.bind(logic))
+
+func _update_buttons_state():
+	if btn_prev:
+		btn_prev.disabled = (current_page_index == 0)
+		btn_prev.modulate.a = 0.5 if btn_prev.disabled else 1.0
+	if btn_next:
+		var max_page = 0
+		if all_cards_logic.size() > 0:
+			max_page = ceil(float(all_cards_logic.size()) / float(CARDS_PER_PAGE)) - 1
+		btn_next.disabled = (current_page_index >= max_page)
+		btn_next.modulate.a = 0.5 if btn_next.disabled else 1.0
+
+# --- EVENTS SOURIS ---
+
+func _on_card_gui_input(event: InputEvent, card_logic: FightCards):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		emit_signal("card_clicked", card_logic)
 
 func _on_card_mouse_enter(carte):
 	hovered_card = carte
-	_update_positions() # On lance l'animation de survol
-	
-	# On envoie les DONNÉES au Main/CombatManager pour l'inspecteur
+	_update_positions()
 	if carte.assigned_class:
 		emit_signal("card_hovered", carte.assigned_class)
 
 func _on_card_mouse_exit(carte):
 	if hovered_card == carte:
 		hovered_card = null
-		# On signale que plus rien n'est survolé (null)
 		emit_signal("card_hovered", null)
-		
-	_update_positions() # On remet les cartes en place
+	_update_positions()
 
-# --- CALCUL DES POSITIONS (L'Algorithme de l'Arc) ---
-
-## Calcule la position, rotation et échelle de chaque carte.
-## @param instantly: Si true, téléporte les cartes. Si false, anime le mouvement.
 func _update_positions(instantly := false):
-	if cartes.is_empty(): return
+	if visible_cards_objects.is_empty(): return
 	
-	var count := cartes.size()
+	var count := visible_cards_objects.size()
 	var center_x := size.x / 2
-	
-	# Largeur totale occupée par les cartes
-	var total_width := (count - 1) * spacing
-	var start_x := center_x - total_width / 2
+	var start_x := center_x - ((count - 1) * spacing) / 2
 
 	for i in range(count):
-		var card := cartes[i]
-		
-		# Sécurité si la carte a été supprimée entre temps
+		var card := visible_cards_objects[i]
 		if not is_instance_valid(card): continue
 		
-		# 't' est une valeur centrée autour de 0.
-		# Ex pour 5 cartes : -2, -1, 0, 1, 2
 		var t := (i - (count - 1) / 2.0)
-		
-		# 1. Calcul Position X de base
-		var target_x := start_x + i * spacing - card.size.x / 2
-		
-		# 2. Calcul Position Y (Courbe quadratique pour faire l'arc)
-		# Formule : y = x^2 (parabole inversée)
-		var target_y = -abs(t) * abs(t) * 2 + arc_height + 40 
-		
-		# 3. Calcul Rotation (en radians)
-		# Plus on est sur les bords, plus on tourne
+		var target_x := start_x + i * spacing - (card.size.x / 2)
+		var target_y = -abs(t) * abs(t) * 2 + arc_height + 40
 		var target_rot = deg_to_rad(t * 5)
-		
 		var target_scale := 1.0
 
-		# --- GESTION DU SURVOL (HOVER) ---
 		if card == hovered_card:
-			# La carte survolée monte, grossit et devient droite
 			target_y -= hover_raise
 			target_scale = hover_scale
-			target_rot = 0 # On remet droit pour lire
-			# La carte passe au premier plan
-			card.z_index = 10 
-		
+			target_rot = 0 
+			card.z_index = 100 
 		elif hovered_card != null:
-			# Les cartes voisines s'écartent pour laisser voir celle survolée
-			card.z_index = i # Ordre normal
-			var hover_index := cartes.find(hovered_card)
+			card.z_index = i 
+			var hover_index := visible_cards_objects.find(hovered_card)
 			var distance = abs(i - hover_index)
-			
-			# Si c'est un voisin direct (gauche ou droite)
 			if distance == 1:
-				if (i < hover_index): target_x -= hover_spread # Pousse à gauche
-				else: target_x += hover_spread # Pousse à droite
+				if (i < hover_index): target_x -= hover_spread 
+				else: target_x += hover_spread 
 		else:
-			# Pas de survol, z-index standard
 			card.z_index = i
 
-		# --- APPLICATION DU MOUVEMENT ---
 		if instantly:
 			card.position = Vector2(target_x, target_y)
 			card.rotation = target_rot
 			card.scale = Vector2.ONE * target_scale
 		else:
-			# Interpolation linéaire (Lerp) pour une animation fluide
 			card.position = card.position.lerp(Vector2(target_x, target_y), animation_speed)
 			card.rotation = lerp_angle(card.rotation, target_rot, animation_speed)
 			card.scale = card.scale.lerp(Vector2.ONE * target_scale, animation_speed)
