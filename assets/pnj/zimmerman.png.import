@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://la1p76c6t2gp"
-path="res://.godot/imported/zimmerman.png-0871599c08f2db5c83bc2404159e943e.ctex"
+uid="uid://dlsmgsplg4tp"
+path="res://.godot/imported/Zimmerman.png-aeed47d5bdb36f62e24233dd3938f407.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pnj/zimmerman.png"
-dest_files=["res://.godot/imported/zimmerman.png-0871599c08f2db5c83bc2404159e943e.ctex"]
+source_file="res://assets/pnj/Zimmerman.png"
+dest_files=["res://.godot/imported/Zimmerman.png-aeed47d5bdb36f62e24233dd3938f407.ctex"]
 
 [params]
 
