@@ -27,7 +27,8 @@ const JSON_PATH = "res://Data/pnj.json"
 @onready var start_button = $StartCombat
 @onready var give_up_button = $GiveUp
 @onready var main_hand = $MainHand
-@onready var confirm_popup = $ConfirmationAttack 
+@onready var confirm_popup = $ConfirmationAttack
+@onready var popup_skill_cards_scene = preload("res://scenes/skill_cards_popup.tscn").instantiate()
 
 # --- VARIABLES D'ÉTAT ---
 var enemy_ref: Enemy = null 
@@ -44,6 +45,9 @@ var card_inspector: CardInspector
 
 func _ready():
 	_load_json_data()
+	
+	add_child(popup_skill_cards_scene)
+	popup_skill_cards_scene.on_close.connect(close_popup_skill_cards)
 	
 	# Connexion sécurisée du bouton start
 	if start_button:
@@ -134,6 +138,7 @@ func setup_preparation_phase(type_id: int, deck_manager_ref: DeckManager):
 	# Affichage UI Préparation
 	start_button.show()
 	card_zone2.show()
+	$PopupSkillCards.show()
 	slot_zone.get_parent().show()
 
 	# Nettoyage des slots (si des cartes y étaient restées)
@@ -161,6 +166,7 @@ func _on_start_combat_pressed():
 	
 	start_button.hide()
 	card_zone2.hide() # On cache la réserve de skills
+	$PopupSkillCards.hide()
 	
 	# On calcule une dernière fois l'efficacité avant de laisser le joueur jouer
 	update_hand_efficiency()
@@ -168,6 +174,26 @@ func _on_start_combat_pressed():
 
 func _on_give_up_pressed():
 	give_up.emit()
+
+func popup_skill_cards():
+	start_button.hide()
+	var cards: Array[object_skill_card]
+	var card_zone = card_zone2.get_node("SkillsBox")
+	for card in card_zone.get_children():
+		if card is object_skill_card:
+			cards.append(card)
+	popup_skill_cards_scene.open(cards)
+
+func close_popup_skill_cards(cards: Array[object_skill_card]):
+	start_button.show()
+	var card_zone = card_zone2.get_node("SkillsBox")
+	for card in cards:
+		if card is not object_skill_card:
+			continue
+		if card.get_parent(): card.get_parent().remove_child(card)
+		card.custom_minimum_size = Vector2(180, 310)
+		card_zone.add_child(card)
+		card.position = Vector2.ZERO
 
 # --- CŒUR DU GAMEPLAY : SYNERGIES ---
 
