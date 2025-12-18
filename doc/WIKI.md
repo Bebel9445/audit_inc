@@ -1,42 +1,51 @@
-# Wiki
+# Wiki - Manuel de Jeu
 ---
 
-Bienvenu sur le wiki, ici vous trouverez les informations sur notre jeu.
+Bienvenue sur le wiki ! Vous trouverez ici toutes les informations essentielles concernant notre jeu.
 
-### Les objectifs de notre jeu
+### Les objectifs pédagogiques
 
-Notre jeux possède propose plusieurs objectifs pédagogique autour de la **planification** d'un audit :
+Notre jeu propose plusieurs objectifs pédagogiques centrés sur la **planification** d'un audit :
 
-- Quel pôle / partie d'une organisation est à prioriser
-- Les connaissances acquises grace a l'expérience
-- Le choix des actions proportionnellement à la situation et à ses compétences
+- Identifier et prioriser quel pôle ou partie de l'organisation auditer.
+- Comprendre l'acquisition de connaissances grâce à l'expérience.
+- Choisir des actions proportionnées à la situation et aux compétences disponibles.
 
-### Description avancé du jeu
+### Description avancée du jeu
 
-Notre jeu est de type jeu de cartes. Il est inspiré en partie des TCG / JCC (Trading Card Game / Jeu de Cartes à Collectionner) tel que Pokémon, Yu-Gi-Oh!, Magic etc...
+Notre projet est un jeu de cartes et de stratégie. Il s'inspire des mécaniques de TCG / JCC (Jeu de Cartes à Collectionner) tels que *Magic*, *Hearthstone* ou *Slay the Spire*.
 
-Le joueur possède ainsi 2 types de cartes :
-- les cartes "compétence" qui reflète les compétences en matière d'audit de l'auditeur (économie, juridique, communication) pouvant aller du niveau 1 au niveau 5
-- les cartes "combats" qui sont les cartes avec lesquelles il va "attaquer" (auditer) un pôle. Elles possèdent chacune un coup en temps, un niveau d'une certaine compétence requise ainsi qu'une puissance
+Le joueur gère 2 types de cartes :
+- **Les cartes "Compétence" :** Elles reflètent l'expertise de l'auditeur (Économie, Juridique, Communication). Elles possèdent un niveau allant de 1 à 4.
+- **Les cartes "Action" (ou Combat) :** Ce sont les cartes utilisées pour "attaquer" (auditer) un pôle. Chaque carte possède un niveau de compétence requis, ainsi qu'une puissance d'impact.
 
 ### Actions du joueur
 
-Au lancement du jeu, le joueur arrive sur l'écran du graphique montrant la situation de l'organisation et de ses différents poles au moyen de couleurs et de tailles.
+Au lancement du jeu, le joueur arrive sur l'écran du **Graphe des Services**, qui visualise la situation globale de l'organisation. L'état de chaque pôle est indiqué par sa couleur et sa taille.
 
-<img src="./graph.png" style="width: 50%">
+<img src="./graph.png" style="width: 50%" alt="Graphe des services">
 
-Sur ce dernier, il peut choisir quel pole auditer en cliquant dessus et l'écran d'audit apparait.
+Depuis cet écran, le joueur choisit quel pôle auditer en cliquant dessus, ce qui lance la phase d'audit (combat).
 
-<img src="./combat.png" style="width: 50%">
+<img src="./combat.png" style="width: 50%" alt="Interface de combat">
 
-Sur cet écran, on peut voir les cartes "compétences" en haut et les cartes "combats" en bas. Le joueur choisit jusqu'a 2 cartes "compétence" et les glisse dans les 2 emplacements disponibles. Il peut aussi en fusionner 2 de même niveau et de même type pour en créer une de niveau supérieur et ainsi pourvoir utiliser des cartes plus fortes.
+Sur cet écran :
+1. Les cartes "Compétence" sont en haut (Main Deck).
+2. Les cartes "Action" sont en bas (Main Hand).
 
-Pendant le combat, le joueur peut décider à n'importe quel moment d'abandonner l'audit. Faisant cela, il laisse l'état du pole inchangé mais obtient de nouvelles cartes reflétant ainsi l'expérience acquise (à condition qu'il ai tenté de combattre et pas juste venir et partir en boucle).
+Le joueur choisit jusqu'à 2 cartes "Compétence" et les glisse dans les emplacements prévus (slots). Une mécanique clé permet de **fusionner** deux cartes de même type et de même niveau pour en créer une de niveau supérieur, débloquant ainsi l'utilisation de cartes Action plus puissantes.
+
+**Abandon tactique :**
+Pendant l'audit, le joueur peut décider d'abandonner à tout moment. Cela laisse l'état du pôle inchangé (pas de dégâts), mais permet d'obtenir de nouvelles cartes, simulant l'expérience acquise (à condition d'avoir joué au moins un tour et ne pas avoir fui immédiatement).
 
 ### Fin du jeu
 
-Après avoir écouler les 16 mois, un écran de fin apparait montrant ainsi une comparaison de l'organisation avant et après le passage du joueur. Cet écran se décline sous 3 variantes en fonction du résultat.
+Une fois les 16 semaines (tours de jeu globaux) écoulées, un écran de fin apparaît. Il présente un bilan comparatif de l'organisation "avant/après" le passage de l'auditeur.
 
-<img src="./match_nul.png" style="width: 30%; display: inline">
-<img src="./victoire.png" style="width: 30%; display: inline">
-<img src="./echec.png" style="width: 30%; display: inline">
+Le résultat se décline en 3 variantes selon la performance :
+
+<div style="display: flex; gap: 10px;">
+  <img src="./match_nul.png" style="width: 30%;" alt="Écran Match Nul">
+  <img src="./victoire.png" style="width: 30%;" alt="Écran Victoire">
+  <img src="./echec.png" style="width: 30%;" alt="Écran Échec">
+</div>
