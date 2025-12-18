@@ -28,7 +28,7 @@ var typing_speed := 0.03
 var tween: Tween
 
 ## Chemin vers le fichier de données.
-const JSON_PATH = "res://Data/dialogue.json" 
+const JSON_PATH = "res://data/dialogue.json" 
 
 ## Dictionnaire contenant toutes les données chargées du JSON.
 var dialogue_data = {}

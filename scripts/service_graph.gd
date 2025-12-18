@@ -16,7 +16,7 @@ signal all_nodes_secured
 @export var background_texture : Texture2D = preload("res://assets/background.png")
 
 ## Police utilisée pour les labels des noeuds.
-@export var font_bytebounce : FontFile = preload("res://assets/icons/ByteBounce.ttf") 
+@export var font_bytebounce : FontFile = preload("res://assets/fonts/ByteBounce.ttf") 
 
 @export_group("Ajustement du Graphe")
 ## Décalage du centre du graphe par rapport au centre de l'écran.

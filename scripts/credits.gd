@@ -7,7 +7,7 @@ signal end_credit
 @export var scroll_speed := 1.0   # pixels / seconde
 
 # --- POLICE PIXEL ART ---
-const FONT_PIXEL = preload("res://assets/icons/ByteBounce.ttf")
+const FONT_PIXEL = preload("res://assets/fonts/ByteBounce.ttf")
 
 func _ready() -> void:
 	#Le contenu

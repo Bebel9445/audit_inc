@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwxxvuf1lj1yp"
-path="res://.godot/imported/defaultfightcards.png-86ffd3cce4d40666acc3fcbf2143182a.ctex"
+uid="uid://bn31jiel6uhl8"
+path="res://.godot/imported/defaultfightcards.png-4dea849664987bd88b325d0e18e79ed3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/cards/images/defaultfightcards.png"
-dest_files=["res://.godot/imported/defaultfightcards.png-86ffd3cce4d40666acc3fcbf2143182a.ctex"]
+source_file="res://assets/cards/defaultfightcards.png"
+dest_files=["res://.godot/imported/defaultfightcards.png-4dea849664987bd88b325d0e18e79ed3.ctex"]
 
 [params]
 
