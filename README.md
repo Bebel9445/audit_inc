@@ -35,7 +35,7 @@ Pour jouer, rendez-vous dans la section **Déploiement > Releases** (ou "Version
 3.  Ouvrez un terminal dans ce dossier.
 4.  Donnez les droits d'exécution au fichier binaire (remplacez le nom si nécessaire) :
     ```bash
-    chmod +x AuditInc.x86_64
+    chmod u+x AuditInc.x86_64
     ```
 5.  Lancez le jeu :
     ```bash
