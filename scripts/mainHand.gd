@@ -26,12 +26,17 @@ var hover_scale := 1.2
 var hover_spread := 30  
 var animation_speed := 0.15
 var hovered_card: FightCardsObject = null
+var sound_effect: AudioStreamPlayer
 
 # --- BOUTONS ---
 @onready var btn_prev: BaseButton = $PrevButton
 @onready var btn_next: BaseButton = $NextButton
 
 func _ready():
+	sound_effect = AudioStreamPlayer.new()
+	sound_effect.stream = preload("res://music/sound-effect.mp3")
+	add_child(sound_effect)
+	
 	if btn_prev:
 		btn_prev.pressed.connect(func(): change_page(-1))
 		btn_prev.z_index = 200 
@@ -191,6 +196,7 @@ func _on_card_gui_input(event: InputEvent, card_logic: FightCards):
 		emit_signal("card_clicked", card_logic)
 
 func _on_card_mouse_enter(carte):
+	sound_effect.play()
 	hovered_card = carte
 	_update_positions()
 	if carte.assigned_class:
