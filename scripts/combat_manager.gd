@@ -44,9 +44,11 @@ var card_inspector: CardInspector # Fenêtre d'info au survol
 var hit_sound: AudioStreamPlayer
 
 func _ready():
+	# --- POUR LES SONS ---
 	hit_sound = AudioStreamPlayer.new()
 	hit_sound.stream = preload("res://music/video-game-hit-noise-001-135821.mp3")
 	add_child(hit_sound)
+	main_hand.signal_sound_effect.emit(sound_effect)
 	
 	_load_json_data()
 	
@@ -202,6 +204,10 @@ func close_popup_skill_cards(cards: Array[object_skill_card]):
 		card.custom_minimum_size = Vector2(180, 310)
 		card_zone.add_child(card)
 		card.position = Vector2.ZERO
+
+func sound_effect(sound: AudioStreamPlayer):
+	add_child(sound)
+	sound.play()
 
 # --- CŒUR DU GAMEPLAY : SYNERGIES ---
 
