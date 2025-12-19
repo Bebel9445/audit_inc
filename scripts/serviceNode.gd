@@ -32,6 +32,9 @@ enum ServiceType { ECONOMY, WELLBEING, FINANCE, RH }
 ## Liste des ServiceNode connectés à celui-ci.
 var links := [] 
 
+# Produire un son lorsque l'on passe la souris
+var sound_effect: AudioStreamPlayer
+
 # --- RESSOURCES ---
 const ICON_ECO = preload("res://assets/icons/icon_eco.png")
 const ICON_WELLBEING = preload("res://assets/icons/icon_wellbeing.png")
@@ -45,6 +48,10 @@ const ICON_RH = preload("res://assets/icons/icon_hr.png")
 @onready var area_2d = $Area2D
 
 func _ready():
+	sound_effect = AudioStreamPlayer.new()
+	sound_effect.stream = preload("res://music/sound-effect.mp3")
+	add_child(sound_effect)
+	
 	_configure_service()
 	update_visual()
 	call_deferred("_keep_inside_screen")
@@ -180,6 +187,8 @@ func _on_area_2d_input_event(_viewport, event, _shape_idx):
 			emit_signal("combat_requested", self)
 
 func _on_hover_enter():
+	sound_effect.play()
+	
 	z_index = 10 
 	
 	# Animation d'agrandissement (celle que je t'ai donnée avant)

@@ -41,8 +41,13 @@ var pnj_data: Dictionary = {}
 var is_in_fight = false
 var current_deck_ref: DeckManager
 var card_inspector: CardInspector # Fenêtre d'info au survol
+var hit_sound: AudioStreamPlayer
 
 func _ready():
+	hit_sound = AudioStreamPlayer.new()
+	hit_sound.stream = preload("res://music/video-game-hit-noise-001-135821.mp3")
+	add_child(hit_sound)
+	
 	_load_json_data()
 	
 	add_child(popup_skill_cards_scene)
@@ -243,6 +248,7 @@ func _on_card_clicked_signal(carte_info: FightCards):
 
 ## Joue la carte une fois confirmée.
 func _on_confirm_play(carte_info):
+	hit_sound.play()
 
 	apply_card_effect(carte_info) 
 	card_played.emit(carte_info)

@@ -1,6 +1,9 @@
 class_name FightCardsObject
 extends MarginContainer
 
+## --- BRUITAGE ---
+#signal sound_effect
+
 # --- RESSOURCES ---
 const FONT_PIXEL = preload("res://assets/fonts/ByteBounce.ttf")
 
@@ -148,3 +151,8 @@ func getImage() -> Texture2D:
 				if sub is TextureRect:
 					return sub.texture
 	return null
+
+## Fonction pour produire un son lorsque l'on passe la souris sur la carte
+#func _on_mouse_entered():
+	#sound_effect.emit()
+	
