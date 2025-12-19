@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ci6284mim63qb"]
+[gd_scene load_steps=7 format=3 uid="uid://ci6284mim63qb"]
 
 [ext_resource type="PackedScene" uid="uid://bqspirjqpmj3d" path="res://scenes/ui/dialogue_box.tscn" id="1_ik0t7"]
 [ext_resource type="Script" uid="uid://c7rbe5ddbd12r" path="res://scripts/combat_manager.gd" id="1_ofoda"]
 [ext_resource type="Script" uid="uid://belgi76t7hh3w" path="res://scripts/skills_box.gd" id="3_a2e2y"]
 [ext_resource type="PackedScene" uid="uid://du3ie6k23cb33" path="res://scenes/main_hand_manager.tscn" id="3_m17q1"]
 [ext_resource type="Texture2D" uid="uid://6bd2tukkotj3" path="res://assets/backgroundFight.png" id="5_m2d54"]
-[ext_resource type="FontFile" uid="uid://bef6ci33eek74" path="res://assets/fonts/ByteBounce.ttf" id="6_0vylu"]
 [ext_resource type="FontFile" uid="uid://bef6ci33eek74" path="res://assets/fonts/ByteBounce.ttf" id="6_ikfks"]
 
 [node name="CombatScene" type="Node2D"]
@@ -79,7 +78,7 @@ offset_left = 330.0
 offset_top = 168.0
 offset_right = 430.0
 offset_bottom = 268.0
-theme_override_fonts/font = ExtResource("6_0vylu")
+theme_override_fonts/font = ExtResource("6_ikfks")
 theme_override_font_sizes/font_size = 45
 text = ">"
 
@@ -89,7 +88,7 @@ offset_left = -439.0
 offset_top = 170.0
 offset_right = -339.0
 offset_bottom = 270.0
-theme_override_fonts/font = ExtResource("6_0vylu")
+theme_override_fonts/font = ExtResource("6_ikfks")
 theme_override_font_sizes/font_size = 45
 text = "<"
 
