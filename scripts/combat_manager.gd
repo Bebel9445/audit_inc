@@ -176,6 +176,7 @@ func _on_start_combat_pressed():
 func _on_give_up_pressed():
 	give_up.emit()
 
+# Fonction qui va afficher l'inventaire des cartes de compétences
 func popup_skill_cards():
 	start_button.hide()
 	var cards: Array[object_skill_card]
@@ -185,6 +186,7 @@ func popup_skill_cards():
 			cards.append(card)
 	popup_skill_cards_scene.open(cards)
 
+# Fonction qui va fermer l'inventaire des cartes de compétences
 func close_popup_skill_cards(cards: Array[object_skill_card]):
 	start_button.show()
 	var card_zone = card_zone2.get_node("SkillsBox")

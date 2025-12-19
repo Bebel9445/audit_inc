@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d10osqbb6exif"
-path="res://.godot/imported/gossa.png-edff90bd88dfdd782ac1c091063f777d.ctex"
+uid="uid://83l0agv3y4cq"
+path="res://.godot/imported/match_nul.png-22731751245544f2dc595e4ed059ccfb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pnj/gossa.png"
-dest_files=["res://.godot/imported/gossa.png-edff90bd88dfdd782ac1c091063f777d.ctex"]
+source_file="res://doc/match_nul.png"
+dest_files=["res://.godot/imported/match_nul.png-22731751245544f2dc595e4ed059ccfb.ctex"]
 
 [params]
 

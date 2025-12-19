@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d10osqbb6exif"
-path="res://.godot/imported/gossa.png-edff90bd88dfdd782ac1c091063f777d.ctex"
+uid="uid://cit8clf6srl6w"
+path="res://.godot/imported/victoire.png-383a80fad18048372e8c4edabd7748e1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pnj/gossa.png"
-dest_files=["res://.godot/imported/gossa.png-edff90bd88dfdd782ac1c091063f777d.ctex"]
+source_file="res://doc/victoire.png"
+dest_files=["res://.godot/imported/victoire.png-383a80fad18048372e8c4edabd7748e1.ctex"]
 
 [params]
 

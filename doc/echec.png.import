@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d10osqbb6exif"
-path="res://.godot/imported/gossa.png-edff90bd88dfdd782ac1c091063f777d.ctex"
+uid="uid://d2u36opvt5w1c"
+path="res://.godot/imported/echec.png-b9c8c9f9fcc3a77ffbd8cc0dbe5a63b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pnj/gossa.png"
-dest_files=["res://.godot/imported/gossa.png-edff90bd88dfdd782ac1c091063f777d.ctex"]
+source_file="res://doc/echec.png"
+dest_files=["res://.godot/imported/echec.png-b9c8c9f9fcc3a77ffbd8cc0dbe5a63b3.ctex"]
 
 [params]
 
