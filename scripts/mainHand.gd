@@ -8,6 +8,7 @@ class_name MainHand
 # --- SIGNAUX ---
 signal card_hovered(card_data)
 signal card_clicked(card_data)
+signal signal_sound_effect(AudioStreamPlayer)
 
 # --- LOGIQUE ---
 var all_cards_logic: Array[FightCards] = []
@@ -35,7 +36,6 @@ var sound_effect: AudioStreamPlayer
 func _ready():
 	sound_effect = AudioStreamPlayer.new()
 	sound_effect.stream = preload("res://music/sound-effect.mp3")
-	add_child(sound_effect)
 	
 	if btn_prev:
 		btn_prev.pressed.connect(func(): change_page(-1))
@@ -196,7 +196,7 @@ func _on_card_gui_input(event: InputEvent, card_logic: FightCards):
 		emit_signal("card_clicked", card_logic)
 
 func _on_card_mouse_enter(carte):
-	sound_effect.play()
+	signal_sound_effect.emit(sound_effect)
 	hovered_card = carte
 	_update_positions()
 	if carte.assigned_class:
