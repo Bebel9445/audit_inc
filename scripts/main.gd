@@ -12,6 +12,8 @@ class_name Main
 
 # --- GESTION DU TEMPS ---
 var current_week: int = 1
+var nb_defaite: int = 0
+var nb_abandon: int = 0
 const MAX_WEEKS: int = 16
 
 # --- SCORING ---
@@ -95,7 +97,7 @@ func on_initiate_combat(service: ServiceNode):
 	enemy.get_node("HealthBar").show()
 	
 	# --- EQUILIBRAGE DOUX ---
-	var base_difficulty = 70 
+	var base_difficulty = 80 
 	var weekly_scaling = (current_week - 1) * 40  
 	var size_scaling = service.size * 40    
 	var total_hp = base_difficulty + weekly_scaling + size_scaling
@@ -134,7 +136,7 @@ func on_card_effect_applied(card: FightCards):
 func on_enemy_victory():
 	if is_combat_resolved: return
 	is_combat_resolved = true
-	
+	nb_defaite+=1
 	if current_service_node:
 		service_graph.mark_node_as_secured(current_service_node)
 	
@@ -169,6 +171,8 @@ func on_combat_defeat():
 	if is_combat_resolved: return
 	is_combat_resolved = true
 	
+	var new_card = deck_manager.add_reward_card()
+
 	var skills_gagnes = []
 	for i in range(2):
 		var s = deck_manager.add_skill_reward()
@@ -177,6 +181,11 @@ func on_combat_defeat():
 	# IMMERSION : On a manqué de temps
 	combat_scene.dialogue_box.show_text("Échéance dépassée. Le rapport n'est pas prêt à temps.")
 	await combat_scene.dialogue_box.dialogue_finished
+	
+	if new_card:
+		# IMMERSION : On recrute du staff
+		combat_scene.dialogue_box.show_text("Nouvelle carte d'auditeur obtenu : '" + new_card.getName())
+		await combat_scene.dialogue_box.dialogue_finished
 
 	if skills_gagnes.size() > 0:
 		# IMMERSION : Formation corrective
@@ -192,7 +201,7 @@ func on_combat_defeat():
 func on_combat_give_up():
 	if is_combat_resolved: return
 	is_combat_resolved = true
-	
+	nb_abandon+=1
 	var skills_gagnes = []
 	for i in range(2):
 		var s = deck_manager.add_skill_reward()
@@ -242,7 +251,7 @@ func finish_game():
 	service_graph.hide()
 	combat_scene.hide()
 	enemy.hide()
-	var final_score = service_graph.get_organization_score()
+	var final_score = service_graph.get_organization_score() - (nb_defaite * 10) - (nb_abandon*5)
 	game_ui.show_end_screen(initial_score, final_score)
 
 func update_time_display():

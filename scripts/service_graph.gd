@@ -44,7 +44,7 @@ func create_graph():
 	create_background()
 
 	# Nombre aléatoire de noeuds
-	var total_services = randi_range(4, 6)
+	var total_services = randi_range(6,8)
 	
 	# --- LOGIQUE DU SAC (BAG SYSTEM) ---
 	# Garantit une distribution équilibrée de la difficulté.

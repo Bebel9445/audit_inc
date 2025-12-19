@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://deau4e4pxy353"
-path="res://.godot/imported/Roy.png-65189009fe53d2e4e79cdf7a35db5a7d.ctex"
+path="res://.godot/imported/roy.png-c6663af26b6253661971b498c238de35.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pnj/Roy.png"
-dest_files=["res://.godot/imported/Roy.png-65189009fe53d2e4e79cdf7a35db5a7d.ctex"]
+source_file="res://assets/pnj/roy.png"
+dest_files=["res://.godot/imported/roy.png-c6663af26b6253661971b498c238de35.ctex"]
 
 [params]
 
